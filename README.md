@@ -22,6 +22,7 @@ The [EdgeTX Dev Kit](https://github.com/JeffreyChix/edgetx-dev-kit) VS Code exte
 └── stubs/
     ├── 2.10/
     │   ├── edgetx-lua-api.json
+    │   ├── edgetx-script-types.json
     │   ├── edgetx.globals.d.lua
     │   ├── edgetx.constants.d.lua
     │   ├── edgetx.scripts.d.lua
@@ -68,6 +69,7 @@ Stubs are cached locally in the extension's global storage and updated silently 
       },
       "files": [
         "edgetx-lua-api.json",
+        "edgetx-script-types.json",
         "edgetx.globals.d.lua",
         "edgetx.constants.d.lua",
         "edgetx.scripts.d.lua",
