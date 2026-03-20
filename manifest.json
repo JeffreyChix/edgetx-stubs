@@ -1,10 +1,10 @@
 {
   "manifestVersion": 1,
-  "updatedAt": "2026-03-19T19:25:54.015Z",
+  "updatedAt": "2026-03-20T00:16:33.112Z",
   "versions": {
     "2.3": {
-      "generatedAt": "2026-03-19T19:25:54.015Z",
-      "stubHash": "ac3509b38c1f21bf5fb3b6c5dc6df9ec1c88cba09596547b43d3c3f54c360329",
+      "generatedAt": "2026-03-20T00:16:33.112Z",
+      "stubHash": "78d698ee0b559bee3019990733249c2a640733137ba36f01e5a89596825bc7ff",
       "files": [
         "edgetx.globals.d.lua",
         "edgetx.lcd.d.lua",
@@ -12,7 +12,8 @@
         "edgetx.bitmap.d.lua",
         "edgetx.constants.d.lua",
         "edgetx.scripts.d.lua",
-        "edgetx-lua-api.json"
+        "edgetx-lua-api.json",
+        "edgetx-script-types.json"
       ],
       "sources": {
         "radio/src/lua/api_general.cpp": "5d0d9f8b2fc7f7952a04d3abccb64d7a61cf9d1c",
@@ -21,8 +22,8 @@
       }
     },
     "2.4": {
-      "generatedAt": "2026-03-19T19:25:54.015Z",
-      "stubHash": "df760c31bb74408a4f0024928f87dc1c3746acf78380f9bc92560ecb8333caa2",
+      "generatedAt": "2026-03-20T00:16:33.112Z",
+      "stubHash": "7b6d0671ddfc2f86df7bf2debbf2677f5b6644feab8af8d9ba66670932ee761a",
       "files": [
         "edgetx.globals.d.lua",
         "edgetx.lcd.d.lua",
@@ -30,7 +31,8 @@
         "edgetx.bitmap.d.lua",
         "edgetx.constants.d.lua",
         "edgetx.scripts.d.lua",
-        "edgetx-lua-api.json"
+        "edgetx-lua-api.json",
+        "edgetx-script-types.json"
       ],
       "sources": {
         "radio/src/lua/api_colorlcd.cpp": "cff1374813e7d14a107cce618a33e8d7d37866a1",
@@ -41,8 +43,8 @@
       }
     },
     "2.5": {
-      "generatedAt": "2026-03-19T19:25:54.015Z",
-      "stubHash": "eefe0be3766b2766967bb984840a357e88d098bb5db56b17577d0678fea776eb",
+      "generatedAt": "2026-03-20T00:16:33.112Z",
+      "stubHash": "69f1ba9e4af8e00da3a1753a5fb7a15cf7bf7390d7afbf1eba740d0327d9d7e0",
       "files": [
         "edgetx.globals.d.lua",
         "edgetx.lcd.d.lua",
@@ -50,7 +52,8 @@
         "edgetx.bitmap.d.lua",
         "edgetx.constants.d.lua",
         "edgetx.scripts.d.lua",
-        "edgetx-lua-api.json"
+        "edgetx-lua-api.json",
+        "edgetx-script-types.json"
       ],
       "sources": {
         "radio/src/lua/api_colorlcd.cpp": "eecfb8eeaa9493bfe7951ff4433ca267a45ae662",
@@ -62,8 +65,8 @@
       }
     },
     "2.6": {
-      "generatedAt": "2026-03-19T19:25:54.015Z",
-      "stubHash": "ca957ec778b05eb74490b1a24b503304c17cfa2defe307999055f310756e7210",
+      "generatedAt": "2026-03-20T00:16:33.112Z",
+      "stubHash": "8321753190a33d250fdcee9bd15add8cf66fca83e5e5235535128d16c27a4fc8",
       "files": [
         "edgetx.globals.d.lua",
         "edgetx.lcd.d.lua",
@@ -71,7 +74,8 @@
         "edgetx.bitmap.d.lua",
         "edgetx.constants.d.lua",
         "edgetx.scripts.d.lua",
-        "edgetx-lua-api.json"
+        "edgetx-lua-api.json",
+        "edgetx-script-types.json"
       ],
       "sources": {
         "radio/src/lua/api_colorlcd.cpp": "66fc3e271160ef5b96817bef4eb0631569e4880b",
@@ -83,8 +87,8 @@
       }
     },
     "2.7": {
-      "generatedAt": "2026-03-19T19:25:54.015Z",
-      "stubHash": "31e18852987c15919bfc6f90e7e6f3d23f2054a8769dce124a696621aa5b65f2",
+      "generatedAt": "2026-03-20T00:16:33.112Z",
+      "stubHash": "63274d4b50afdabd53c89e802e46b61a470f018d289b502309847d5a1beac638",
       "files": [
         "edgetx.globals.d.lua",
         "edgetx.lcd.d.lua",
@@ -92,7 +96,8 @@
         "edgetx.bitmap.d.lua",
         "edgetx.constants.d.lua",
         "edgetx.scripts.d.lua",
-        "edgetx-lua-api.json"
+        "edgetx-lua-api.json",
+        "edgetx-script-types.json"
       ],
       "sources": {
         "radio/src/lua/api_colorlcd.cpp": "66fc3e271160ef5b96817bef4eb0631569e4880b",
@@ -104,8 +109,8 @@
       }
     },
     "2.8": {
-      "generatedAt": "2026-03-19T19:25:54.015Z",
-      "stubHash": "e6e13d9a141b08f3b9a0f419a9129a9e68390dfa262d6ef7f57f0fbd1c289f19",
+      "generatedAt": "2026-03-20T00:16:33.112Z",
+      "stubHash": "18bc427ae79e68004d2e138c2615b97e692ec87bb991d76e91a5b9725c21506d",
       "files": [
         "edgetx.globals.d.lua",
         "edgetx.lcd.d.lua",
@@ -113,7 +118,8 @@
         "edgetx.bitmap.d.lua",
         "edgetx.constants.d.lua",
         "edgetx.scripts.d.lua",
-        "edgetx-lua-api.json"
+        "edgetx-lua-api.json",
+        "edgetx-script-types.json"
       ],
       "sources": {
         "radio/src/lua/api_colorlcd.cpp": "b853008a55636fdc0b85ccb13c5dff0171ac4a08",
@@ -125,8 +131,8 @@
       }
     },
     "2.9": {
-      "generatedAt": "2026-03-19T19:25:54.015Z",
-      "stubHash": "0bd092a5f04da2e9e08316c5a4f0a468406a0052c8dece4ffad0eb06dd08b426",
+      "generatedAt": "2026-03-20T00:16:33.112Z",
+      "stubHash": "a2dbf5886f78dae5bbb898bf4c2814395c7d084781b53cc39307feebd035b8cf",
       "files": [
         "edgetx.globals.d.lua",
         "edgetx.lcd.d.lua",
@@ -134,7 +140,8 @@
         "edgetx.bitmap.d.lua",
         "edgetx.constants.d.lua",
         "edgetx.scripts.d.lua",
-        "edgetx-lua-api.json"
+        "edgetx-lua-api.json",
+        "edgetx-script-types.json"
       ],
       "sources": {
         "radio/src/lua/api_colorlcd.cpp": "b201891133130c277729a6accc4b07b16c036062",
@@ -145,8 +152,8 @@
       }
     },
     "2.10": {
-      "generatedAt": "2026-03-19T19:25:54.015Z",
-      "stubHash": "cdc8c3ee4c2f1d060258510560bf63db27f22ca56e225a82edacd5a96f6702df",
+      "generatedAt": "2026-03-20T00:16:33.112Z",
+      "stubHash": "4e6d0b5f921e4a07f53cc7ccad306362bcfc928a4354f490dab07efde18db5ca",
       "files": [
         "edgetx.globals.d.lua",
         "edgetx.lcd.d.lua",
@@ -154,7 +161,8 @@
         "edgetx.bitmap.d.lua",
         "edgetx.constants.d.lua",
         "edgetx.scripts.d.lua",
-        "edgetx-lua-api.json"
+        "edgetx-lua-api.json",
+        "edgetx-script-types.json"
       ],
       "sources": {
         "radio/src/lua/api_colorlcd.cpp": "7ab9a567e19a6db5476e68319885628e27966329",
@@ -165,8 +173,8 @@
       }
     },
     "2.11": {
-      "generatedAt": "2026-03-19T19:25:54.015Z",
-      "stubHash": "176b95d49448126833c3227e2adf9ad3d29930dfd579f94a98fe9b4f59b25a87",
+      "generatedAt": "2026-03-20T00:16:33.112Z",
+      "stubHash": "5dbc289ab67636e41b58531c94f9015e210cd081cfcac8d396facc344e9fdf6d",
       "files": [
         "edgetx.globals.d.lua",
         "edgetx.lcd.d.lua",
@@ -174,7 +182,8 @@
         "edgetx.bitmap.d.lua",
         "edgetx.constants.d.lua",
         "edgetx.scripts.d.lua",
-        "edgetx-lua-api.json"
+        "edgetx-lua-api.json",
+        "edgetx-script-types.json"
       ],
       "sources": {
         "radio/src/lua/api_colorlcd.cpp": "285de60bc623badaffc1a72b8c72d83410d8eb9e",
@@ -186,8 +195,8 @@
       }
     },
     "2.12": {
-      "generatedAt": "2026-03-19T19:25:54.015Z",
-      "stubHash": "ce49719e484e6e9dd7fec22c1c67857942355a696129ba8888393aa4511c2bec",
+      "generatedAt": "2026-03-20T00:16:33.112Z",
+      "stubHash": "0c3b17a2d70feff901ee59b8a7abfc26ba4cc38317fafa18ed77f02386fbceae",
       "files": [
         "edgetx.globals.d.lua",
         "edgetx.lcd.d.lua",
@@ -195,7 +204,8 @@
         "edgetx.bitmap.d.lua",
         "edgetx.constants.d.lua",
         "edgetx.scripts.d.lua",
-        "edgetx-lua-api.json"
+        "edgetx-lua-api.json",
+        "edgetx-script-types.json"
       ],
       "sources": {
         "radio/src/lua/api_colorlcd.cpp": "fda476ff4e5bd1cccc2cc55b30176086c6fd2be2",
@@ -207,8 +217,8 @@
       }
     },
     "main": {
-      "generatedAt": "2026-03-19T19:25:54.015Z",
-      "stubHash": "5895a3926f4d37719c1006e76ec7921b50ce40f0a0b6e2138009ca7e5f744fae",
+      "generatedAt": "2026-03-20T00:16:33.112Z",
+      "stubHash": "74559157722240d20c738c2b87c573e76b20826676803f2d9bb4a4b561912213",
       "files": [
         "edgetx.globals.d.lua",
         "edgetx.lcd.d.lua",
@@ -216,7 +226,8 @@
         "edgetx.bitmap.d.lua",
         "edgetx.constants.d.lua",
         "edgetx.scripts.d.lua",
-        "edgetx-lua-api.json"
+        "edgetx-lua-api.json",
+        "edgetx-script-types.json"
       ],
       "sources": {
         "radio/src/lua/api_colorlcd.cpp": "fda476ff4e5bd1cccc2cc55b30176086c6fd2be2",
