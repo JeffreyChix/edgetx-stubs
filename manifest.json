@@ -1,10 +1,10 @@
 {
   "manifestVersion": 1,
-  "updatedAt": "2026-03-23T22:33:18.841Z",
+  "updatedAt": "2026-03-26T07:19:49.543Z",
   "versions": {
     "2.3": {
-      "generatedAt": "2026-03-23T22:33:18.841Z",
-      "stubHash": "707a4fa4e19c6c962474d920ba21f0f18092bbb50946050e68fc458b6a843e36",
+      "generatedAt": "2026-03-26T07:19:49.543Z",
+      "stubHash": "192ecf1f6c89fad0abbea1c37b5bdd91d1fd0bca80f4ef61506a7ee47290ea28",
       "files": [
         "edgetx.globals.d.lua",
         "edgetx.lcd.d.lua",
@@ -22,8 +22,8 @@
       }
     },
     "2.4": {
-      "generatedAt": "2026-03-23T22:33:18.841Z",
-      "stubHash": "fa8887b38b1a57ef8ff3c55d02b150989d04d0605f97274b7e16e811b732b478",
+      "generatedAt": "2026-03-26T07:19:49.543Z",
+      "stubHash": "f9edb0db6c90d24f8d2ce9f5ad11c86ec93173c719eb79d6c243644d6b26303f",
       "files": [
         "edgetx.globals.d.lua",
         "edgetx.lcd.d.lua",
@@ -43,8 +43,8 @@
       }
     },
     "2.5": {
-      "generatedAt": "2026-03-23T22:33:18.841Z",
-      "stubHash": "0a9f1dffa760f0687e391856d61cfc68a1c5f1615faa961bd458e9ee4bd63115",
+      "generatedAt": "2026-03-26T07:19:49.543Z",
+      "stubHash": "53d2ac7cc251e33ac26a8992aceccb6192c032aa27f3de2c79ab4818c8d7cf2b",
       "files": [
         "edgetx.globals.d.lua",
         "edgetx.lcd.d.lua",
@@ -65,8 +65,8 @@
       }
     },
     "2.6": {
-      "generatedAt": "2026-03-23T22:33:18.841Z",
-      "stubHash": "9da0155ae07efbf402df821f526377e0e7583cbd8d2d72028ea5c58de50daeb8",
+      "generatedAt": "2026-03-26T07:19:49.543Z",
+      "stubHash": "16307be4e4582688a0b40300e578d4b6f986a72bc7a10d2c054d7fb39bead5fb",
       "files": [
         "edgetx.globals.d.lua",
         "edgetx.lcd.d.lua",
@@ -87,8 +87,8 @@
       }
     },
     "2.7": {
-      "generatedAt": "2026-03-23T22:33:18.841Z",
-      "stubHash": "1e05d53d7064a21c759e86f6b3c393f37934b8f7b223658a0fd0fa8f74987fb9",
+      "generatedAt": "2026-03-26T07:19:49.543Z",
+      "stubHash": "570d53693309cab80f261be5eaf7a0de7b02870abe984193271d1b893fed4e17",
       "files": [
         "edgetx.globals.d.lua",
         "edgetx.lcd.d.lua",
@@ -109,8 +109,8 @@
       }
     },
     "2.8": {
-      "generatedAt": "2026-03-23T22:33:18.841Z",
-      "stubHash": "74ad87eeebf2f558338928e49ebd5321a1854501adb0128c29058bec8fe45512",
+      "generatedAt": "2026-03-26T07:19:49.543Z",
+      "stubHash": "a28516c5e91881a6bb0741d8e2352b5d447c8a1f22cacb6c8b751771c323ecd8",
       "files": [
         "edgetx.globals.d.lua",
         "edgetx.lcd.d.lua",
@@ -131,8 +131,8 @@
       }
     },
     "2.9": {
-      "generatedAt": "2026-03-23T22:33:18.841Z",
-      "stubHash": "59e848c984b26f7dc3343fd439edf399891312e50b249a22c1a401f8a7c46f4f",
+      "generatedAt": "2026-03-26T07:19:49.543Z",
+      "stubHash": "14ecdffb74114a091fbab074557ba2b2cd93f9a1a7e3cf23fc8398a4ad55c209",
       "files": [
         "edgetx.globals.d.lua",
         "edgetx.lcd.d.lua",
@@ -152,8 +152,8 @@
       }
     },
     "2.10": {
-      "generatedAt": "2026-03-23T22:33:18.841Z",
-      "stubHash": "0c437400fb10899f410b3efe25a2f676d75c113e1107cd7f0069605dc4a6c81d",
+      "generatedAt": "2026-03-26T07:19:49.543Z",
+      "stubHash": "29f520dacbc3e214a751bef67ee249ad921fe612325f717a04ad7fe2906e6f21",
       "files": [
         "edgetx.globals.d.lua",
         "edgetx.lcd.d.lua",
@@ -173,8 +173,8 @@
       }
     },
     "2.11": {
-      "generatedAt": "2026-03-23T22:33:18.841Z",
-      "stubHash": "7eef1c5c618b747e71b124a9776c8c8632b8f18e65b2f27c641e8fcd3034f3c7",
+      "generatedAt": "2026-03-26T07:19:49.543Z",
+      "stubHash": "85adc39cd0d68bbeeffba98ed0610764d80e9882f63e5cf5169bbd527aa0d390",
       "files": [
         "edgetx.globals.d.lua",
         "edgetx.lcd.d.lua",
@@ -195,8 +195,8 @@
       }
     },
     "2.12": {
-      "generatedAt": "2026-03-23T22:33:18.841Z",
-      "stubHash": "42bfc42f248a37fb30ac69b61da16a01c9ba22842e8fc6ed7ae7081a7b1f71e8",
+      "generatedAt": "2026-03-26T07:19:49.543Z",
+      "stubHash": "bb4c1864bf9000998a6f1896ee100adbb900941b1f105ceae6b976e63abed72e",
       "files": [
         "edgetx.globals.d.lua",
         "edgetx.lcd.d.lua",
@@ -217,8 +217,8 @@
       }
     },
     "main": {
-      "generatedAt": "2026-03-23T22:33:18.841Z",
-      "stubHash": "ed0a583a66541d4b47385215d0aecebd362934b6a00c1dff865d281f30b06223",
+      "generatedAt": "2026-03-26T07:19:49.543Z",
+      "stubHash": "b0165d8656611c90d854347a7fa4faff5bb70ae3c2f2a37dd163dd60784c7222",
       "files": [
         "edgetx.globals.d.lua",
         "edgetx.lcd.d.lua",
@@ -233,7 +233,7 @@
         "radio/src/lua/api_colorlcd.cpp": "fda476ff4e5bd1cccc2cc55b30176086c6fd2be2",
         "radio/src/lua/api_colorlcd_lvgl.cpp": "fe26f5ff65c238de2e6da3e13e0fc115cff8a2a0",
         "radio/src/lua/api_filesystem.cpp": "33c85c727750d40020dbc834ace0ba508b0d004a",
-        "radio/src/lua/api_general.cpp": "43dfe0ee5ea569d69d2fff3e4f42a04d42e67492",
+        "radio/src/lua/api_general.cpp": "dddda8746427830704ddaa4c6925b88ff55f1510",
         "radio/src/lua/api_model.cpp": "8dd674c0e18423ae1a2439e8f6e61fc3929790f5",
         "radio/src/lua/api_stdlcd.cpp": "7b3d200082589537d5235ff89c79175cf2916d16"
       }
