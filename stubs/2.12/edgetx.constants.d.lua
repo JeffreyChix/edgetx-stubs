@@ -21,119 +21,119 @@ COLOR = 0
 ---@type integer
 BOOL = 0
 
---- Text input option, limited to 8 characters
+--- Text input option, limited to 8 characters in 2.10 or earlier, 12 characters in 2.11.
 ---@type integer
 STRING = 0
 
---- → COLOR_THEME_SECONDARY1
+--- -> COLOR_THEME_SECONDARY1
 ---@type integer
 TEXT_COLOR = 0
 
---- → COLOR_THEME_SECONDARY3
+--- -> COLOR_THEME_SECONDARY3
 ---@type integer
 TEXT_BGCOLOR = 0
 
---- → COLOR_THEME_PRIMARY2
+--- -> COLOR_THEME_PRIMARY2
 ---@type integer
 TEXT_INVERTED_COLOR = 0
 
---- → COLOR_THEME_FOCUS
+--- -> COLOR_THEME_FOCUS
 ---@type integer
 TEXT_INVERTED_BGCOLOR = 0
 
---- → COLOR_THEME_PRIMARY3
+--- -> COLOR_THEME_PRIMARY3
 ---@type integer
 LINE_COLOR = 0
 
---- → COLOR_THEME_SECONDARY3
+--- -> COLOR_THEME_SECONDARY3
 ---@type integer
 SCROLLBOX_COLOR = 0
 
---- → COLOR_THEME_SECONDARY1
+--- -> COLOR_THEME_SECONDARY1
 ---@type integer
 MENU_TITLE_BGCOLOR = 0
 
---- → COLOR_THEME_PRIMARY2
+--- -> COLOR_THEME_PRIMARY2
 ---@type integer
 MENU_TITLE_COLOR = 0
 
---- → COLOR_THEME_PRIMARY3
+--- -> COLOR_THEME_PRIMARY3
 ---@type integer
 MENU_TITLE_DISABLE_COLOR = 0
 
---- → COLOR_THEME_SECONDARY1
+--- -> COLOR_THEME_SECONDARY1
 ---@type integer
 HEADER_COLOR = 0
 
---- → COLOR_THEME_WARNING
+--- -> COLOR_THEME_WARNING
 ---@type integer
 ALARM_COLOR = 0
 
---- → COLOR_THEME_WARNING
+--- -> COLOR_THEME_WARNING
 ---@type integer
 WARNING_COLOR = 0
 
---- → COLOR_THEME_DISABLED
+--- -> COLOR_THEME_DISABLED
 ---@type integer
 TEXT_DISABLE_COLOR = 0
 
---- → COLOR_THEME_SECONDARY2
+--- -> COLOR_THEME_SECONDARY2
 ---@type integer
 CURVE_AXIS_COLOR = 0
 
---- → COLOR_THEME_SECONDARY1
+--- -> COLOR_THEME_SECONDARY1
 ---@type integer
 CURVE_COLOR = 0
 
---- → COLOR_THEME_WARNING
+--- -> COLOR_THEME_WARNING
 ---@type integer
 CURVE_CURSOR_COLOR = 0
 
---- → COLOR_THEME_SECONDARY1
+--- -> COLOR_THEME_SECONDARY1
 ---@type integer
 TITLE_BGCOLOR = 0
 
---- → COLOR_THEME_FOCUS
+--- -> COLOR_THEME_FOCUS
 ---@type integer
 TRIM_BGCOLOR = 0
 
---- → COLOR_THEME_PRIMARY1
+--- -> COLOR_THEME_PRIMARY1
 ---@type integer
 TRIM_SHADOW_COLOR = 0
 
---- → COLOR_THEME_FOCUS
+--- -> COLOR_THEME_FOCUS
 ---@type integer
 HEADER_BGCOLOR = 0
 
---- → COLOR_THEME_SECONDARY1
+--- -> COLOR_THEME_SECONDARY1
 ---@type integer
 HEADER_ICON_BGCOLOR = 0
 
---- → COLOR_THEME_FOCUS
+--- -> COLOR_THEME_FOCUS
 ---@type integer
 HEADER_CURRENT_BGCOLOR = 0
 
---- → COLOR_THEME_PRIMARY2
+--- -> COLOR_THEME_PRIMARY2
 ---@type integer
 MAINVIEW_PANES_COLOR = 0
 
---- → COLOR_THEME_SECONDARY1
+--- -> COLOR_THEME_SECONDARY1
 ---@type integer
 MAINVIEW_GRAPHICS_COLOR = 0
 
---- → COLOR_THEME_PRIMARY1
+--- -> COLOR_THEME_PRIMARY1
 ---@type integer
 OVERLAY_COLOR = 0
 
---- → COLOR_THEME_SECONDARY1
+--- -> COLOR_THEME_SECONDARY1
 ---@type integer
 BARGRAPH1_COLOR = 0
 
---- → COLOR_THEME_SECONDARY2
+--- -> COLOR_THEME_SECONDARY2
 ---@type integer
 BARGRAPH2_COLOR = 0
 
---- → COLOR_THEME_SECONDARY3
+--- -> COLOR_THEME_SECONDARY3
 ---@type integer
 BARGRAPH_BGCOLOR = 0
 
@@ -251,19 +251,15 @@ SWSRC_LAST = 0
 ---@type integer
 MAX_SENSORS = 0
 
---- for FIELDS navigation
 ---@type integer
 EVT_VIRTUAL_PREV = 0
 
---- for FIELDS navigation
 ---@type integer
 EVT_VIRTUAL_NEXT = 0
 
---- for VALUES navigation
 ---@type integer
 EVT_VIRTUAL_DEC = 0
 
---- for VALUES navigation
 ---@type integer
 EVT_VIRTUAL_INC = 0
 
@@ -276,27 +272,21 @@ ROTENC_MIDSPEED = 0
 ---@type integer
 ROTENC_HIGHSPEED = 0
 
---- for FIELDS navigation
 ---@type integer
 EVT_VIRTUAL_PREV_REPT = 0
 
---- for FIELDS navigation
 ---@type integer
 EVT_VIRTUAL_NEXT_REPT = 0
 
---- for VALUES navigation
 ---@type integer
 EVT_VIRTUAL_DEC_REPT = 0
 
---- for VALUES navigation
 ---@type integer
 EVT_VIRTUAL_INC_REPT = 0
 
---- for PAGE navigation
 ---@type integer
 EVT_VIRTUAL_PREV_PAGE = 0
 
---- for PAGE navigation
 ---@type integer
 EVT_VIRTUAL_NEXT_PAGE = 0
 
@@ -315,18 +305,15 @@ EVT_VIRTUAL_ENTER_LONG = 0
 ---@type integer
 EVT_VIRTUAL_EXIT = 0
 
---- EXIT key release
 ---@type integer
 EVT_EXIT_BREAK = 0
 
 ---@type integer
 EVT_RTN_FIRST = 0
 
---- rotary encoder rotated left
 ---@type integer
 EVT_ROT_LEFT = 0
 
---- rotary encoder rotated right
 ---@type integer
 EVT_ROT_RIGHT = 0
 
@@ -367,7 +354,7 @@ PLAY_BACKGROUND = 0
 ---@type integer
 TIMEHOUR = 0
 
---- Raw unit \(no unit\)
+--- Raw unit (no unit)
 ---@type integer
 UNIT_RAW = 0
 
@@ -819,7 +806,7 @@ LIMIT_STD_PERCENT = 0
 ---@type integer
 ALIGNMENT = 0
 
---- lvgl.  "switch"
+--- Choice option to select from available switches.
 ---@type integer
 SWITCH = 0
 
@@ -832,24 +819,26 @@ MIXSRC_MIN = 0
 ---@type integer
 LED_STRIP_LENGTH = 0
 
---- lvgl.  "choice"
+--- Select numerical value using a custom popup list (available in 2.11)
 ---@type integer
 CHOICE = 0
 
---- lvgl.  "slider"
+--- Select numerical value using a slider control (available in 2.11)
 ---@type integer
 SLIDER = 0
 
---- lvgl.  "file"
+--- Select a file from SD card / internal storage (available in 2.11). Filename is limited to 12 characters maximum.
 ---@type integer
 FILE = 0
 
 ---@type integer
 STDSIZE = 0
 
+--- align to top  2.11.4  Only for color displays using the LVGL API.
 ---@type integer
 VTOP = 0
 
+--- align to bottom  2.11.4  Only for color displays using hte LVGL API.
 ---@type integer
 VBOTTOM = 0
 
@@ -864,7 +853,7 @@ CHAR_CURVE = 0
 
 -- ── lcd constants ───────────────────────────────────────────────
 
---- These are the theme colors plus , and they can be changed with the function lcd.setColor\(color_index, color\). Please note: if an indexed color is changed, then it changes everywhere that it is used. For the theme colors, this is not only in other widgets, but everywhere throughout the radio's user interface!
+--- These are the theme colors plus , and they can be changed with the function lcd.setColor(color_index, color). Please note: if an indexed color is changed, then it changes everywhere that it is used. For the theme colors, this is not only in other widgets, but everywhere throughout the radio's user interface!
 ---@type integer
 CUSTOM_COLOR = 0
 

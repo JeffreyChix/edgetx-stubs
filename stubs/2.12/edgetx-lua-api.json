@@ -1,6 +1,6 @@
 {
   "version": "2.12",
-  "generated": "2026-03-30T07:53:53.615Z",
+  "generated": "2026-04-02T07:23:44.940Z",
   "functions": [
     {
       "entityType": "function",
@@ -6363,7 +6363,7 @@
     {
       "entityType": "constant",
       "availableOn": "COLOR_LCD",
-      "description": "Text input option, limited to 8 characters",
+      "description": "Text input option, limited to 8 characters in 2.10 or earlier, 12 characters in 2.11.",
       "sourceFile": "api_general.cpp",
       "name": "STRING",
       "module": "general"
@@ -6371,7 +6371,7 @@
     {
       "entityType": "constant",
       "availableOn": "COLOR_LCD",
-      "description": "→ COLOR_THEME_SECONDARY1",
+      "description": "-> COLOR_THEME_SECONDARY1",
       "sourceFile": "api_general.cpp",
       "name": "TEXT_COLOR",
       "module": "general"
@@ -6379,7 +6379,7 @@
     {
       "entityType": "constant",
       "availableOn": "COLOR_LCD",
-      "description": "→ COLOR_THEME_SECONDARY3",
+      "description": "-> COLOR_THEME_SECONDARY3",
       "sourceFile": "api_general.cpp",
       "name": "TEXT_BGCOLOR",
       "module": "general"
@@ -6387,7 +6387,7 @@
     {
       "entityType": "constant",
       "availableOn": "COLOR_LCD",
-      "description": "→ COLOR_THEME_PRIMARY2",
+      "description": "-> COLOR_THEME_PRIMARY2",
       "sourceFile": "api_general.cpp",
       "name": "TEXT_INVERTED_COLOR",
       "module": "general"
@@ -6395,7 +6395,7 @@
     {
       "entityType": "constant",
       "availableOn": "COLOR_LCD",
-      "description": "→ COLOR_THEME_FOCUS",
+      "description": "-> COLOR_THEME_FOCUS",
       "sourceFile": "api_general.cpp",
       "name": "TEXT_INVERTED_BGCOLOR",
       "module": "general"
@@ -6403,7 +6403,7 @@
     {
       "entityType": "constant",
       "availableOn": "COLOR_LCD",
-      "description": "→ COLOR_THEME_PRIMARY3",
+      "description": "-> COLOR_THEME_PRIMARY3",
       "sourceFile": "api_general.cpp",
       "name": "LINE_COLOR",
       "module": "general"
@@ -6411,7 +6411,7 @@
     {
       "entityType": "constant",
       "availableOn": "COLOR_LCD",
-      "description": "→ COLOR_THEME_SECONDARY3",
+      "description": "-> COLOR_THEME_SECONDARY3",
       "sourceFile": "api_general.cpp",
       "name": "SCROLLBOX_COLOR",
       "module": "general"
@@ -6419,7 +6419,7 @@
     {
       "entityType": "constant",
       "availableOn": "COLOR_LCD",
-      "description": "→ COLOR_THEME_SECONDARY1",
+      "description": "-> COLOR_THEME_SECONDARY1",
       "sourceFile": "api_general.cpp",
       "name": "MENU_TITLE_BGCOLOR",
       "module": "general"
@@ -6427,7 +6427,7 @@
     {
       "entityType": "constant",
       "availableOn": "COLOR_LCD",
-      "description": "→ COLOR_THEME_PRIMARY2",
+      "description": "-> COLOR_THEME_PRIMARY2",
       "sourceFile": "api_general.cpp",
       "name": "MENU_TITLE_COLOR",
       "module": "general"
@@ -6435,7 +6435,7 @@
     {
       "entityType": "constant",
       "availableOn": "COLOR_LCD",
-      "description": "→ COLOR_THEME_PRIMARY3",
+      "description": "-> COLOR_THEME_PRIMARY3",
       "sourceFile": "api_general.cpp",
       "name": "MENU_TITLE_DISABLE_COLOR",
       "module": "general"
@@ -6443,7 +6443,7 @@
     {
       "entityType": "constant",
       "availableOn": "COLOR_LCD",
-      "description": "→ COLOR_THEME_SECONDARY1",
+      "description": "-> COLOR_THEME_SECONDARY1",
       "sourceFile": "api_general.cpp",
       "name": "HEADER_COLOR",
       "module": "general"
@@ -6451,7 +6451,7 @@
     {
       "entityType": "constant",
       "availableOn": "COLOR_LCD",
-      "description": "→ COLOR_THEME_WARNING",
+      "description": "-> COLOR_THEME_WARNING",
       "sourceFile": "api_general.cpp",
       "name": "ALARM_COLOR",
       "module": "general"
@@ -6459,7 +6459,7 @@
     {
       "entityType": "constant",
       "availableOn": "COLOR_LCD",
-      "description": "→ COLOR_THEME_WARNING",
+      "description": "-> COLOR_THEME_WARNING",
       "sourceFile": "api_general.cpp",
       "name": "WARNING_COLOR",
       "module": "general"
@@ -6467,7 +6467,7 @@
     {
       "entityType": "constant",
       "availableOn": "COLOR_LCD",
-      "description": "→ COLOR_THEME_DISABLED",
+      "description": "-> COLOR_THEME_DISABLED",
       "sourceFile": "api_general.cpp",
       "name": "TEXT_DISABLE_COLOR",
       "module": "general"
@@ -6475,7 +6475,7 @@
     {
       "entityType": "constant",
       "availableOn": "COLOR_LCD",
-      "description": "→ COLOR_THEME_SECONDARY2",
+      "description": "-> COLOR_THEME_SECONDARY2",
       "sourceFile": "api_general.cpp",
       "name": "CURVE_AXIS_COLOR",
       "module": "general"
@@ -6483,7 +6483,7 @@
     {
       "entityType": "constant",
       "availableOn": "COLOR_LCD",
-      "description": "→ COLOR_THEME_SECONDARY1",
+      "description": "-> COLOR_THEME_SECONDARY1",
       "sourceFile": "api_general.cpp",
       "name": "CURVE_COLOR",
       "module": "general"
@@ -6491,7 +6491,7 @@
     {
       "entityType": "constant",
       "availableOn": "COLOR_LCD",
-      "description": "→ COLOR_THEME_WARNING",
+      "description": "-> COLOR_THEME_WARNING",
       "sourceFile": "api_general.cpp",
       "name": "CURVE_CURSOR_COLOR",
       "module": "general"
@@ -6499,7 +6499,7 @@
     {
       "entityType": "constant",
       "availableOn": "COLOR_LCD",
-      "description": "→ COLOR_THEME_SECONDARY1",
+      "description": "-> COLOR_THEME_SECONDARY1",
       "sourceFile": "api_general.cpp",
       "name": "TITLE_BGCOLOR",
       "module": "general"
@@ -6507,7 +6507,7 @@
     {
       "entityType": "constant",
       "availableOn": "COLOR_LCD",
-      "description": "→ COLOR_THEME_FOCUS",
+      "description": "-> COLOR_THEME_FOCUS",
       "sourceFile": "api_general.cpp",
       "name": "TRIM_BGCOLOR",
       "module": "general"
@@ -6515,7 +6515,7 @@
     {
       "entityType": "constant",
       "availableOn": "COLOR_LCD",
-      "description": "→ COLOR_THEME_PRIMARY1",
+      "description": "-> COLOR_THEME_PRIMARY1",
       "sourceFile": "api_general.cpp",
       "name": "TRIM_SHADOW_COLOR",
       "module": "general"
@@ -6523,7 +6523,7 @@
     {
       "entityType": "constant",
       "availableOn": "COLOR_LCD",
-      "description": "→ COLOR_THEME_FOCUS",
+      "description": "-> COLOR_THEME_FOCUS",
       "sourceFile": "api_general.cpp",
       "name": "HEADER_BGCOLOR",
       "module": "general"
@@ -6531,7 +6531,7 @@
     {
       "entityType": "constant",
       "availableOn": "COLOR_LCD",
-      "description": "→ COLOR_THEME_SECONDARY1",
+      "description": "-> COLOR_THEME_SECONDARY1",
       "sourceFile": "api_general.cpp",
       "name": "HEADER_ICON_BGCOLOR",
       "module": "general"
@@ -6539,7 +6539,7 @@
     {
       "entityType": "constant",
       "availableOn": "COLOR_LCD",
-      "description": "→ COLOR_THEME_FOCUS",
+      "description": "-> COLOR_THEME_FOCUS",
       "sourceFile": "api_general.cpp",
       "name": "HEADER_CURRENT_BGCOLOR",
       "module": "general"
@@ -6547,7 +6547,7 @@
     {
       "entityType": "constant",
       "availableOn": "COLOR_LCD",
-      "description": "→ COLOR_THEME_PRIMARY2",
+      "description": "-> COLOR_THEME_PRIMARY2",
       "sourceFile": "api_general.cpp",
       "name": "MAINVIEW_PANES_COLOR",
       "module": "general"
@@ -6555,7 +6555,7 @@
     {
       "entityType": "constant",
       "availableOn": "COLOR_LCD",
-      "description": "→ COLOR_THEME_SECONDARY1",
+      "description": "-> COLOR_THEME_SECONDARY1",
       "sourceFile": "api_general.cpp",
       "name": "MAINVIEW_GRAPHICS_COLOR",
       "module": "general"
@@ -6563,7 +6563,7 @@
     {
       "entityType": "constant",
       "availableOn": "COLOR_LCD",
-      "description": "→ COLOR_THEME_PRIMARY1",
+      "description": "-> COLOR_THEME_PRIMARY1",
       "sourceFile": "api_general.cpp",
       "name": "OVERLAY_COLOR",
       "module": "general"
@@ -6571,7 +6571,7 @@
     {
       "entityType": "constant",
       "availableOn": "COLOR_LCD",
-      "description": "→ COLOR_THEME_SECONDARY1",
+      "description": "-> COLOR_THEME_SECONDARY1",
       "sourceFile": "api_general.cpp",
       "name": "BARGRAPH1_COLOR",
       "module": "general"
@@ -6579,7 +6579,7 @@
     {
       "entityType": "constant",
       "availableOn": "COLOR_LCD",
-      "description": "→ COLOR_THEME_SECONDARY2",
+      "description": "-> COLOR_THEME_SECONDARY2",
       "sourceFile": "api_general.cpp",
       "name": "BARGRAPH2_COLOR",
       "module": "general"
@@ -6587,7 +6587,7 @@
     {
       "entityType": "constant",
       "availableOn": "COLOR_LCD",
-      "description": "→ COLOR_THEME_SECONDARY3",
+      "description": "-> COLOR_THEME_SECONDARY3",
       "sourceFile": "api_general.cpp",
       "name": "BARGRAPH_BGCOLOR",
       "module": "general"
@@ -6595,7 +6595,7 @@
     {
       "entityType": "constant",
       "availableOn": "COLOR_LCD",
-      "description": "These are the theme colors plus , and they can be changed with the function lcd.setColor\\(color_index, color\\). Please note: if an indexed color is changed, then it changes everywhere that it is used. For the theme colors, this is not only in other widgets, but everywhere throughout the radio's user interface!",
+      "description": "These are the theme colors plus , and they can be changed with the function lcd.setColor(color_index, color). Please note: if an indexed color is changed, then it changes everywhere that it is used. For the theme colors, this is not only in other widgets, but everywhere throughout the radio's user interface!",
       "sourceFile": "api_colorlcd.cpp",
       "name": "CUSTOM_COLOR",
       "module": "lcd"
@@ -6939,7 +6939,7 @@
     {
       "entityType": "constant",
       "availableOn": "GENERAL",
-      "description": "for FIELDS navigation",
+      "description": "",
       "sourceFile": "api_general.cpp",
       "name": "EVT_VIRTUAL_PREV",
       "module": "general"
@@ -6947,7 +6947,7 @@
     {
       "entityType": "constant",
       "availableOn": "GENERAL",
-      "description": "for FIELDS navigation",
+      "description": "",
       "sourceFile": "api_general.cpp",
       "name": "EVT_VIRTUAL_NEXT",
       "module": "general"
@@ -6955,7 +6955,7 @@
     {
       "entityType": "constant",
       "availableOn": "GENERAL",
-      "description": "for VALUES navigation",
+      "description": "",
       "sourceFile": "api_general.cpp",
       "name": "EVT_VIRTUAL_DEC",
       "module": "general"
@@ -6963,7 +6963,7 @@
     {
       "entityType": "constant",
       "availableOn": "GENERAL",
-      "description": "for VALUES navigation",
+      "description": "",
       "sourceFile": "api_general.cpp",
       "name": "EVT_VIRTUAL_INC",
       "module": "general"
@@ -6995,7 +6995,7 @@
     {
       "entityType": "constant",
       "availableOn": "GENERAL",
-      "description": "for FIELDS navigation",
+      "description": "",
       "sourceFile": "api_general.cpp",
       "name": "EVT_VIRTUAL_PREV_REPT",
       "module": "general"
@@ -7003,7 +7003,7 @@
     {
       "entityType": "constant",
       "availableOn": "GENERAL",
-      "description": "for FIELDS navigation",
+      "description": "",
       "sourceFile": "api_general.cpp",
       "name": "EVT_VIRTUAL_NEXT_REPT",
       "module": "general"
@@ -7011,7 +7011,7 @@
     {
       "entityType": "constant",
       "availableOn": "GENERAL",
-      "description": "for VALUES navigation",
+      "description": "",
       "sourceFile": "api_general.cpp",
       "name": "EVT_VIRTUAL_DEC_REPT",
       "module": "general"
@@ -7019,7 +7019,7 @@
     {
       "entityType": "constant",
       "availableOn": "GENERAL",
-      "description": "for VALUES navigation",
+      "description": "",
       "sourceFile": "api_general.cpp",
       "name": "EVT_VIRTUAL_INC_REPT",
       "module": "general"
@@ -7027,7 +7027,7 @@
     {
       "entityType": "constant",
       "availableOn": "GENERAL",
-      "description": "for PAGE navigation",
+      "description": "",
       "sourceFile": "api_general.cpp",
       "name": "EVT_VIRTUAL_PREV_PAGE",
       "module": "general"
@@ -7035,7 +7035,7 @@
     {
       "entityType": "constant",
       "availableOn": "GENERAL",
-      "description": "for PAGE navigation",
+      "description": "",
       "sourceFile": "api_general.cpp",
       "name": "EVT_VIRTUAL_NEXT_PAGE",
       "module": "general"
@@ -7083,7 +7083,7 @@
     {
       "entityType": "constant",
       "availableOn": "GENERAL",
-      "description": "EXIT key release",
+      "description": "",
       "sourceFile": "api_general.cpp",
       "name": "EVT_EXIT_BREAK",
       "module": "general"
@@ -7099,7 +7099,7 @@
     {
       "entityType": "constant",
       "availableOn": "GENERAL",
-      "description": "rotary encoder rotated left",
+      "description": "",
       "sourceFile": "api_general.cpp",
       "name": "EVT_ROT_LEFT",
       "module": "general"
@@ -7107,7 +7107,7 @@
     {
       "entityType": "constant",
       "availableOn": "GENERAL",
-      "description": "rotary encoder rotated right",
+      "description": "",
       "sourceFile": "api_general.cpp",
       "name": "EVT_ROT_RIGHT",
       "module": "general"
@@ -7195,7 +7195,7 @@
     {
       "entityType": "constant",
       "availableOn": "GENERAL",
-      "description": "Raw unit \\(no unit\\)",
+      "description": "Raw unit (no unit)",
       "sourceFile": "api_general.cpp",
       "name": "UNIT_RAW",
       "module": "general"
@@ -8395,7 +8395,7 @@
     {
       "entityType": "constant",
       "availableOn": "COLOR_LCD",
-      "description": "lvgl.  \"switch\"",
+      "description": "Choice option to select from available switches.",
       "sourceFile": "api_general.cpp",
       "name": "SWITCH",
       "module": "general"
@@ -8859,7 +8859,7 @@
     {
       "entityType": "constant",
       "availableOn": "COLOR_LCD",
-      "description": "lvgl.  \"choice\"",
+      "description": "Select numerical value using a custom popup list (available in 2.11)",
       "sourceFile": "api_general.cpp",
       "name": "CHOICE",
       "module": "general"
@@ -8867,7 +8867,7 @@
     {
       "entityType": "constant",
       "availableOn": "COLOR_LCD",
-      "description": "lvgl.  \"slider\"",
+      "description": "Select numerical value using a slider control (available in 2.11)",
       "sourceFile": "api_general.cpp",
       "name": "SLIDER",
       "module": "general"
@@ -8907,7 +8907,7 @@
     {
       "entityType": "constant",
       "availableOn": "COLOR_LCD",
-      "description": "lvgl.  \"file\"",
+      "description": "Select a file from SD card / internal storage (available in 2.11). Filename is limited to 12 characters maximum.",
       "sourceFile": "api_general.cpp",
       "name": "FILE",
       "module": "general"
@@ -8931,7 +8931,7 @@
     {
       "entityType": "constant",
       "availableOn": "COLOR_LCD",
-      "description": "",
+      "description": "align to top  2.11.4  Only for color displays using the LVGL API.",
       "sourceFile": "api_general.cpp",
       "name": "VTOP",
       "module": "general"
@@ -8939,7 +8939,7 @@
     {
       "entityType": "constant",
       "availableOn": "COLOR_LCD",
-      "description": "",
+      "description": "align to bottom  2.11.4  Only for color displays using hte LVGL API.",
       "sourceFile": "api_general.cpp",
       "name": "VBOTTOM",
       "module": "general"
