@@ -8,7 +8,7 @@
 
 ## What this repo is
 
-This repo is the output target of the [edgetx-lua-gen](https://github.com/JeffreyChix/edgetx-lua-gen) pipeline. Every time the generator runs, it commits updated stubs and a manifest here. **Do not edit files in this repo manually** — all content is generated and any manual changes will be overwritten on the next run.
+This repo is the output target of the [edgetx-lua-gen](https://github.com/JeffreyChix/edgetx-lua-gen) pipeline. Every time the generator runs, it commits updated stubs and a manifest here. **Do not edit files in this repo manually** — all content is generated, and any manual changes will be overwritten on the next run.
 
 The [EdgeTX Dev Kit](https://github.com/JeffreyChix/edgetx-dev-kit) VS Code extension consumes this repo directly — fetching `manifest.json` on activation and downloading only the stubs that have changed.
 
@@ -31,6 +31,9 @@ The [EdgeTX Dev Kit](https://github.com/JeffreyChix/edgetx-dev-kit) VS Code exte
     │   └── edgetx.model.d.lua
     └── 2.9/
         └── ...
+    └── 2.11/
+        └── ...
+    │   ├── edgetx.lvgl.d.lua
 ```
 
 Each versioned folder maps to an EdgeTX firmware release. The generator produces one `.d.lua` file per Lua module — any new module in a future EdgeTX release is handled automatically.
@@ -56,7 +59,7 @@ Stubs are cached locally in the extension's global storage and updated silently 
 
 ```json
 {
-  "manifestVersion": 1,
+  "manifestVersion": 2,
   "updatedAt": "2026-03-16T06:00:00Z",
   "versions": {
     "2.10": {
@@ -83,7 +86,7 @@ Stubs are cached locally in the extension's global storage and updated silently 
 
 | Field             | Description                                                                                    |
 | ----------------- | ---------------------------------------------------------------------------------------------- |
-| `manifestVersion` | Schema version of the manifest itself. Only bumped on breaking structural changes              |
+| `manifestVersion` | Schema version of the manifest itself. Only bumped on breaking structural changes. Current supported version is 2.             |
 | `updatedAt`       | Timestamp of the last generation run that produced any change                                  |
 | `generatedAt`     | When this specific version's stubs were last generated                                         |
 | `stubHash`        | SHA-256 of all stub files combined. Extension compares this to detect if re-download is needed |
