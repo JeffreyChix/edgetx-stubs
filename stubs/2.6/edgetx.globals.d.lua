@@ -4,58 +4,6 @@
 --- EdgeTX Lua API stubs for lua-language-server (LuaLS)
 --- Global functions available in all EdgeTX Lua scripts
 
---- Return an iterator listing all the files and directories name in a directory
---- ### Example
---- 
---- ```lua
----   for fname in dir(".") do
----     print(fname)
----   end
----
---- **Since:** 2.5.0
----@param directory string #Working directory
-function dir(directory) end
----@class (exact) General_fstat_Return
----@field year number #year
----@field mon number #month
----@field day number #day of month
----@field hour number #hours
----@field hour12 number #hours in US format
----@field min number #minutes
----@field sec number #seconds
----@field suffix string #(text) am or pm
-
---- Checks the existence of file or directory.
----  If not exist, return nil.
----  If exist, return the object information.
---- ### Example
---- 
---- ```lua
----   info = fstat("radio")
----   if info ~= nil then
----     if (info.attrib == AM_DIR) then
----       print("is a directory")
----     end
---- 
----     size = info.size
----     time = info.time
----   end
----
---- **Since:** 2.5.0
----@param path string #path to the object
----@return General_fstat_Return table #object info, table elements:
---- 'size' (number) file size
---- 'attrib' (number) file attribute flags
---- 'time' (table) table with last time modified date and times, table elements:
---- `year` (number) year
---- `mon` (number) month
---- `day` (number) day of month
---- `hour` (number) hours
---- `hour12` (number) hours in US format
---- `min` (number) minutes
---- `sec` (number) seconds
---- `suffix` (text) am or pm
-function fstat(path) end
 --- Return OpenTX version
 --- ### Example
 --- 
@@ -146,7 +94,7 @@ function getRotEncSpeed() end
 --- the LUA telemetry receive queue.
 ---
 --- **Since:** 2.2.0
----@return nil nil #queue does not contain any (or enough) bytes to form a whole packet
+---@return nil _nil #queue does not contain any (or enough) bytes to form a whole packet
 ---@return number multiple #returns 4 values:
 --- sensor ID (number)
 --- frame ID (number)
@@ -164,7 +112,7 @@ function sportTelemetryPop() end
 ---@param dataId? any #data ID
 ---@param value? number #value
 ---@return boolean boolean #data queued in output buffer or not.
----@return nil nil #incorrect telemetry protocol.
+---@return nil _nil #incorrect telemetry protocol.
 function sportTelemetryPush(sensorId, frameId, dataId, value) end
 --- This functions allows for sending SPORT / ACCESS telemetry data toward the receiver,
 --- and more generally, to anything connected SPORT bus on the receiver or transmitter.
@@ -183,7 +131,7 @@ function accessTelemetryPush(module, rxUid, sensorId, frameId, dataId, value) en
 --- Pops a received Crossfire Telemetry packet from the queue.
 ---
 --- **Since:** 2.2.0
----@return nil nil #queue does not contain any (or enough) bytes to form a whole packet
+---@return nil _nil #queue does not contain any (or enough) bytes to form a whole packet
 ---@return number|table multiple #returns 2 values:
 --- command (number)
 --- packet (table) data bytes
@@ -196,7 +144,7 @@ function crossfireTelemetryPop() end
 ---@param command? any #command
 ---@param data? table #table of data bytes
 ---@return boolean boolean #data queued in output buffer or not.
----@return nil nil #incorrect telemetry protocol.
+---@return nil _nil #incorrect telemetry protocol.
 function crossfireTelemetryPush(command, data) end
 ---@class (exact) General_getFieldInfo_Return1
 ---@field id number #field identifier
@@ -221,7 +169,7 @@ function crossfireTelemetryPush(command, data) end
 --- `name` (string) field name
 --- `desc` (string) field description
 --- 'unit' (number) unit identifier [Full list](../appendix/units.html)
----@return nil nil #the requested field was not found
+---@return nil _nil #the requested field was not found
 function getFieldInfo(source) end
 ---@class (exact) General_getValue_Return2
 ---@field lat number #latitude, positive is North
@@ -461,7 +409,7 @@ function setTelemetryValue(id, subID, instance, value, unit, precision, name) en
 --- **Since:** 2.0.0
 ---@param stick number #stick number (from 0 to 3)
 ---@return number number #channel assigned to this stick (from 0 to 3)
----@return nil nil #stick not found
+---@return nil _nil #stick not found
 function defaultChannel(stick) end
 --- Get RSSI value as well as low and critical RSSI alarm levels (in dB)
 ---
@@ -512,7 +460,7 @@ function chdir(directory) end
 --- Add `d` to keep extra debug info in the compiled binary.
 ---        Eg: "td", "btd", or "tcd" (no effect with just "b" or with "x").
 ---@param env? number #See documentation for Lua function loadfile().
----@return fun() function #The loaded script, or `nil` if there was an error (e.g. file not found or syntax error).
+---@return fun(...):... _function #The loaded script, or `nil` if there was an error (e.g. file not found or syntax error).
 ---@return string string #Error message(s), if any. Blank if no error occurred.
 function loadScript(file, mode, env) end
 --- Get percent of already used Lua instructions in current script execution cycle.
@@ -577,7 +525,7 @@ function getShmVar(id) end
 --- **Since:** 2.6
 ---@param id number #integer identifying the sticky logical switch (zero for LS1 etc.).
 ---@param value number #true/false. The new value of the sticky logical switch.
----@return boolean|fun() bufferFull #true/false. This function sends a message from Lua to the logical switch processor
+---@return boolean|fun(...):... bufferFull #true/false. This function sends a message from Lua to the logical switch processor
 --- via a buffer with eight slots that are read 10 times per second. If the buffer is full, then a true value 
 --- is returned and no messages was sent (i.e. the switch was not changed).
 --- 
@@ -607,7 +555,7 @@ function getSwitchName(switchIndex) end
 function getSwitchValue(switchIndex) end
 --- **Since:** 2.6
 ---@param first? number|nil #the first switch index. If `nil` or omitted, the first available switch is used.
----@param last? number|fun()|nil #the last switch index. If `nil` or omitted, the last available switch is used.
+---@param last? number|fun(...):...|nil #the last switch index. If `nil` or omitted, the last available switch is used.
 --- 
 --- This is an iterator function over switch positions. `for switchIndex, switchName in switches() do ...` will iterate over all available switch positions.
 function switches(first, last) end
@@ -624,7 +572,59 @@ function getSourceIndex(sourceName) end
 function getSourceName(sourceIndex) end
 --- **Since:** 2.6
 ---@param first? number|nil #the first source index. If `nil` or omitted, the first available source is used.
----@param last? number|fun()|nil #the last soure index. If `nil` or omitted, the last available source is used.
+---@param last? number|fun(...):...|nil #the last soure index. If `nil` or omitted, the last available source is used.
 --- 
 --- This is an iterator function over value sources. `for sourceIndex, sourceName in sources() do ...` will iterate over all available value sources.
 function sources(first, last) end
+--- Return an iterator listing all the files and directories name in a directory
+--- ### Example
+--- 
+--- ```lua
+---   for fname in dir(".") do
+---     print(fname)
+---   end
+---
+--- **Since:** 2.5.0
+---@param directory string #Working directory
+function dir(directory) end
+---@class (exact) General_fstat_Return
+---@field year number #year
+---@field mon number #month
+---@field day number #day of month
+---@field hour number #hours
+---@field hour12 number #hours in US format
+---@field min number #minutes
+---@field sec number #seconds
+---@field suffix string #(text) am or pm
+
+--- Checks the existence of file or directory.
+---  If not exist, return nil.
+---  If exist, return the object information.
+--- ### Example
+--- 
+--- ```lua
+---   info = fstat("radio")
+---   if info ~= nil then
+---     if (info.attrib == AM_DIR) then
+---       print("is a directory")
+---     end
+--- 
+---     size = info.size
+---     time = info.time
+---   end
+---
+--- **Since:** 2.5.0
+---@param path string #path to the object
+---@return General_fstat_Return table #object info, table elements:
+--- 'size' (number) file size
+--- 'attrib' (number) file attribute flags
+--- 'time' (table) table with last time modified date and times, table elements:
+--- `year` (number) year
+--- `mon` (number) month
+--- `day` (number) day of month
+--- `hour` (number) hours
+--- `hour12` (number) hours in US format
+--- `min` (number) minutes
+--- `sec` (number) seconds
+--- `suffix` (text) am or pm
+function fstat(path) end

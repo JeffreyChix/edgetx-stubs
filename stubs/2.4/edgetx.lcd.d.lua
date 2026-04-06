@@ -8,10 +8,9 @@
 lcd = {}
 
 --- Refresh the LCD screen
---- 
---- From 2.4.0 on color LCDs, this is done automatically when the screen
---- needs to be refreshed (on events and depending on refresh period).
 ---
+--- **Since:** 2.2.0
+--- > **Notice:** This function only works in stand-alone and telemetry scripts.
 function lcd.refresh() end
 --- Clear the LCD screen
 ---
@@ -45,6 +44,26 @@ function lcd.drawPoint(x, y, flags) end
 ---@param pattern number #SOLID or DOTTED
 ---@param flags? number #lcdflags
 function lcd.drawLine(x1, y1, x2, y2, pattern, flags) end
+--- Returns the rightmost x position from previous output
+---
+--- **Since:** 2.0.0
+--- > **Notice:** Only available on Taranis
+--- > **Notice:** For added clarity, it is recommended to use lcd.getLastRightPos()
+---@return number number #(integer) x position
+function lcd.getLastPos() end
+--- Returns the rightest x position from previous drawtext or drawNumber output
+---
+--- **Since:** 2.2.0
+--- > **Notice:** Only available on Taranis
+--- > **Notice:** This is strictly equivalent to former lcd.getLastPos()
+---@return number number #(integer) x position
+function lcd.getLastRightPos() end
+--- Returns the leftmost x position from previous drawtext or drawNumber output
+---
+--- **Since:** 2.2.0
+--- > **Notice:** Only available on Taranis
+---@return number number #(integer) x position
+function lcd.getLastLeftPos() end
 --- Draw a text beginning at (x,y)
 ---
 --- **Since:** 2.0.0
@@ -124,6 +143,14 @@ function lcd.drawSource(x, y, source, flags) end
 ---@param scale? number #(positive numbers) scale in %, 50 divides size by two, 100 is unchanged, 200 doubles size.
 --- Omitting scale draws image in 1:1 scale and is faster than specifying 100 for scale.
 function lcd.drawBitmap(bitmap, x, y, scale) end
+--- Draw a bitmap at (x,y)
+---
+--- **Since:** 2.0.0
+--- > **Notice:** Maximum image size is [display width / 2] x [display height] pixels.
+---@param x number #(positive numbers) starting coordinates
+---@param y number #(positive numbers) starting coordinates
+---@param name string #(string) full path to the bitmap on SD card (i.e. “/IMAGES/test.bmp”)
+function lcd.drawPixmap(x, y, name) end
 --- Draw a rectangle from top left corner (x,y) of specified width and height
 ---
 --- **Since:** 2.0.0
@@ -154,31 +181,57 @@ function lcd.drawFilledRectangle(x, y, w, h, flags) end
 ---@param maxfill number #total value of fill
 ---@param flags? number #(unsigned number) drawing flags
 function lcd.drawGauge(x, y, w, h, fill, maxfill, flags) end
+--- Draw a title bar
+---
+--- **Since:** 2.0.0
+--- > **Notice:** Only available on Taranis
+---@param title string #(string) text for the title
+---@param page number #page number
+---@param pages number #total number of pages. Only used as indicator on
+--- the right side of title bar. (i.e. idx=2, cnt=5, display `2/5`)
+function lcd.drawScreenTitle(title, page, pages) end
+--- Draw a combo box
+---
+--- **Since:** 2.0.0
+--- > **Notice:** Only available on Taranis
+---@param x number #(positive numbers) top left corner position
+---@param y number #(positive numbers) top left corner position
+---@param w number #(number) width of combo box in pixels
+---@param list table #combo box elements, each element is a string
+---@param idx number #(integer) index of entry to highlight
+---@param flags? number #(unsigned number) drawing flags, the flags can not be combined:
+--- `BLINK` combo box is expanded
+--- `INVERS` combo box collapsed, text inversed
+--- `0 or not present` combo box collapsed, text normal
+function lcd.drawCombobox(x, y, w, list, idx, flags) end
 --- Set a color for specific area
 ---
 --- **Since:** 2.2.0
 --- > **Notice:** Only available on Colorlcd radios
 ---@param area number #(unsigned number) specific screen area in the list bellow
---- `TEXT_COLOR`
---- `TEXT_BGCOLOR`
---- `TEXT_INVERTED_COLOR`
---- `TEXT_INVERTED_BGCOLOR`
+--- `CUSTOM_COLOR`
+--- `DEFAULT_COLOR`
+--- `DEFAULT_BGCOLOR`
+--- `FOCUS_COLOR`
+--- `FOCUS_BGCOLOR`
 --- `LINE_COLOR`
---- `SCROLLBOX_COLOR`
---- `MENU_TITLE_BGCOLOR`
---- `MENU_TITLE_COLOR`
+--- `CHECKBOX_COLOR`
+--- `MENU_BGCOLOR`
+--- `MENU_COLOR`
 --- `MENU_TITLE_DISABLE_COLOR`
 --- `HEADER_COLOR`
 --- `ALARM_COLOR`
---- `WARNING_COLOR`
+--- `HIGHLIGHT_COLOR`
 --- `TEXT_DISABLE_COLOR`
---- `CURVE_AXIS_COLOR`
---- `CURVE_COLOR`
+--- `HEADER_COLOR`
+--- `DISABLE_COLOR`
 --- `CURVE_CURSOR_COLOR`
 --- `TITLE_BGCOLOR`
 --- `TRIM_BGCOLOR`
 --- `TRIM_SHADOW_COLOR`
---- `HEADER_BGCOLOR`
+--- `MAINVIEW_PANES_COLOR`
+--- `MAINVIEW_GRAPHICS_COLOR`
+--- `MENU_BGCOLOR`
 --- `HEADER_ICON_BGCOLOR`
 --- `HEADER_CURRENT_BGCOLOR`
 --- `MAINVIEW_PANES_COLOR`
@@ -214,54 +267,3 @@ function lcd.getColor(area) end
 ---@param b number #a number between 0x00 and 0xff that expresses te amount of blue in the color
 ---@return number number #(integer) rgb color expressed in 5/6/5 format
 function lcd.RGB(r, g, b) end
---- Returns the rightmost x position from previous output
----
---- **Since:** 2.0.0
---- > **Notice:** Only available on Taranis
---- > **Notice:** For added clarity, it is recommended to use lcd.getLastRightPos()
----@return number number #(integer) x position
-function lcd.getLastPos() end
---- Returns the rightest x position from previous drawtext or drawNumber output
----
---- **Since:** 2.2.0
---- > **Notice:** Only available on Taranis
---- > **Notice:** This is strictly equivalent to former lcd.getLastPos()
----@return number number #(integer) x position
-function lcd.getLastRightPos() end
---- Returns the leftmost x position from previous drawtext or drawNumber output
----
---- **Since:** 2.2.0
---- > **Notice:** Only available on Taranis
----@return number number #(integer) x position
-function lcd.getLastLeftPos() end
---- Draw a bitmap at (x,y)
----
---- **Since:** 2.0.0
---- > **Notice:** Maximum image size is [display width / 2] x [display height] pixels.
----@param x number #(positive numbers) starting coordinates
----@param y number #(positive numbers) starting coordinates
----@param name string #(string) full path to the bitmap on SD card (i.e. “/IMAGES/test.bmp”)
-function lcd.drawPixmap(x, y, name) end
---- Draw a title bar
----
---- **Since:** 2.0.0
---- > **Notice:** Only available on Taranis
----@param title string #(string) text for the title
----@param page number #page number
----@param pages number #total number of pages. Only used as indicator on
---- the right side of title bar. (i.e. idx=2, cnt=5, display `2/5`)
-function lcd.drawScreenTitle(title, page, pages) end
---- Draw a combo box
----
---- **Since:** 2.0.0
---- > **Notice:** Only available on Taranis
----@param x number #(positive numbers) top left corner position
----@param y number #(positive numbers) top left corner position
----@param w number #(number) width of combo box in pixels
----@param list table #combo box elements, each element is a string
----@param idx number #(integer) index of entry to highlight
----@param flags? number #(unsigned number) drawing flags, the flags can not be combined:
---- `BLINK` combo box is expanded
---- `INVERS` combo box collapsed, text inversed
---- `0 or not present` combo box collapsed, text normal
-function lcd.drawCombobox(x, y, w, list, idx, flags) end

@@ -164,6 +164,7 @@
 ---@class OneTimeScript
 ---@field init? fun() #Called once when the script is loaded
 ---@field run fun(event: number, touchState?: TouchState): string | number #Called every cycle. If return value is zero, script will continue to run, non-zero, script will be halted.. If return value is a text string with the file path to a new Lua script, then the new script will be loaded and run.
+---@field useLvgl? boolean #Set to true to enable the LVGL API for this script. Required if the script uses LVGL to build its UI.
 
 --- Displayed on a telemetry screen page. Has full access to the LCD display.
 ---@class TelemetryScript
@@ -183,6 +184,7 @@
 ---@field update? fun(widget: TWidget, options: WidgetOptions) #Called when the user changes widget options
 ---@field background? fun(widget: TWidget) #Called when the widget is not in the foreground
 ---@field refresh fun(widget: TWidget, event: number, touchState?: TouchState) #Called every cycle to draw the widget. No touch support in 2.3
+---@field useLvgl? boolean #Set to true to enable the LVGL API for this script. Required if the script uses LVGL to build its UI.
 
 --- Activated by a switch. Runs in the background alongside the main firmware. Does NOT have access to the LCD display.
 --- >⚠️ Function scripts do NOT have access to the LCD display<br>

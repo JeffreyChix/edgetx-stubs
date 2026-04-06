@@ -68,7 +68,7 @@ function model.setInfo(value) end
 ---
 --- **Since:** 2.2.0
 ---@param index number #(number) module index (0 for internal, 1 for external)
----@return nil nil #requested module does not exist
+---@return nil _nil #requested module does not exist
 ---@return Model_getModule_Return2 table #module parameters:
 --- `subType` (number) protocol index
 --- `modelId` (number) receiver number
@@ -102,7 +102,7 @@ function model.setModule(index, value) end
 ---
 --- **Since:** 2.0.0
 ---@param timer number #timer index (0 for Timer 1)
----@return nil nil #requested timer does not exist
+---@return nil _nil #requested timer does not exist
 ---@return Model_getTimer_Return2 table #timer parameters:
 --- `mode` (number) timer trigger source: off, abs, stk,  stk%, sw/!sw, !m_sw/!m_sw
 --- `start` (number) start value [seconds], 0 for up timer, 0> down timer
@@ -151,7 +151,7 @@ function model.deleteFlightModes() end
 ---@param index number #(unsigned number) flight mode number (use 0 for FM0)
 ---  
 --- Return input data for given input and line number
----@return nil nil #requested input or line does not exist
+---@return nil _nil #requested input or line does not exist
 ---@return Model_getFlightMode_Return2 table #input data:
 --- `name` (string) input line name
 --- `switch` (number) input switch index
@@ -187,7 +187,7 @@ function model.setFlightMode(index, params) end
 --- **Since:** 2.0.0
 ---@param input number #(unsigned number) input number (use 0 for Input1)
 ---@param line number #(unsigned number) input line (use 0 for first line)
----@return nil nil #requested input or line does not exist
+---@return nil _nil #requested input or line does not exist
 ---@return Model_getInput_Return2 table #input data:
 --- `name` (string) input line name
 --- `inputName` (string) input input name
@@ -252,7 +252,7 @@ function model.getMixesCount(channel) end
 --- **Since:** 2.0.0
 ---@param channel number #(unsigned number) channel number (use 0 for CH1)
 ---@param line number #(unsigned number) mix number (use 0 for first line(mix))
----@return nil nil #requested channel or line does not exist
+---@return nil _nil #requested channel or line does not exist
 ---@return Model_getMix_Return2 table #mix data:
 --- `name` (string) mix line name
 --- `source` (number) source index
@@ -301,7 +301,7 @@ function model.deleteMixes() end
 ---
 --- **Since:** 2.0.0
 ---@param switch number #(unsigned number) logical switch number (use 0 for LS1)
----@return nil nil #requested logical switch does not exist
+---@return nil _nil #requested logical switch does not exist
 ---@return Model_getLogicalSwitch_Return2 table #logical switch data:
 --- `func` (number) function index
 --- `v1` (number) V1 value (index)
@@ -337,7 +337,7 @@ function model.setLogicalSwitch(switch, value) end
 ---
 --- **Since:** 2.0.12
 ---@param curve number #(unsigned number) curve number (use 0 for Curve1)
----@return nil nil #requested curve does not exist
+---@return nil _nil #requested curve does not exist
 ---@return Model_getCurve_Return2 table #curve data:
 --- `name` (string) name
 --- `type` (number) type
@@ -384,8 +384,8 @@ function model.setCurve(curve, params) end
 --- Get Custom Function parameters
 ---
 --- **Since:** 2.0.0
----@param function fun() #(unsigned number) custom function number (use 0 for CF1)
----@return nil nil #requested custom function does not exist
+---@param _function fun(...):... #(unsigned number) custom function number (use 0 for CF1)
+---@return nil _nil #requested custom function does not exist
 ---@return Model_getCustomFunction_Return2 table #custom function data:
 --- `switch` (number) switch index
 --- `func` (number) function index
@@ -395,15 +395,15 @@ function model.setCurve(curve, params) end
 --- `param` (number) parameter (only returned only returned if action is **not** play track, sound or script)
 --- `active` (number) 0 = disabled, 1 = enabled
 --- `repetition` (number) -1 to 60, range and meaning depend on function
-function model.getCustomFunction(function) end
+function model.getCustomFunction(_function) end
 --- Set Custom Function parameters
 ---
 --- **Since:** 2.0.0
 --- > **Notice:** If a parameter is missing from the value, then
 --- > that parameter remains unchanged.
----@param function fun() #(unsigned number) custom function number (use 0 for CF1)
+---@param _function fun(...):... #(unsigned number) custom function number (use 0 for CF1)
 ---@param value number #(table) custom function parameters, see model.getCustomFunction() for table format
-function model.setCustomFunction(function, value) end
+function model.setCustomFunction(_function, value) end
 ---@class (exact) Model_getOutput_Return2
 ---@field name string #name
 ---@field min number #Minimum % * 10
@@ -418,7 +418,7 @@ function model.setCustomFunction(function, value) end
 ---
 --- **Since:** 2.0.0
 ---@param index number #(unsigned number) output number (use 0 for CH1)
----@return nil nil #requested output does not exist
+---@return nil _nil #requested output does not exist
 ---@return Model_getOutput_Return2 table #output parameters:
 --- `name` (string) name
 --- `min` (number) Minimum % * 10
@@ -444,7 +444,7 @@ function model.setOutput(index, value) end
 --- > **Notice:** a simple warning or notice
 ---@param index number #zero based global variable index, use 0 for GV1, 8 for GV9
 ---@param flight_mode number #Flight mode number (0 = FM0, 8 = FM8)
----@return nil nil #requested global variable does not exist
+---@return nil _nil #requested global variable does not exist
 ---@return number number #current value of global variable
 --- 
 --- Example:
@@ -477,7 +477,7 @@ function model.setGlobalVariable(index, flight_mode, value) end
 ---
 --- **Since:** 2.3.0
 ---@param sensor number #(unsigned number) sensor number (use 0 for sensor 1)
----@return nil nil #requested sensor does not exist
+---@return nil _nil #requested sensor does not exist
 ---@return Model_getSensor_Return2 table #with sensor data:
 --- `type` (number) 0 = custom, 1 = calculated
 --- `name` (string) Name
@@ -491,7 +491,7 @@ function model.getSensor(sensor) end
 ---
 --- **Since:** 2.3.11
 ---@param sensor number #(unsigned number) sensor number (use 0 for sensor 1)
----@return nil nil
+---@return nil _nil
 function model.resetSensor(sensor) end
 ---@class (exact) Model_getSwashRing_Return
 ---@field type number #0=- --, 1=120, 2=120X, 3=140, 4=90

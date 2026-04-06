@@ -51,7 +51,7 @@ function lcd.drawLine(x1, y1, x2, y2, pattern, flags) end
 ---@param y number #(positive numbers) starting coordinate
 ---@param text string #(string) text to display
 ---@param flags? number #(optional) please see [Lcd functions overview](../lcd-functions-less-than-greater-than-luadoc-begin-lcd/lcd_functions-overview.html) for drawing flags and colors, and [Appendix](../../part_vii_-_appendix/fonts.md) for available characters in each font set.
----@param inversColor? string #(optional with the INVERS flag) overrides the inverse text color for INVERS
+---@param inversColor? number|string #(optional with the INVERS flag) overrides the inverse text color for INVERS
 function lcd.drawText(x, y, text, flags, inversColor) end
 --- Get the width and height of a text string drawn with flags
 ---
@@ -82,7 +82,7 @@ function lcd.drawTextLines(x, y, w, h, text, flags) end
 ---@param y number #(positive numbers) starting coordinate
 ---@param value number #(number) time in seconds
 ---@param flags? number #(optional) please see [Lcd functions overview](../lcd-functions-less-than-greater-than-luadoc-begin-lcd/lcd_functions-overview.html)
----@param inversColor? string #(optional with INVERS flag) overrides the inverse text color for INVERS
+---@param inversColor? number|string #(optional with INVERS flag) overrides the inverse text color for INVERS
 function lcd.drawTimer(x, y, value, flags, inversColor) end
 --- Display a number at (x,y)
 ---
@@ -91,7 +91,7 @@ function lcd.drawTimer(x, y, value, flags, inversColor) end
 ---@param y number #(positive numbers) starting coordinate
 ---@param value number #(number) value to display
 ---@param flags? number #(optional) please see [Lcd functions overview](../lcd-functions-less-than-greater-than-luadoc-begin-lcd/lcd_functions-overview.html)
----@param inversColor? string #(optional with INVERS flag) overrides the inverse text color for INVERS
+---@param inversColor? number|string #(optional with INVERS flag) overrides the inverse text color for INVERS
 function lcd.drawNumber(x, y, value, flags, inversColor) end
 --- Display a telemetry value at (x,y)
 ---
@@ -214,9 +214,8 @@ function lcd.getColor(flags) end
 ---@param r number #a number between 0 and 255 that expresses the amount of red in the color
 ---@param g number #a number between 0 and 255 that expresses the amount of green in the color
 ---@param b number #a number between 0 and 255 that expresses the amount of blue in the color
----@param rgb number #a number between 0 and 0xFFFFFF that expresses the RGB value (0xFF000=RED, 0x00FF00=GREEN, 0x0000FF=BLUE)
---- <br><br>**Flag hints:** RED, GREEN, BLUE<br><br>
----@overload fun(rgb: number): number
+---@overload fun(rgb: number): number #a number between 0 and 0xFFFFFF that expresses the RGB value (0xFF000=RED, 0x00FF00=GREEN, 0x0000FF=BLUE)
+--- **Flag hints:** RED, GREEN, BLUE
 ---@return number flag #with RGB565 color
 function lcd.RGB(r, g, b) end
 --- Draw a circle at (x, y) of specified radius
@@ -269,9 +268,9 @@ function lcd.drawFilledTriangle(x1, y1, x2, y2, x3, y3, flags) end
 ---@param y number #(positive numbers) coordinates of the center
 ---@param r number #(positive number) radius
 ---@param start number #(positive numbers) start and end of the arc
----@param end number #(positive numbers) start and end of the arc
+---@param _end number #(positive numbers) start and end of the arc
 ---@param flags? number #(optional) please see [Lcd functions overview](../lcd-functions-less-than-greater-than-luadoc-begin-lcd/lcd_functions-overview.html)
-function lcd.drawArc(x, y, r, start, end, flags) end
+function lcd.drawArc(x, y, r, start, _end, flags) end
 --- Draw a pie slice
 ---
 --- **Since:** 2.4.0
@@ -280,9 +279,9 @@ function lcd.drawArc(x, y, r, start, end, flags) end
 ---@param y number #(positive numbers) coordinates of the center
 ---@param r number #(positive number) radius
 ---@param start number #(positive numbers) start and end of the pie slice
----@param end number #(positive numbers) start and end of the pie slice
+---@param _end number #(positive numbers) start and end of the pie slice
 ---@param flags? number #(optional) please see [Lcd functions overview](../lcd-functions-less-than-greater-than-luadoc-begin-lcd/lcd_functions-overview.html)
-function lcd.drawPie(x, y, r, start, end, flags) end
+function lcd.drawPie(x, y, r, start, _end, flags) end
 --- Draw an arc
 ---
 --- **Since:** 2.4.0
@@ -292,9 +291,9 @@ function lcd.drawPie(x, y, r, start, end, flags) end
 ---@param r1 number #(positive numbers) radii of the inside and outside of the annulus
 ---@param r2 number #(positive numbers) radii of the inside and outside of the annulus
 ---@param start number #(positive numbers) start and end of the annulus
----@param end number #(positive numbers) start and end of the annulus
+---@param _end number #(positive numbers) start and end of the annulus
 ---@param flags? number #(optional) please see [Lcd functions overview](../lcd-functions-less-than-greater-than-luadoc-begin-lcd/lcd_functions-overview.html)
-function lcd.drawAnnulus(x, y, r1, r2, start, end, flags) end
+function lcd.drawAnnulus(x, y, r1, r2, start, _end, flags) end
 --- Draw a line only inside a rectangle
 ---
 --- **Since:** 2.4.0
