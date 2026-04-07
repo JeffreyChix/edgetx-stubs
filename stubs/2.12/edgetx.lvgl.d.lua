@@ -291,42 +291,8 @@ lvgl.FILE = "file"
 --- "setting"
 ---@type string
 lvgl.SETTING = "setting"
---- Lvgl AlignSettings
----@class (exact) AlignSettings
----@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
---- > **Notice:** Default if not set: 0
----@field y? number #Vertical position of the object relative to the top left corner of the parent object.
---- > **Notice:** Default if not set: 0
----@field w? number #Width of the object
---- > **Notice:** Default if not set: Auto size to fit content
----@field h? number #Height of the object
---- > **Notice:** Default if not set: Auto size to fit content
----@field color? number|fun(...):... #Primary color for the object.
---- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
----@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
---- Must return two values - x, y.
---- > **Notice:** Default if not set: nil
----@field size? fun(...): number,number #Size of the object. Must return two values - width, height.
---- > **Notice:** Default if not set: nil
----@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
---- > **Notice:** Default if not set: nil
----@field floating? boolean #If set to true then the associated object will remain fixed in place on the screen if it is within a scrollable container regardless of how the container is scrolled.
---- 
---- Caveats:
---- - has no effect if the object container is not scrollable
---- - may not work as expected in flex containers
---- - nested containers with more than one container having floating set to true may not work as expected
---- **Since:** 2.11.6
---- > **Notice:** Default if not set: false
----@field get? fun(...): ... #Called to get the currently selected alignment, when the popup menu is first opened.
---- > **Notice:** Default if not set: nil
----@field set? fun(...): fun(...):... #Called when the user taps on an alignment button.
---- The function is passed a single parameter wihich is the selected alignement value.
---- > **Notice:** Default if not set: nil
-
-
---- Lvgl ChoiceSettings
----@class (exact) ChoiceSettings
+--- Lvgl MenuSettings
+---@class (exact) MenuSettings
 ---@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
 --- > **Notice:** Default if not set: 0
 ---@field y? number #Vertical position of the object relative to the top left corner of the parent object.
@@ -355,8 +321,6 @@ lvgl.SETTING = "setting"
 ---@field title? string #Text to be displayed in the header of the popup menu.
 --- > **Notice:** Default if not set: Empty string
 ---@field values? table #Must contain a simple table of strings. Each string defines an options shown in the popup menu.
---- 
---- The values table can be changed using the 'lvgl.set' function (in 2.11.6 or later).
 --- > **Notice:** Default if not set: Empty list
 ---@field get? fun(...): number #Called to get the index of the currently selected option, when the popup menu is first opened.
 --- Must return a number between 1 and the number of values.
@@ -364,18 +328,10 @@ lvgl.SETTING = "setting"
 ---@field set? fun(...): number|fun(...):... #Called when the user taps on a menu item.
 --- The function is passed a single parameter wihich is the index of the selected item (1 .. number of values)
 --- > **Notice:** Default if not set: nil
----@field active? fun(...): boolean #Set the enabled / disabled state. Return value must be a boolean - true to enable the control, false to disable.
---- > **Notice:** Default if not set: nil
----@field filter? fun(...): boolean|number|table|fun(...):... #Allows the popup menu list to be filtered when the user opens the popup.
---- This function is called for each option in the values table. The index of the option is passed as a parameter to the function.
---- If the function returns true the option is shown in the popup, false will hide the option.
---- > **Notice:** Default if not set: nil
----@field popupWidth? number #Set the width of the popup window.
---- > **Notice:** Default if not set: 0 (use default width)
 
 
---- Lvgl TextEditSettings
----@class (exact) TextEditSettings
+--- Lvgl TimerSettings
+---@class (exact) TimerSettings
 ---@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
 --- > **Notice:** Default if not set: 0
 ---@field y? number #Vertical position of the object relative to the top left corner of the parent object.
@@ -401,28 +357,30 @@ lvgl.SETTING = "setting"
 --- - nested containers with more than one container having floating set to true may not work as expected
 --- **Since:** 2.11.6
 --- > **Notice:** Default if not set: false
----@field value? string #Sets the initial text that the user can edit.
---- > **Notice:** Default if not set: Empty string
----@field length? number #Sets the maximum length of the text that can be edited.
---- Must be a number between 32 and 128.
---- > **Notice:** Default if not set: 32
----@field set? fun(...): string|fun(...):... #Called when the user edits the text.
---- The function is a string with the edited content.
+---@field get? fun(...): ... #Called to get the currently selected timer, when the popup menu is first opened.
+--- > **Notice:** Default if not set: nil
+---@field set? fun(...): fun(...):... #Called when the user taps on an timer button.
+--- The function is passed a single parameter wihich is the selected timer value.
 --- > **Notice:** Default if not set: nil
 ---@field active? fun(...): boolean #Set the enabled / disabled state. Return value must be a boolean - true to enable the control, false to disable.
---- > **Notice:** Default if not set: nil
 
 
---- Lvgl ArcSettings
----@class (exact) ArcSettings
+--- Lvgl BuildSettings
+---@class (exact) BuildSettings
 ---@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
 --- > **Notice:** Default if not set: 0
 ---@field y? number #Vertical position of the object relative to the top left corner of the parent object.
 --- > **Notice:** Default if not set: 0
+---@field w? number #Width of the object
+--- > **Notice:** Default if not set: Auto size to fit content
+---@field h? number #Height of the object
+--- > **Notice:** Default if not set: Auto size to fit content
 ---@field color? number|fun(...):... #Primary color for the object.
 --- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
 ---@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
 --- Must return two values - x, y.
+--- > **Notice:** Default if not set: nil
+---@field size? fun(...): number,number #Size of the object. Must return two values - width, height.
 --- > **Notice:** Default if not set: nil
 ---@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
 --- > **Notice:** Default if not set: nil
@@ -434,96 +392,54 @@ lvgl.SETTING = "setting"
 --- - nested containers with more than one container having floating set to true may not work as expected
 --- **Since:** 2.11.6
 --- > **Notice:** Default if not set: false
----@field thickness? number #Sets the width of the line used to draw the arc.
---- > **Notice:** Default if not set: 1
----@field radius? number|fun(...):... #Sets the radius of the arc
+---@field type string #Mandatory on each table entry to determine what type of LVGL object to create.
+--- 
+--- e.g.
+---   type="rectangle"
+---   type=lvgl.RECTANGLE
+---@field name? string
+--- > **Notice:** Default if not set: Empty string
+---@field children? table
+--- > **Notice:** Default if not set: nil
+
+
+--- Lvgl HlineSettings
+---@class (exact) HlineSettings
+---@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
 --- > **Notice:** Default if not set: 0
----@field startAngle? number|fun(...):... #Sets the starting angle or the arc. Measured in degrees - 0 - 360.
---- 0 is to the right (3 o'clock).
+---@field y? number #Vertical position of the object relative to the top left corner of the parent object.
 --- > **Notice:** Default if not set: 0
----@field endAngle? number|fun(...):... #Sets the ending angle for the arc.
---- > **Notice:** Default if not set: 360
+---@field w? number #Width of the object
+--- > **Notice:** Default if not set: Auto size to fit content
+---@field h? number #Height of the object
+--- > **Notice:** Default if not set: Auto size to fit content
+---@field color? number|fun(...):... #Primary color for the object.
+--- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
+---@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
+--- Must return two values - x, y.
+--- > **Notice:** Default if not set: nil
+---@field size? fun(...): number,number #Size of the object. Must return two values - width, height.
+--- > **Notice:** Default if not set: nil
+---@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
+--- > **Notice:** Default if not set: nil
+---@field floating? boolean #If set to true then the associated object will remain fixed in place on the screen if it is within a scrollable container regardless of how the container is scrolled.
+--- 
+--- Caveats:
+--- - has no effect if the object container is not scrollable
+--- - may not work as expected in flex containers
+--- - nested containers with more than one container having floating set to true may not work as expected
+--- **Since:** 2.11.6
+--- > **Notice:** Default if not set: false
+---@field rounded? boolean #If true then the end caps of the line are rounded.
+--- > **Notice:** Default if not set: false
 ---@field opacity? number|fun(...):... #Sets the opacity.
---- Note: range is 0 (transparent) to 255 (opaque).
+--- Note: range is 0 (transparent) to 255 (opaque)
 --- > **Notice:** Default if not set: 255 (opaque)
----@field rounded? boolean #If true makes the ends of the arc round.
---- > **Notice:** Default if not set: false
----@field bgColor? number|fun(...):... #Sets the color of the background arc.
---- > **Notice:** Default if not set: not used
----@field bgOpacity? number|fun(...):... #Sets the opacity of the background arc.
---- > **Notice:** Default if not set: 0 (not visible)
----@field bgStartAngle? number|fun(...):... #Sets the starting angle or the background arc. Measured in degrees - 0 - 360.
---- 0 is to the right (3 o'clock).
+---@field dashGap? number #Sets the gap size for drawing dashed lines.
 --- > **Notice:** Default if not set: 0
----@field bgEndAngle? number|fun(...):... #Sets the ending angle for the arc.
---- > **Notice:** Default if not set: 360
-
-
---- Lvgl QrcodeSettings
----@class (exact) QrcodeSettings
----@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
+---@field dashWidth? number #Sets the dash size for drawing dashed lines.
+--- Note: both dashGap and dashWidth must be > 0 in order to draw dashed lines.
 --- > **Notice:** Default if not set: 0
----@field y? number #Vertical position of the object relative to the top left corner of the parent object.
---- > **Notice:** Default if not set: 0
----@field w? number #Width of the object
---- > **Notice:** Default if not set: Auto size to fit content
----@field h? number #Height of the object
---- > **Notice:** Default if not set: Auto size to fit content
----@field color? number|fun(...):... #Primary color for the object.
---- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
----@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
---- Must return two values - x, y.
---- > **Notice:** Default if not set: nil
----@field size? fun(...): number,number #Size of the object. Must return two values - width, height.
---- > **Notice:** Default if not set: nil
----@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
---- > **Notice:** Default if not set: nil
----@field floating? boolean #If set to true then the associated object will remain fixed in place on the screen if it is within a scrollable container regardless of how the container is scrolled.
---- 
---- Caveats:
---- - has no effect if the object container is not scrollable
---- - may not work as expected in flex containers
---- - nested containers with more than one container having floating set to true may not work as expected
---- **Since:** 2.11.6
---- > **Notice:** Default if not set: false
----@field data? string #Sets the URL or other content to be enccoded in the QR code.
---- > **Notice:** Default if not set: Empty string
----@field bgColor? number #Sets the background color for the QR code image.
---- > **Notice:** Default if not set: COLOR_THEME_SECONDARY3
-
-
---- Lvgl ColorSettings
----@class (exact) ColorSettings
----@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
---- > **Notice:** Default if not set: 0
----@field y? number #Vertical position of the object relative to the top left corner of the parent object.
---- > **Notice:** Default if not set: 0
----@field w? number #Width of the object
---- > **Notice:** Default if not set: Auto size to fit content
----@field h? number #Height of the object
---- > **Notice:** Default if not set: Auto size to fit content
----@field color? number|fun(...):... #Primary color for the object.
---- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
----@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
---- Must return two values - x, y.
---- > **Notice:** Default if not set: nil
----@field size? fun(...): number,number #Size of the object. Must return two values - width, height.
---- > **Notice:** Default if not set: nil
----@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
---- > **Notice:** Default if not set: nil
----@field floating? boolean #If set to true then the associated object will remain fixed in place on the screen if it is within a scrollable container regardless of how the container is scrolled.
---- 
---- Caveats:
---- - has no effect if the object container is not scrollable
---- - may not work as expected in flex containers
---- - nested containers with more than one container having floating set to true may not work as expected
---- **Since:** 2.11.6
---- > **Notice:** Default if not set: false
----@field get? fun(...): number #Called to get the currently selected color, when the popup menu is first opened.
---- > **Notice:** Default if not set: nil
----@field set? fun(...): number|fun(...):... #Called when the user taps on an color button.
---- The function is passed a single parameter wihich is the selected color value.
---- > **Notice:** Default if not set: nil
 
 
 --- Lvgl FileSettings
@@ -576,8 +492,28 @@ lvgl.SETTING = "setting"
 --- > **Notice:** Default if not set: 255
 
 
---- Lvgl LineSettings
----@class (exact) LineSettings
+--- Lvgl ConfirmSettings
+---@class (exact) ConfirmSettings
+---@field title? string #Text to be displayed in the header of the dialog box.
+--- > **Notice:** Default if not set: Empty string
+---@field message? string #Text to be displayed in the body of the dialog box
+--- > **Notice:** Default if not set: Empty string
+---@field confirm? fun(...): ... #Called when the user taps the 'Yes' button.
+--- > **Notice:** Default if not set: nil
+---@field cancel? fun(...): ... #Called when the user taps the 'No' button.
+--- > **Notice:** Default if not set: nil
+
+
+--- Lvgl SwitchSettings
+---@class (exact) SwitchSettings
+---@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
+--- > **Notice:** Default if not set: 0
+---@field y? number #Vertical position of the object relative to the top left corner of the parent object.
+--- > **Notice:** Default if not set: 0
+---@field w? number #Width of the object
+--- > **Notice:** Default if not set: Auto size to fit content
+---@field h? number #Height of the object
+--- > **Notice:** Default if not set: Auto size to fit content
 ---@field color? number|fun(...):... #Primary color for the object.
 --- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
 ---@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
@@ -595,16 +531,469 @@ lvgl.SETTING = "setting"
 --- - nested containers with more than one container having floating set to true may not work as expected
 --- **Since:** 2.11.6
 --- > **Notice:** Default if not set: false
----@field rounded? boolean #If true then the end caps of the line are rounded.
+---@field get? fun(...): ... #Called to get the currently selected switch, when the popup menu is first opened.
+--- > **Notice:** Default if not set: nil
+---@field set? fun(...): fun(...):... #Called when the user taps on an switch button.
+--- The function is passed a single parameter wihich is the selected switch value.
+--- > **Notice:** Default if not set: nil
+---@field active? fun(...): boolean #Set the enabled / disabled state. Return value must be a boolean - true to enable the control, false to disable.
+--- > **Notice:** Default if not set: nil
+
+
+--- Lvgl ChoiceSettings
+---@class (exact) ChoiceSettings
+---@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
+--- > **Notice:** Default if not set: 0
+---@field y? number #Vertical position of the object relative to the top left corner of the parent object.
+--- > **Notice:** Default if not set: 0
+---@field w? number #Width of the object
+--- > **Notice:** Default if not set: Auto size to fit content
+---@field h? number #Height of the object
+--- > **Notice:** Default if not set: Auto size to fit content
+---@field color? number|fun(...):... #Primary color for the object.
+--- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
+---@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
+--- Must return two values - x, y.
+--- > **Notice:** Default if not set: nil
+---@field size? fun(...): number,number #Size of the object. Must return two values - width, height.
+--- > **Notice:** Default if not set: nil
+---@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
+--- > **Notice:** Default if not set: nil
+---@field floating? boolean #If set to true then the associated object will remain fixed in place on the screen if it is within a scrollable container regardless of how the container is scrolled.
+--- 
+--- Caveats:
+--- - has no effect if the object container is not scrollable
+--- - may not work as expected in flex containers
+--- - nested containers with more than one container having floating set to true may not work as expected
+--- **Since:** 2.11.6
 --- > **Notice:** Default if not set: false
----@field thickness? number #Sets the thickness of each line segment.
+---@field title? string #Text to be displayed in the header of the popup menu.
+--- > **Notice:** Default if not set: Empty string
+---@field values? table #Must contain a simple table of strings. Each string defines an options shown in the popup menu.
+--- 
+--- The values table can be changed using the 'lvgl.set' function (in 2.11.6 or later).
+--- > **Notice:** Default if not set: Empty list
+---@field get? fun(...): number #Called to get the index of the currently selected option, when the popup menu is first opened.
+--- Must return a number between 1 and the number of values.
+--- > **Notice:** Default if not set: nil
+---@field set? fun(...): number|fun(...):... #Called when the user taps on a menu item.
+--- The function is passed a single parameter wihich is the index of the selected item (1 .. number of values)
+--- > **Notice:** Default if not set: nil
+---@field active? fun(...): boolean #Set the enabled / disabled state. Return value must be a boolean - true to enable the control, false to disable.
+--- > **Notice:** Default if not set: nil
+---@field filter? fun(...): boolean|number|table|fun(...):... #Allows the popup menu list to be filtered when the user opens the popup.
+--- This function is called for each option in the values table. The index of the option is passed as a parameter to the function.
+--- If the function returns true the option is shown in the popup, false will hide the option.
+--- > **Notice:** Default if not set: nil
+---@field popupWidth? number #Set the width of the popup window.
+--- > **Notice:** Default if not set: 0 (use default width)
+
+
+--- Lvgl CircleSettings
+---@class (exact) CircleSettings
+---@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
+--- > **Notice:** Default if not set: 0
+---@field y? number #Vertical position of the object relative to the top left corner of the parent object.
+--- > **Notice:** Default if not set: 0
+---@field color? number|fun(...):... #Primary color for the object.
+--- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
+---@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
+--- Must return two values - x, y.
+--- > **Notice:** Default if not set: nil
+---@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
+--- > **Notice:** Default if not set: nil
+---@field floating? boolean #If set to true then the associated object will remain fixed in place on the screen if it is within a scrollable container regardless of how the container is scrolled.
+--- 
+--- Caveats:
+--- - has no effect if the object container is not scrollable
+--- - may not work as expected in flex containers
+--- - nested containers with more than one container having floating set to true may not work as expected
+--- **Since:** 2.11.6
+--- > **Notice:** Default if not set: false
+---@field thickness? number #Sets the width of the line used to draw the arc.
 --- > **Notice:** Default if not set: 1
+---@field filled? boolean #If true the circle is filled with the 'color'value
+--- > **Notice:** Default if not set: false
+---@field radius? number|fun(...):... #Sets the radius of the arc
+--- > **Notice:** Default if not set: 0
+---@field opacity? number|fun(...):... #Sets the opacity.
+--- Note: range is 0 (transparent) to 255 (opaque).
+--- > **Notice:** Default if not set: 255 (opaque)
+
+
+--- Lvgl MessageSettings
+---@class (exact) MessageSettings
+---@field title? string #Text to be displayed in the header of the dialog box.
+--- > **Notice:** Default if not set: Empty string
+---@field message? string #Text to be displayed in the body of the dialog box
+--- > **Notice:** Default if not set: Empty string
+---@field details? fun(...): string #Text to be displayed in the body of the dialog box
+--- > **Notice:** Default if not set: Empty string
+
+
+--- Lvgl LabelSettings
+---@class (exact) LabelSettings
+---@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
+--- > **Notice:** Default if not set: 0
+---@field y? number #Vertical position of the object relative to the top left corner of the parent object.
+--- > **Notice:** Default if not set: 0
+---@field w? number #Width of the object
+--- > **Notice:** Default if not set: Auto size to fit content
+---@field h? number #Height of the object
+--- > **Notice:** Default if not set: Auto size to fit content
+---@field color? number|fun(...):... #Primary color for the object.
+--- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
+---@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
+--- Must return two values - x, y.
+--- > **Notice:** Default if not set: nil
+---@field size? fun(...): number,number #Size of the object. Must return two values - width, height.
+--- > **Notice:** Default if not set: nil
+---@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
+--- > **Notice:** Default if not set: nil
+---@field floating? boolean #If set to true then the associated object will remain fixed in place on the screen if it is within a scrollable container regardless of how the container is scrolled.
+--- 
+--- Caveats:
+--- - has no effect if the object container is not scrollable
+--- - may not work as expected in flex containers
+--- - nested containers with more than one container having floating set to true may not work as expected
+--- **Since:** 2.11.6
+--- > **Notice:** Default if not set: false
+---@field text? string|fun(...):... #Set the text to be displayed on the label
+--- > **Notice:** Default if not set: Empty string
+---@field font? fun(...): ... #Sets the font size. 
+--- E.G.:
+--- - MIDSIZE
+--- - DBLSIZE
+--- > **Notice:** Default if not set: STDSIZE
+---@field align? string|fun(...):... #Sets the justification for the text.
+--- E.G.:
+---  - RIGHT
+---  - VCENTER
+--- 
+--- Notes:
+--- RIGHT and CENTER alignment require the width for the label to be set.
+--- LEFT, RIGHT and CENTER will align the text horizontally within the label bounding box (x,y,w,h).
+--- VCENTER, VTOP and VBOTTOM will align the label bounding box vertically within the parent object.
+--- > **Notice:** Default if not set: LEFT
+
+
+--- Lvgl ImageSettings
+---@class (exact) ImageSettings
+---@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
+--- > **Notice:** Default if not set: 0
+---@field y? number #Vertical position of the object relative to the top left corner of the parent object.
+--- > **Notice:** Default if not set: 0
+---@field w? number #Width of the object
+--- > **Notice:** Default if not set: Auto size to fit content
+---@field h? number #Height of the object
+--- > **Notice:** Default if not set: Auto size to fit content
+---@field color? number|fun(...):... #Primary color for the object.
+--- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
+---@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
+--- Must return two values - x, y.
+--- > **Notice:** Default if not set: nil
+---@field size? fun(...): number,number #Size of the object. Must return two values - width, height.
+--- > **Notice:** Default if not set: nil
+---@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
+--- > **Notice:** Default if not set: nil
+---@field floating? boolean #If set to true then the associated object will remain fixed in place on the screen if it is within a scrollable container regardless of how the container is scrolled.
+--- 
+--- Caveats:
+--- - has no effect if the object container is not scrollable
+--- - may not work as expected in flex containers
+--- - nested containers with more than one container having floating set to true may not work as expected
+--- **Since:** 2.11.6
+--- > **Notice:** Default if not set: false
+---@field file? string #File name of the image to display. Must include full path to image file on the SD card.
+--- > **Notice:** Default if not set: Empty string
+---@field fill? boolean #If true the image is scaled to completely fill the frame. The image may be cropped.
+--- If false it is scaled to fit entirely in the frame. The result may have empty borders.
+--- > **Notice:** Default if not set: false
+
+
+--- Lvgl AlignSettings
+---@class (exact) AlignSettings
+---@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
+--- > **Notice:** Default if not set: 0
+---@field y? number #Vertical position of the object relative to the top left corner of the parent object.
+--- > **Notice:** Default if not set: 0
+---@field w? number #Width of the object
+--- > **Notice:** Default if not set: Auto size to fit content
+---@field h? number #Height of the object
+--- > **Notice:** Default if not set: Auto size to fit content
+---@field color? number|fun(...):... #Primary color for the object.
+--- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
+---@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
+--- Must return two values - x, y.
+--- > **Notice:** Default if not set: nil
+---@field size? fun(...): number,number #Size of the object. Must return two values - width, height.
+--- > **Notice:** Default if not set: nil
+---@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
+--- > **Notice:** Default if not set: nil
+---@field floating? boolean #If set to true then the associated object will remain fixed in place on the screen if it is within a scrollable container regardless of how the container is scrolled.
+--- 
+--- Caveats:
+--- - has no effect if the object container is not scrollable
+--- - may not work as expected in flex containers
+--- - nested containers with more than one container having floating set to true may not work as expected
+--- **Since:** 2.11.6
+--- > **Notice:** Default if not set: false
+---@field get? fun(...): ... #Called to get the currently selected alignment, when the popup menu is first opened.
+--- > **Notice:** Default if not set: nil
+---@field set? fun(...): fun(...):... #Called when the user taps on an alignment button.
+--- The function is passed a single parameter wihich is the selected alignement value.
+--- > **Notice:** Default if not set: nil
+
+
+--- Lvgl BoxSettings
+---@class (exact) BoxSettings
+---@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
+--- > **Notice:** Default if not set: 0
+---@field y? number #Vertical position of the object relative to the top left corner of the parent object.
+--- > **Notice:** Default if not set: 0
+---@field w? number #Width of the object
+--- > **Notice:** Default if not set: Auto size to fit content
+---@field h? number #Height of the object
+--- > **Notice:** Default if not set: Auto size to fit content
+---@field color? number|fun(...):... #Primary color for the object.
+--- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
+---@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
+--- Must return two values - x, y.
+--- > **Notice:** Default if not set: nil
+---@field size? fun(...): number,number #Size of the object. Must return two values - width, height.
+--- > **Notice:** Default if not set: nil
+---@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
+--- > **Notice:** Default if not set: nil
+---@field floating? boolean #If set to true then the associated object will remain fixed in place on the screen if it is within a scrollable container regardless of how the container is scrolled.
+--- 
+--- Caveats:
+--- - has no effect if the object container is not scrollable
+--- - may not work as expected in flex containers
+--- - nested containers with more than one container having floating set to true may not work as expected
+--- **Since:** 2.11.6
+--- > **Notice:** Default if not set: false
+---@field flexFlow? number #Enable flex layout for this box.
+--- > **Flag hints:** lvgl.FLOW_COLUMN, lvgl.FLOW_ROW
+--- > **Notice:** Default if not set: not used
+---@field flexPad? number #When flex layout is used, set the padding between rows or columns.
+--- Recommended to use the lvgl.PAD_xxx values.
+--- > **Notice:** Default if not set: PAD_OUTLINE
+---@field scrollBar? boolean #Enables or disables scroll bars. Set to false to disable scroll bars.
+--- > **Notice:** Default if not set: true
+---@field scrollDir? number #Sets the allowed scrolling directions if child objects extend beyond the box boundaries.
+--- Only valid for stand alone scripts.
+--- > **Flag hints:** lvgl.SCROLL_OFF, lvgl.SCROLL_HOR, lvgl.SCROLL_VER, lvgl.SCROLL_ALL
+--- > **Notice:** Default if not set: lvgl.SCROLL_ALL
+---@field scrolled? fun(...): number,number #Called when the box content is scrolled. Passed two parameters 'x', and 'y' which are the current scroll position of the box window.
+--- > **Notice:** Default if not set: nil
+---@field scrollTo? fun(...): number,number #Function to override the box scroll position. Must return two values, 'x' and 'y' which are the position to scroll the box window to.
+--- > **Notice:** Default if not set: nil
+---@field align? number #- LEFT, RIGHT, CENTER, VTOP, VBOTTOM. VCENTER
+--- Sets the alignment when using flex layouts.
+--- 
+--- NOTE: If the box content is larger than the box size (requiring a scroll bar), then do not use the alignment options in the same direction as the scroll. If the flex layout is FLOW_COLUMN and the box has a vertical scroll bar then VCENTER and VBOTTOM alignment will not work. If the flex layout is FLOW_ROW and the box has a horizontal scroll bar then CENTER and RIGHT alignment will not work.
+--- > **Flag hints:** LEFT, RIGHT, CENTER, VTOP, VBOTTOM, VCENTER
+--- **Since:** 2.11.4
+--- > **Notice:** Default if not set: CENTER | VTOP
+---@field borderPad? number|table #Controls the border padding around the edges of the container.
+--- 
+--- Can be a number which sets uniform padding on all side. Or a table to set each side separately - e.g. {left=?, right=?, top=?, bottom=?}
+--- **Since:** 2.11.5
+--- > **Notice:** Default if not set: PAD_OUTLINE If flexFlow is set, otherwise 0.
+
+
+--- Lvgl TriangleSettings
+---@class (exact) TriangleSettings
+---@field color? number|fun(...):... #Primary color for the object.
+--- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
+---@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
+--- Must return two values - x, y.
+--- > **Notice:** Default if not set: nil
+---@field size? fun(...): number,number #Size of the object. Must return two values - width, height.
+--- > **Notice:** Default if not set: nil
+---@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
+--- > **Notice:** Default if not set: nil
+---@field floating? boolean #If set to true then the associated object will remain fixed in place on the screen if it is within a scrollable container regardless of how the container is scrolled.
+--- 
+--- Caveats:
+--- - has no effect if the object container is not scrollable
+--- - may not work as expected in flex containers
+--- - nested containers with more than one container having floating set to true may not work as expected
+--- **Since:** 2.11.6
+--- > **Notice:** Default if not set: false
 ---@field opacity? number|fun(...):... #Sets the opacity.
 --- Note: range is 0 (transparent) to 255 (opaque)
 --- > **Notice:** Default if not set: 255 (opaque)
 ---@field pts? table|fun(...):... #Table of points. Each point must be a table with two number values ({x, y})
---- Defines the points used to draw the line segments. There must be at least two points.
+--- Defines the points used to draw the triangle. There must be three points.
 --- > **Notice:** Default if not set: nil
+
+
+--- Lvgl TextEditSettings
+---@class (exact) TextEditSettings
+---@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
+--- > **Notice:** Default if not set: 0
+---@field y? number #Vertical position of the object relative to the top left corner of the parent object.
+--- > **Notice:** Default if not set: 0
+---@field w? number #Width of the object
+--- > **Notice:** Default if not set: Auto size to fit content
+---@field h? number #Height of the object
+--- > **Notice:** Default if not set: Auto size to fit content
+---@field color? number|fun(...):... #Primary color for the object.
+--- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
+---@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
+--- Must return two values - x, y.
+--- > **Notice:** Default if not set: nil
+---@field size? fun(...): number,number #Size of the object. Must return two values - width, height.
+--- > **Notice:** Default if not set: nil
+---@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
+--- > **Notice:** Default if not set: nil
+---@field floating? boolean #If set to true then the associated object will remain fixed in place on the screen if it is within a scrollable container regardless of how the container is scrolled.
+--- 
+--- Caveats:
+--- - has no effect if the object container is not scrollable
+--- - may not work as expected in flex containers
+--- - nested containers with more than one container having floating set to true may not work as expected
+--- **Since:** 2.11.6
+--- > **Notice:** Default if not set: false
+---@field value? string #Sets the initial text that the user can edit.
+--- > **Notice:** Default if not set: Empty string
+---@field length? number #Sets the maximum length of the text that can be edited.
+--- Must be a number between 32 and 128.
+--- > **Notice:** Default if not set: 32
+---@field set? fun(...): string|fun(...):... #Called when the user edits the text.
+--- The function is a string with the edited content.
+--- > **Notice:** Default if not set: nil
+---@field active? fun(...): boolean #Set the enabled / disabled state. Return value must be a boolean - true to enable the control, false to disable.
+--- > **Notice:** Default if not set: nil
+
+
+--- Lvgl RectangleSettings
+---@class (exact) RectangleSettings
+---@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
+--- > **Notice:** Default if not set: 0
+---@field y? number #Vertical position of the object relative to the top left corner of the parent object.
+--- > **Notice:** Default if not set: 0
+---@field w? number #Width of the object
+--- > **Notice:** Default if not set: Auto size to fit content
+---@field h? number #Height of the object
+--- > **Notice:** Default if not set: Auto size to fit content
+---@field color? number|fun(...):... #Primary color for the object.
+--- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
+---@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
+--- Must return two values - x, y.
+--- > **Notice:** Default if not set: nil
+---@field size? fun(...): number,number #Size of the object. Must return two values - width, height.
+--- > **Notice:** Default if not set: nil
+---@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
+--- > **Notice:** Default if not set: nil
+---@field floating? boolean #If set to true then the associated object will remain fixed in place on the screen if it is within a scrollable container regardless of how the container is scrolled.
+--- 
+--- Caveats:
+--- - has no effect if the object container is not scrollable
+--- - may not work as expected in flex containers
+--- - nested containers with more than one container having floating set to true may not work as expected
+--- **Since:** 2.11.6
+--- > **Notice:** Default if not set: false
+---@field thickness? number #Sets the width of the line used to draw the border.
+--- > **Notice:** Default if not set: 1
+---@field filled? boolean|fun(...):... #If true the rectangle is filled with the 'color' value.
+--- 
+--- Filled can be a function in 2.11.4 or later.
+--- > **Notice:** Default if not set: false
+---@field rounded? number #If greater than 0 makes the corners rounded with a radius set this value.
+--- When set to a value greater than 0, must also be >= thickness.
+--- > **Notice:** Default if not set: 0
+---@field opacity? number|fun(...):... #Sets the opacity.
+--- Note: range is 0 (transparent) to 255 (opaque)
+--- > **Notice:** Default if not set: 255 (opaque)
+
+
+--- Lvgl QrcodeSettings
+---@class (exact) QrcodeSettings
+---@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
+--- > **Notice:** Default if not set: 0
+---@field y? number #Vertical position of the object relative to the top left corner of the parent object.
+--- > **Notice:** Default if not set: 0
+---@field w? number #Width of the object
+--- > **Notice:** Default if not set: Auto size to fit content
+---@field h? number #Height of the object
+--- > **Notice:** Default if not set: Auto size to fit content
+---@field color? number|fun(...):... #Primary color for the object.
+--- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
+---@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
+--- Must return two values - x, y.
+--- > **Notice:** Default if not set: nil
+---@field size? fun(...): number,number #Size of the object. Must return two values - width, height.
+--- > **Notice:** Default if not set: nil
+---@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
+--- > **Notice:** Default if not set: nil
+---@field floating? boolean #If set to true then the associated object will remain fixed in place on the screen if it is within a scrollable container regardless of how the container is scrolled.
+--- 
+--- Caveats:
+--- - has no effect if the object container is not scrollable
+--- - may not work as expected in flex containers
+--- - nested containers with more than one container having floating set to true may not work as expected
+--- **Since:** 2.11.6
+--- > **Notice:** Default if not set: false
+---@field data? string #Sets the URL or other content to be enccoded in the QR code.
+--- > **Notice:** Default if not set: Empty string
+---@field bgColor? number #Sets the background color for the QR code image.
+--- > **Notice:** Default if not set: COLOR_THEME_SECONDARY3
+
+
+--- Lvgl ButtonSettings
+---@class (exact) ButtonSettings
+---@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
+--- > **Notice:** Default if not set: 0
+---@field y? number #Vertical position of the object relative to the top left corner of the parent object.
+--- > **Notice:** Default if not set: 0
+---@field w? number #Width of the object
+--- > **Notice:** Default if not set: Auto size to fit content
+---@field h? number #Height of the object
+--- > **Notice:** Default if not set: Auto size to fit content
+---@field color? number|fun(...):... #Primary color for the object.
+--- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
+---@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
+--- Must return two values - x, y.
+--- > **Notice:** Default if not set: nil
+---@field size? fun(...): number,number #Size of the object. Must return two values - width, height.
+--- > **Notice:** Default if not set: nil
+---@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
+--- > **Notice:** Default if not set: nil
+---@field floating? boolean #If set to true then the associated object will remain fixed in place on the screen if it is within a scrollable container regardless of how the container is scrolled.
+--- 
+--- Caveats:
+--- - has no effect if the object container is not scrollable
+--- - may not work as expected in flex containers
+--- - nested containers with more than one container having floating set to true may not work as expected
+--- **Since:** 2.11.6
+--- > **Notice:** Default if not set: false
+---@field text? string|fun(...):... #Text to be displayed in the button.
+--- > **Notice:** Default if not set: Empty string
+---@field press? fun(...): ... #Called when the user taps on the button, after the user releases ENTER key or stops touching the screen.
+--- 
+--- Note: the 'press' function may optionally return a integer value. If the return value if non-zero then the button will be displayed in the 'checked' state.
+--- > **Notice:** Default if not set: nil
+---@field longpress? fun(...): ... #Called when the user long taps on the button.
+--- 
+--- Note: the 'longpress' function may optionally return a integer value. If the return value if non-zero then the button will be displayed in the 'checked' state.
+--- > **Notice:** Default if not set: nil
+---@field active? fun(...): boolean #Set the enabled / disabled state. Return value must be a boolean - true to enable the control, false to disable.
+--- > **Notice:** Default if not set: nil
+---@field checked? boolean #Sets the initial 'checked' state for the button. If true the button will display in the checked state. Can be updated with the set() function.
+--- > **Notice:** Default if not set: false
+---@field color? number|fun(...):... #Sets the background color for the button.
+--- > **Notice:** Default if not set: EdgeTx button style color - PRIMARY2 theme color.
+---@field textColor? number|fun(...):... #Sets the text color for the button label.
+--- > **Notice:** Default if not set: EdgeTx button style color - SECONDARY1 theme color.
+---@field cornerRadius? number #Sets the radius for the corners of the button.
+--- > **Notice:** Default if not set: EdgeTx button style radius.
+---@field font? fun(...): ... #Sets the font size. 
+--- E.G.:
+--- - MIDSIZE
+--- - DBLSIZE
+--- > **Notice:** Default if not set: STDSIZE
 
 
 --- Lvgl PageSettings
@@ -653,28 +1042,8 @@ lvgl.SETTING = "setting"
 --- **Since:** 2.11.5
 
 
---- Lvgl MessageSettings
----@class (exact) MessageSettings
----@field title? string #Text to be displayed in the header of the dialog box.
---- > **Notice:** Default if not set: Empty string
----@field message? string #Text to be displayed in the body of the dialog box
---- > **Notice:** Default if not set: Empty string
----@field details? fun(...): string #Text to be displayed in the body of the dialog box
---- > **Notice:** Default if not set: Empty string
-
-
---- Lvgl DialogSettings
----@class (exact) DialogSettings
----@field title? string #Text to be displayed in the header of the dialog box.
----@field close? fun(...): ... #Called when the dialog box is closed.
----@field flexFlow? number #Enable flex layout for this box.
---- > **Flag hints:** lvgl.FLOW_COLUMN, lvgl.FLOW_ROW
----@field flexPad? number #When flex layout is used, set the padding between rows or columns.
---- Recommended to use the lvgl.PAD_xxx values.
-
-
---- Lvgl FontSettings
----@class (exact) FontSettings
+--- Lvgl MomentaryButtonSettings
+---@class (exact) MomentaryButtonSettings
 ---@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
 --- > **Notice:** Default if not set: 0
 ---@field y? number #Vertical position of the object relative to the top left corner of the parent object.
@@ -700,12 +1069,135 @@ lvgl.SETTING = "setting"
 --- - nested containers with more than one container having floating set to true may not work as expected
 --- **Since:** 2.11.6
 --- > **Notice:** Default if not set: false
----@field get? fun(...): ... #Called to get the currently selected font, when the popup menu is first opened.
+---@field text? string|fun(...):... #Text to be displayed in the button.
+--- > **Notice:** Default if not set: Empty string
+---@field press? fun(...): ... #Called when the user first taps on the button.
 --- > **Notice:** Default if not set: nil
----@field set? fun(...): fun(...):... #Called when the user taps on a font button.
---- The function is passed a single parameter wihich is the selected font value.
+---@field release? fun(...): ... #Called when the user releases the ENTER key or stops touching the screen.
 --- > **Notice:** Default if not set: nil
 ---@field active? fun(...): boolean #Set the enabled / disabled state. Return value must be a boolean - true to enable the control, false to disable.
+--- > **Notice:** Default if not set: nil
+---@field color? number|fun(...):... #Sets the background color for the button.
+--- > **Notice:** Default if not set: EdgeTx button style color - PRIMARY2 theme color.
+---@field textColor? number|fun(...):... #Sets the text color for the button label.
+--- > **Notice:** Default if not set: EdgeTx button style color - SECONDARY1 theme color.
+---@field cornerRadius? number #Sets the radius for the corners of the button.
+--- > **Notice:** Default if not set: EdgeTx button style radius.
+---@field font? fun(...): ... #Sets the font size. 
+--- E.G.:
+--- - MIDSIZE
+--- - DBLSIZE
+--- > **Notice:** Default if not set: STDSIZE
+
+
+--- Lvgl ArcSettings
+---@class (exact) ArcSettings
+---@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
+--- > **Notice:** Default if not set: 0
+---@field y? number #Vertical position of the object relative to the top left corner of the parent object.
+--- > **Notice:** Default if not set: 0
+---@field color? number|fun(...):... #Primary color for the object.
+--- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
+---@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
+--- Must return two values - x, y.
+--- > **Notice:** Default if not set: nil
+---@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
+--- > **Notice:** Default if not set: nil
+---@field floating? boolean #If set to true then the associated object will remain fixed in place on the screen if it is within a scrollable container regardless of how the container is scrolled.
+--- 
+--- Caveats:
+--- - has no effect if the object container is not scrollable
+--- - may not work as expected in flex containers
+--- - nested containers with more than one container having floating set to true may not work as expected
+--- **Since:** 2.11.6
+--- > **Notice:** Default if not set: false
+---@field thickness? number #Sets the width of the line used to draw the arc.
+--- > **Notice:** Default if not set: 1
+---@field radius? number|fun(...):... #Sets the radius of the arc
+--- > **Notice:** Default if not set: 0
+---@field startAngle? number|fun(...):... #Sets the starting angle or the arc. Measured in degrees - 0 - 360.
+--- 0 is to the right (3 o'clock).
+--- > **Notice:** Default if not set: 0
+---@field endAngle? number|fun(...):... #Sets the ending angle for the arc.
+--- > **Notice:** Default if not set: 360
+---@field opacity? number|fun(...):... #Sets the opacity.
+--- Note: range is 0 (transparent) to 255 (opaque).
+--- > **Notice:** Default if not set: 255 (opaque)
+---@field rounded? boolean #If true makes the ends of the arc round.
+--- > **Notice:** Default if not set: false
+---@field bgColor? number|fun(...):... #Sets the color of the background arc.
+--- > **Notice:** Default if not set: not used
+---@field bgOpacity? number|fun(...):... #Sets the opacity of the background arc.
+--- > **Notice:** Default if not set: 0 (not visible)
+---@field bgStartAngle? number|fun(...):... #Sets the starting angle or the background arc. Measured in degrees - 0 - 360.
+--- 0 is to the right (3 o'clock).
+--- > **Notice:** Default if not set: 0
+---@field bgEndAngle? number|fun(...):... #Sets the ending angle for the arc.
+--- > **Notice:** Default if not set: 360
+
+
+--- Lvgl ColorSettings
+---@class (exact) ColorSettings
+---@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
+--- > **Notice:** Default if not set: 0
+---@field y? number #Vertical position of the object relative to the top left corner of the parent object.
+--- > **Notice:** Default if not set: 0
+---@field w? number #Width of the object
+--- > **Notice:** Default if not set: Auto size to fit content
+---@field h? number #Height of the object
+--- > **Notice:** Default if not set: Auto size to fit content
+---@field color? number|fun(...):... #Primary color for the object.
+--- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
+---@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
+--- Must return two values - x, y.
+--- > **Notice:** Default if not set: nil
+---@field size? fun(...): number,number #Size of the object. Must return two values - width, height.
+--- > **Notice:** Default if not set: nil
+---@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
+--- > **Notice:** Default if not set: nil
+---@field floating? boolean #If set to true then the associated object will remain fixed in place on the screen if it is within a scrollable container regardless of how the container is scrolled.
+--- 
+--- Caveats:
+--- - has no effect if the object container is not scrollable
+--- - may not work as expected in flex containers
+--- - nested containers with more than one container having floating set to true may not work as expected
+--- **Since:** 2.11.6
+--- > **Notice:** Default if not set: false
+---@field get? fun(...): number #Called to get the currently selected color, when the popup menu is first opened.
+--- > **Notice:** Default if not set: nil
+---@field set? fun(...): number|fun(...):... #Called when the user taps on an color button.
+--- The function is passed a single parameter wihich is the selected color value.
+--- > **Notice:** Default if not set: nil
+
+
+--- Lvgl LineSettings
+---@class (exact) LineSettings
+---@field color? number|fun(...):... #Primary color for the object.
+--- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
+---@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
+--- Must return two values - x, y.
+--- > **Notice:** Default if not set: nil
+---@field size? fun(...): number,number #Size of the object. Must return two values - width, height.
+--- > **Notice:** Default if not set: nil
+---@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
+--- > **Notice:** Default if not set: nil
+---@field floating? boolean #If set to true then the associated object will remain fixed in place on the screen if it is within a scrollable container regardless of how the container is scrolled.
+--- 
+--- Caveats:
+--- - has no effect if the object container is not scrollable
+--- - may not work as expected in flex containers
+--- - nested containers with more than one container having floating set to true may not work as expected
+--- **Since:** 2.11.6
+--- > **Notice:** Default if not set: false
+---@field rounded? boolean #If true then the end caps of the line are rounded.
+--- > **Notice:** Default if not set: false
+---@field thickness? number #Sets the thickness of each line segment.
+--- > **Notice:** Default if not set: 1
+---@field opacity? number|fun(...):... #Sets the opacity.
+--- Note: range is 0 (transparent) to 255 (opaque)
+--- > **Notice:** Default if not set: 255 (opaque)
+---@field pts? table|fun(...):... #Table of points. Each point must be a table with two number values ({x, y})
+--- Defines the points used to draw the line segments. There must be at least two points.
 --- > **Notice:** Default if not set: nil
 
 
@@ -777,8 +1269,14 @@ lvgl.SETTING = "setting"
 --- Text to be displayed on the left.
 
 
---- Lvgl TriangleSettings
----@class (exact) TriangleSettings
+--- Lvgl SliderSettings
+---@class (exact) SliderSettings
+---@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
+--- > **Notice:** Default if not set: 0
+---@field y? number #Vertical position of the object relative to the top left corner of the parent object.
+--- > **Notice:** Default if not set: 0
+---@field w? number #Width of the object
+--- > **Notice:** Default if not set: Auto size to fit content
 ---@field color? number|fun(...):... #Primary color for the object.
 --- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
 ---@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
@@ -796,11 +1294,176 @@ lvgl.SETTING = "setting"
 --- - nested containers with more than one container having floating set to true may not work as expected
 --- **Since:** 2.11.6
 --- > **Notice:** Default if not set: false
+---@field min? number #Minimum value for the slider range (left end).
+--- > **Notice:** Default if not set: 0
+---@field max? number #Maximum value for the slider range (right end).
+--- > **Notice:** Default if not set: 100
+---@field get? fun(...): ... #Called to get the currrent value for the slider knob.
+--- Should rethrn a value between min and max (inclusive).
+--- > **Notice:** Default if not set: nil
+---@field set? fun(...): number|fun(...):... #Called when the user interacts with the slider and changes the knob position.
+--- The function is passed a single number parameter with the new value.
+---@field active? fun(...): boolean #Set the enabled / disabled state. Return value must be a boolean - true to enable the control, false to disable.
+--- > **Notice:** Default if not set: nil
+
+
+--- Lvgl VlineSettings
+---@class (exact) VlineSettings
+---@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
+--- > **Notice:** Default if not set: 0
+---@field y? number #Vertical position of the object relative to the top left corner of the parent object.
+--- > **Notice:** Default if not set: 0
+---@field w? number #Width of the object
+--- > **Notice:** Default if not set: Auto size to fit content
+---@field h? number #Height of the object
+--- > **Notice:** Default if not set: Auto size to fit content
+---@field color? number|fun(...):... #Primary color for the object.
+--- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
+---@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
+--- Must return two values - x, y.
+--- > **Notice:** Default if not set: nil
+---@field size? fun(...): number,number #Size of the object. Must return two values - width, height.
+--- > **Notice:** Default if not set: nil
+---@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
+--- > **Notice:** Default if not set: nil
+---@field floating? boolean #If set to true then the associated object will remain fixed in place on the screen if it is within a scrollable container regardless of how the container is scrolled.
+--- 
+--- Caveats:
+--- - has no effect if the object container is not scrollable
+--- - may not work as expected in flex containers
+--- - nested containers with more than one container having floating set to true may not work as expected
+--- **Since:** 2.11.6
+--- > **Notice:** Default if not set: false
+---@field rounded? boolean #If true then the end caps of the line are rounded.
+--- > **Notice:** Default if not set: false
 ---@field opacity? number|fun(...):... #Sets the opacity.
 --- Note: range is 0 (transparent) to 255 (opaque)
 --- > **Notice:** Default if not set: 255 (opaque)
----@field pts? table|fun(...):... #Table of points. Each point must be a table with two number values ({x, y})
---- Defines the points used to draw the triangle. There must be three points.
+---@field dashGap? number #Sets the gap size for drawing dashed lines.
+--- > **Notice:** Default if not set: 0
+---@field dashWidth? number #Sets the dash size for drawing dashed lines.
+--- Note: both dashGap and dashWidth must be > 0 in order to draw dashed lines.
+--- > **Notice:** Default if not set: 0
+
+
+--- Lvgl VerticalSliderSettings
+---@class (exact) VerticalSliderSettings
+---@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
+--- > **Notice:** Default if not set: 0
+---@field y? number #Vertical position of the object relative to the top left corner of the parent object.
+--- > **Notice:** Default if not set: 0
+---@field h? number #Height of the object
+--- > **Notice:** Default if not set: Auto size to fit content
+---@field color? number|fun(...):... #Primary color for the object.
+--- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
+---@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
+--- Must return two values - x, y.
+--- > **Notice:** Default if not set: nil
+---@field size? fun(...): number,number #Size of the object. Must return two values - width, height.
+--- > **Notice:** Default if not set: nil
+---@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
+--- > **Notice:** Default if not set: nil
+---@field floating? boolean #If set to true then the associated object will remain fixed in place on the screen if it is within a scrollable container regardless of how the container is scrolled.
+--- 
+--- Caveats:
+--- - has no effect if the object container is not scrollable
+--- - may not work as expected in flex containers
+--- - nested containers with more than one container having floating set to true may not work as expected
+--- **Since:** 2.11.6
+--- > **Notice:** Default if not set: false
+---@field min? number #Minimum value for the slider range (left end).
+--- > **Notice:** Default if not set: 0
+---@field max? number #Maximum value for the slider range (right end).
+--- > **Notice:** Default if not set: 100
+---@field get? fun(...): ... #Called to get the currrent value for the slider knob.
+--- Should rethrn a value between min and max (inclusive).
+--- > **Notice:** Default if not set: nil
+---@field set? fun(...): number|fun(...):... #Called when the user interacts with the slider and changes the knob position.
+--- The function is passed a single number parameter with the new value.
+---@field active? fun(...): boolean #Set the enabled / disabled state. Return value must be a boolean - true to enable the control, false to disable.
+--- > **Notice:** Default if not set: nil
+
+
+--- Lvgl DialogSettings
+---@class (exact) DialogSettings
+---@field title? string #Text to be displayed in the header of the dialog box.
+---@field close? fun(...): ... #Called when the dialog box is closed.
+---@field flexFlow? number #Enable flex layout for this box.
+--- > **Flag hints:** lvgl.FLOW_COLUMN, lvgl.FLOW_ROW
+---@field flexPad? number #When flex layout is used, set the padding between rows or columns.
+--- Recommended to use the lvgl.PAD_xxx values.
+
+
+--- Lvgl FontSettings
+---@class (exact) FontSettings
+---@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
+--- > **Notice:** Default if not set: 0
+---@field y? number #Vertical position of the object relative to the top left corner of the parent object.
+--- > **Notice:** Default if not set: 0
+---@field w? number #Width of the object
+--- > **Notice:** Default if not set: Auto size to fit content
+---@field h? number #Height of the object
+--- > **Notice:** Default if not set: Auto size to fit content
+---@field color? number|fun(...):... #Primary color for the object.
+--- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
+---@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
+--- Must return two values - x, y.
+--- > **Notice:** Default if not set: nil
+---@field size? fun(...): number,number #Size of the object. Must return two values - width, height.
+--- > **Notice:** Default if not set: nil
+---@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
+--- > **Notice:** Default if not set: nil
+---@field floating? boolean #If set to true then the associated object will remain fixed in place on the screen if it is within a scrollable container regardless of how the container is scrolled.
+--- 
+--- Caveats:
+--- - has no effect if the object container is not scrollable
+--- - may not work as expected in flex containers
+--- - nested containers with more than one container having floating set to true may not work as expected
+--- **Since:** 2.11.6
+--- > **Notice:** Default if not set: false
+---@field get? fun(...): ... #Called to get the currently selected font, when the popup menu is first opened.
+--- > **Notice:** Default if not set: nil
+---@field set? fun(...): fun(...):... #Called when the user taps on a font button.
+--- The function is passed a single parameter wihich is the selected font value.
+--- > **Notice:** Default if not set: nil
+---@field active? fun(...): boolean #Set the enabled / disabled state. Return value must be a boolean - true to enable the control, false to disable.
+--- > **Notice:** Default if not set: nil
+
+
+--- Lvgl ToggleSettings
+---@class (exact) ToggleSettings
+---@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
+--- > **Notice:** Default if not set: 0
+---@field y? number #Vertical position of the object relative to the top left corner of the parent object.
+--- > **Notice:** Default if not set: 0
+---@field w? number #Width of the object
+--- > **Notice:** Default if not set: Auto size to fit content
+---@field h? number #Height of the object
+--- > **Notice:** Default if not set: Auto size to fit content
+---@field color? number|fun(...):... #Primary color for the object.
+--- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
+---@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
+--- Must return two values - x, y.
+--- > **Notice:** Default if not set: nil
+---@field size? fun(...): number,number #Size of the object. Must return two values - width, height.
+--- > **Notice:** Default if not set: nil
+---@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
+--- > **Notice:** Default if not set: nil
+---@field floating? boolean #If set to true then the associated object will remain fixed in place on the screen if it is within a scrollable container regardless of how the container is scrolled.
+--- 
+--- Caveats:
+--- - has no effect if the object container is not scrollable
+--- - may not work as expected in flex containers
+--- - nested containers with more than one container having floating set to true may not work as expected
+--- **Since:** 2.11.6
+--- > **Notice:** Default if not set: false
+---@field get? fun(...): boolean|number #Called to get the curent state of the toggle switch.
+--- Must return a boolean or a number value. 0 or false if the toggle switch is off, 1 or true if it should be on.
+--- > **Notice:** Default if not set: nil
+---@field set? fun(...): number|fun(...):... #Called when the user interacts with the toggle switch.
+--- The function is passed a single number parameter - 0 if the toggle switch is off, 1 if it is on.
+--- > **Notice:** Default if not set: nil
+---@field active? fun(...): boolean #Set the enabled / disabled state. Return value must be a boolean - true to enable the control, false to disable.
 --- > **Notice:** Default if not set: nil
 
 
@@ -851,1028 +1514,6 @@ lvgl.SETTING = "setting"
 ---@field display? fun(...): string|fun(...):... #Can be used to override how the value is displayed in the control. The function is passed the current value as a parameter and must return a string to display the value.
 --- > **Notice:** Default if not set: nil
 
-
---- Lvgl VlineSettings
----@class (exact) VlineSettings
----@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
---- > **Notice:** Default if not set: 0
----@field y? number #Vertical position of the object relative to the top left corner of the parent object.
---- > **Notice:** Default if not set: 0
----@field w? number #Width of the object
---- > **Notice:** Default if not set: Auto size to fit content
----@field h? number #Height of the object
---- > **Notice:** Default if not set: Auto size to fit content
----@field color? number|fun(...):... #Primary color for the object.
---- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
----@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
---- Must return two values - x, y.
---- > **Notice:** Default if not set: nil
----@field size? fun(...): number,number #Size of the object. Must return two values - width, height.
---- > **Notice:** Default if not set: nil
----@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
---- > **Notice:** Default if not set: nil
----@field floating? boolean #If set to true then the associated object will remain fixed in place on the screen if it is within a scrollable container regardless of how the container is scrolled.
---- 
---- Caveats:
---- - has no effect if the object container is not scrollable
---- - may not work as expected in flex containers
---- - nested containers with more than one container having floating set to true may not work as expected
---- **Since:** 2.11.6
---- > **Notice:** Default if not set: false
----@field rounded? boolean #If true then the end caps of the line are rounded.
---- > **Notice:** Default if not set: false
----@field opacity? number|fun(...):... #Sets the opacity.
---- Note: range is 0 (transparent) to 255 (opaque)
---- > **Notice:** Default if not set: 255 (opaque)
----@field dashGap? number #Sets the gap size for drawing dashed lines.
---- > **Notice:** Default if not set: 0
----@field dashWidth? number #Sets the dash size for drawing dashed lines.
---- Note: both dashGap and dashWidth must be > 0 in order to draw dashed lines.
---- > **Notice:** Default if not set: 0
-
-
---- Lvgl MomentaryButtonSettings
----@class (exact) MomentaryButtonSettings
----@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
---- > **Notice:** Default if not set: 0
----@field y? number #Vertical position of the object relative to the top left corner of the parent object.
---- > **Notice:** Default if not set: 0
----@field w? number #Width of the object
---- > **Notice:** Default if not set: Auto size to fit content
----@field h? number #Height of the object
---- > **Notice:** Default if not set: Auto size to fit content
----@field color? number|fun(...):... #Primary color for the object.
---- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
----@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
---- Must return two values - x, y.
---- > **Notice:** Default if not set: nil
----@field size? fun(...): number,number #Size of the object. Must return two values - width, height.
---- > **Notice:** Default if not set: nil
----@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
---- > **Notice:** Default if not set: nil
----@field floating? boolean #If set to true then the associated object will remain fixed in place on the screen if it is within a scrollable container regardless of how the container is scrolled.
---- 
---- Caveats:
---- - has no effect if the object container is not scrollable
---- - may not work as expected in flex containers
---- - nested containers with more than one container having floating set to true may not work as expected
---- **Since:** 2.11.6
---- > **Notice:** Default if not set: false
----@field text? string|fun(...):... #Text to be displayed in the button.
---- > **Notice:** Default if not set: Empty string
----@field press? fun(...): ... #Called when the user first taps on the button.
---- > **Notice:** Default if not set: nil
----@field release? fun(...): ... #Called when the user releases the ENTER key or stops touching the screen.
---- > **Notice:** Default if not set: nil
----@field active? fun(...): boolean #Set the enabled / disabled state. Return value must be a boolean - true to enable the control, false to disable.
---- > **Notice:** Default if not set: nil
----@field color? number|fun(...):... #Sets the background color for the button.
---- > **Notice:** Default if not set: EdgeTx button style color - PRIMARY2 theme color.
----@field textColor? number|fun(...):... #Sets the text color for the button label.
---- > **Notice:** Default if not set: EdgeTx button style color - SECONDARY1 theme color.
----@field cornerRadius? number #Sets the radius for the corners of the button.
---- > **Notice:** Default if not set: EdgeTx button style radius.
----@field font? fun(...): ... #Sets the font size. 
---- E.G.:
---- - MIDSIZE
---- - DBLSIZE
---- > **Notice:** Default if not set: STDSIZE
-
-
---- Lvgl BuildSettings
----@class (exact) BuildSettings
----@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
---- > **Notice:** Default if not set: 0
----@field y? number #Vertical position of the object relative to the top left corner of the parent object.
---- > **Notice:** Default if not set: 0
----@field w? number #Width of the object
---- > **Notice:** Default if not set: Auto size to fit content
----@field h? number #Height of the object
---- > **Notice:** Default if not set: Auto size to fit content
----@field color? number|fun(...):... #Primary color for the object.
---- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
----@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
---- Must return two values - x, y.
---- > **Notice:** Default if not set: nil
----@field size? fun(...): number,number #Size of the object. Must return two values - width, height.
---- > **Notice:** Default if not set: nil
----@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
---- > **Notice:** Default if not set: nil
----@field floating? boolean #If set to true then the associated object will remain fixed in place on the screen if it is within a scrollable container regardless of how the container is scrolled.
---- 
---- Caveats:
---- - has no effect if the object container is not scrollable
---- - may not work as expected in flex containers
---- - nested containers with more than one container having floating set to true may not work as expected
---- **Since:** 2.11.6
---- > **Notice:** Default if not set: false
----@field type string #Mandatory on each table entry to determine what type of LVGL object to create.
---- 
---- e.g.
----   type="rectangle"
----   type=lvgl.RECTANGLE
----@field name? string
---- > **Notice:** Default if not set: Empty string
----@field children? table
---- > **Notice:** Default if not set: nil
-
-
---- Lvgl MenuSettings
----@class (exact) MenuSettings
----@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
---- > **Notice:** Default if not set: 0
----@field y? number #Vertical position of the object relative to the top left corner of the parent object.
---- > **Notice:** Default if not set: 0
----@field w? number #Width of the object
---- > **Notice:** Default if not set: Auto size to fit content
----@field h? number #Height of the object
---- > **Notice:** Default if not set: Auto size to fit content
----@field color? number|fun(...):... #Primary color for the object.
---- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
----@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
---- Must return two values - x, y.
---- > **Notice:** Default if not set: nil
----@field size? fun(...): number,number #Size of the object. Must return two values - width, height.
---- > **Notice:** Default if not set: nil
----@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
---- > **Notice:** Default if not set: nil
----@field floating? boolean #If set to true then the associated object will remain fixed in place on the screen if it is within a scrollable container regardless of how the container is scrolled.
---- 
---- Caveats:
---- - has no effect if the object container is not scrollable
---- - may not work as expected in flex containers
---- - nested containers with more than one container having floating set to true may not work as expected
---- **Since:** 2.11.6
---- > **Notice:** Default if not set: false
----@field title? string #Text to be displayed in the header of the popup menu.
---- > **Notice:** Default if not set: Empty string
----@field values? table #Must contain a simple table of strings. Each string defines an options shown in the popup menu.
---- > **Notice:** Default if not set: Empty list
----@field get? fun(...): number #Called to get the index of the currently selected option, when the popup menu is first opened.
---- Must return a number between 1 and the number of values.
---- > **Notice:** Default if not set: nil
----@field set? fun(...): number|fun(...):... #Called when the user taps on a menu item.
---- The function is passed a single parameter wihich is the index of the selected item (1 .. number of values)
---- > **Notice:** Default if not set: nil
-
-
---- Lvgl ConfirmSettings
----@class (exact) ConfirmSettings
----@field title? string #Text to be displayed in the header of the dialog box.
---- > **Notice:** Default if not set: Empty string
----@field message? string #Text to be displayed in the body of the dialog box
---- > **Notice:** Default if not set: Empty string
----@field confirm? fun(...): ... #Called when the user taps the 'Yes' button.
---- > **Notice:** Default if not set: nil
----@field cancel? fun(...): ... #Called when the user taps the 'No' button.
---- > **Notice:** Default if not set: nil
-
-
---- Lvgl BoxSettings
----@class (exact) BoxSettings
----@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
---- > **Notice:** Default if not set: 0
----@field y? number #Vertical position of the object relative to the top left corner of the parent object.
---- > **Notice:** Default if not set: 0
----@field w? number #Width of the object
---- > **Notice:** Default if not set: Auto size to fit content
----@field h? number #Height of the object
---- > **Notice:** Default if not set: Auto size to fit content
----@field color? number|fun(...):... #Primary color for the object.
---- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
----@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
---- Must return two values - x, y.
---- > **Notice:** Default if not set: nil
----@field size? fun(...): number,number #Size of the object. Must return two values - width, height.
---- > **Notice:** Default if not set: nil
----@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
---- > **Notice:** Default if not set: nil
----@field floating? boolean #If set to true then the associated object will remain fixed in place on the screen if it is within a scrollable container regardless of how the container is scrolled.
---- 
---- Caveats:
---- - has no effect if the object container is not scrollable
---- - may not work as expected in flex containers
---- - nested containers with more than one container having floating set to true may not work as expected
---- **Since:** 2.11.6
---- > **Notice:** Default if not set: false
----@field flexFlow? number #Enable flex layout for this box.
---- > **Flag hints:** lvgl.FLOW_COLUMN, lvgl.FLOW_ROW
---- > **Notice:** Default if not set: not used
----@field flexPad? number #When flex layout is used, set the padding between rows or columns.
---- Recommended to use the lvgl.PAD_xxx values.
---- > **Notice:** Default if not set: PAD_OUTLINE
----@field scrollBar? boolean #Enables or disables scroll bars. Set to false to disable scroll bars.
---- > **Notice:** Default if not set: true
----@field scrollDir? number #Sets the allowed scrolling directions if child objects extend beyond the box boundaries.
---- Only valid for stand alone scripts.
---- > **Flag hints:** lvgl.SCROLL_OFF, lvgl.SCROLL_HOR, lvgl.SCROLL_VER, lvgl.SCROLL_ALL
---- > **Notice:** Default if not set: lvgl.SCROLL_ALL
----@field scrolled? fun(...): number,number #Called when the box content is scrolled. Passed two parameters 'x', and 'y' which are the current scroll position of the box window.
---- > **Notice:** Default if not set: nil
----@field scrollTo? fun(...): number,number #Function to override the box scroll position. Must return two values, 'x' and 'y' which are the position to scroll the box window to.
---- > **Notice:** Default if not set: nil
----@field align? number #- LEFT, RIGHT, CENTER, VTOP, VBOTTOM. VCENTER
---- Sets the alignment when using flex layouts.
---- 
---- NOTE: If the box content is larger than the box size (requiring a scroll bar), then do not use the alignment options in the same direction as the scroll. If the flex layout is FLOW_COLUMN and the box has a vertical scroll bar then VCENTER and VBOTTOM alignment will not work. If the flex layout is FLOW_ROW and the box has a horizontal scroll bar then CENTER and RIGHT alignment will not work.
---- > **Flag hints:** LEFT, RIGHT, CENTER, VTOP, VBOTTOM, VCENTER
---- **Since:** 2.11.4
---- > **Notice:** Default if not set: CENTER | VTOP
----@field borderPad? number|table #Controls the border padding around the edges of the container.
---- 
---- Can be a number which sets uniform padding on all side. Or a table to set each side separately - e.g. {left=?, right=?, top=?, bottom=?}
---- **Since:** 2.11.5
---- > **Notice:** Default if not set: PAD_OUTLINE If flexFlow is set, otherwise 0.
-
-
---- Lvgl CircleSettings
----@class (exact) CircleSettings
----@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
---- > **Notice:** Default if not set: 0
----@field y? number #Vertical position of the object relative to the top left corner of the parent object.
---- > **Notice:** Default if not set: 0
----@field color? number|fun(...):... #Primary color for the object.
---- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
----@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
---- Must return two values - x, y.
---- > **Notice:** Default if not set: nil
----@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
---- > **Notice:** Default if not set: nil
----@field floating? boolean #If set to true then the associated object will remain fixed in place on the screen if it is within a scrollable container regardless of how the container is scrolled.
---- 
---- Caveats:
---- - has no effect if the object container is not scrollable
---- - may not work as expected in flex containers
---- - nested containers with more than one container having floating set to true may not work as expected
---- **Since:** 2.11.6
---- > **Notice:** Default if not set: false
----@field thickness? number #Sets the width of the line used to draw the arc.
---- > **Notice:** Default if not set: 1
----@field filled? boolean #If true the circle is filled with the 'color'value
---- > **Notice:** Default if not set: false
----@field radius? number|fun(...):... #Sets the radius of the arc
---- > **Notice:** Default if not set: 0
----@field opacity? number|fun(...):... #Sets the opacity.
---- Note: range is 0 (transparent) to 255 (opaque).
---- > **Notice:** Default if not set: 255 (opaque)
-
-
---- Lvgl SwitchSettings
----@class (exact) SwitchSettings
----@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
---- > **Notice:** Default if not set: 0
----@field y? number #Vertical position of the object relative to the top left corner of the parent object.
---- > **Notice:** Default if not set: 0
----@field w? number #Width of the object
---- > **Notice:** Default if not set: Auto size to fit content
----@field h? number #Height of the object
---- > **Notice:** Default if not set: Auto size to fit content
----@field color? number|fun(...):... #Primary color for the object.
---- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
----@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
---- Must return two values - x, y.
---- > **Notice:** Default if not set: nil
----@field size? fun(...): number,number #Size of the object. Must return two values - width, height.
---- > **Notice:** Default if not set: nil
----@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
---- > **Notice:** Default if not set: nil
----@field floating? boolean #If set to true then the associated object will remain fixed in place on the screen if it is within a scrollable container regardless of how the container is scrolled.
---- 
---- Caveats:
---- - has no effect if the object container is not scrollable
---- - may not work as expected in flex containers
---- - nested containers with more than one container having floating set to true may not work as expected
---- **Since:** 2.11.6
---- > **Notice:** Default if not set: false
----@field get? fun(...): ... #Called to get the currently selected switch, when the popup menu is first opened.
---- > **Notice:** Default if not set: nil
----@field set? fun(...): fun(...):... #Called when the user taps on an switch button.
---- The function is passed a single parameter wihich is the selected switch value.
---- > **Notice:** Default if not set: nil
----@field active? fun(...): boolean #Set the enabled / disabled state. Return value must be a boolean - true to enable the control, false to disable.
---- > **Notice:** Default if not set: nil
-
-
---- Lvgl ImageSettings
----@class (exact) ImageSettings
----@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
---- > **Notice:** Default if not set: 0
----@field y? number #Vertical position of the object relative to the top left corner of the parent object.
---- > **Notice:** Default if not set: 0
----@field w? number #Width of the object
---- > **Notice:** Default if not set: Auto size to fit content
----@field h? number #Height of the object
---- > **Notice:** Default if not set: Auto size to fit content
----@field color? number|fun(...):... #Primary color for the object.
---- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
----@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
---- Must return two values - x, y.
---- > **Notice:** Default if not set: nil
----@field size? fun(...): number,number #Size of the object. Must return two values - width, height.
---- > **Notice:** Default if not set: nil
----@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
---- > **Notice:** Default if not set: nil
----@field floating? boolean #If set to true then the associated object will remain fixed in place on the screen if it is within a scrollable container regardless of how the container is scrolled.
---- 
---- Caveats:
---- - has no effect if the object container is not scrollable
---- - may not work as expected in flex containers
---- - nested containers with more than one container having floating set to true may not work as expected
---- **Since:** 2.11.6
---- > **Notice:** Default if not set: false
----@field file? string #File name of the image to display. Must include full path to image file on the SD card.
---- > **Notice:** Default if not set: Empty string
----@field fill? boolean #If true the image is scaled to completely fill the frame. The image may be cropped.
---- If false it is scaled to fit entirely in the frame. The result may have empty borders.
---- > **Notice:** Default if not set: false
-
-
---- Lvgl LabelSettings
----@class (exact) LabelSettings
----@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
---- > **Notice:** Default if not set: 0
----@field y? number #Vertical position of the object relative to the top left corner of the parent object.
---- > **Notice:** Default if not set: 0
----@field w? number #Width of the object
---- > **Notice:** Default if not set: Auto size to fit content
----@field h? number #Height of the object
---- > **Notice:** Default if not set: Auto size to fit content
----@field color? number|fun(...):... #Primary color for the object.
---- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
----@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
---- Must return two values - x, y.
---- > **Notice:** Default if not set: nil
----@field size? fun(...): number,number #Size of the object. Must return two values - width, height.
---- > **Notice:** Default if not set: nil
----@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
---- > **Notice:** Default if not set: nil
----@field floating? boolean #If set to true then the associated object will remain fixed in place on the screen if it is within a scrollable container regardless of how the container is scrolled.
---- 
---- Caveats:
---- - has no effect if the object container is not scrollable
---- - may not work as expected in flex containers
---- - nested containers with more than one container having floating set to true may not work as expected
---- **Since:** 2.11.6
---- > **Notice:** Default if not set: false
----@field text? string|fun(...):... #Set the text to be displayed on the label
---- > **Notice:** Default if not set: Empty string
----@field font? fun(...): ... #Sets the font size. 
---- E.G.:
---- - MIDSIZE
---- - DBLSIZE
---- > **Notice:** Default if not set: STDSIZE
----@field align? string|fun(...):... #Sets the justification for the text.
---- E.G.:
----  - RIGHT
----  - VCENTER
---- 
---- Notes:
---- RIGHT and CENTER alignment require the width for the label to be set.
---- LEFT, RIGHT and CENTER will align the text horizontally within the label bounding box (x,y,w,h).
---- VCENTER, VTOP and VBOTTOM will align the label bounding box vertically within the parent object.
---- > **Notice:** Default if not set: LEFT
-
-
---- Lvgl TimerSettings
----@class (exact) TimerSettings
----@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
---- > **Notice:** Default if not set: 0
----@field y? number #Vertical position of the object relative to the top left corner of the parent object.
---- > **Notice:** Default if not set: 0
----@field w? number #Width of the object
---- > **Notice:** Default if not set: Auto size to fit content
----@field h? number #Height of the object
---- > **Notice:** Default if not set: Auto size to fit content
----@field color? number|fun(...):... #Primary color for the object.
---- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
----@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
---- Must return two values - x, y.
---- > **Notice:** Default if not set: nil
----@field size? fun(...): number,number #Size of the object. Must return two values - width, height.
---- > **Notice:** Default if not set: nil
----@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
---- > **Notice:** Default if not set: nil
----@field floating? boolean #If set to true then the associated object will remain fixed in place on the screen if it is within a scrollable container regardless of how the container is scrolled.
---- 
---- Caveats:
---- - has no effect if the object container is not scrollable
---- - may not work as expected in flex containers
---- - nested containers with more than one container having floating set to true may not work as expected
---- **Since:** 2.11.6
---- > **Notice:** Default if not set: false
----@field get? fun(...): ... #Called to get the currently selected timer, when the popup menu is first opened.
---- > **Notice:** Default if not set: nil
----@field set? fun(...): fun(...):... #Called when the user taps on an timer button.
---- The function is passed a single parameter wihich is the selected timer value.
---- > **Notice:** Default if not set: nil
----@field active? fun(...): boolean #Set the enabled / disabled state. Return value must be a boolean - true to enable the control, false to disable.
-
-
---- Lvgl VerticalSliderSettings
----@class (exact) VerticalSliderSettings
----@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
---- > **Notice:** Default if not set: 0
----@field y? number #Vertical position of the object relative to the top left corner of the parent object.
---- > **Notice:** Default if not set: 0
----@field h? number #Height of the object
---- > **Notice:** Default if not set: Auto size to fit content
----@field color? number|fun(...):... #Primary color for the object.
---- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
----@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
---- Must return two values - x, y.
---- > **Notice:** Default if not set: nil
----@field size? fun(...): number,number #Size of the object. Must return two values - width, height.
---- > **Notice:** Default if not set: nil
----@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
---- > **Notice:** Default if not set: nil
----@field floating? boolean #If set to true then the associated object will remain fixed in place on the screen if it is within a scrollable container regardless of how the container is scrolled.
---- 
---- Caveats:
---- - has no effect if the object container is not scrollable
---- - may not work as expected in flex containers
---- - nested containers with more than one container having floating set to true may not work as expected
---- **Since:** 2.11.6
---- > **Notice:** Default if not set: false
----@field min? number #Minimum value for the slider range (left end).
---- > **Notice:** Default if not set: 0
----@field max? number #Maximum value for the slider range (right end).
---- > **Notice:** Default if not set: 100
----@field get? fun(...): ... #Called to get the currrent value for the slider knob.
---- Should rethrn a value between min and max (inclusive).
---- > **Notice:** Default if not set: nil
----@field set? fun(...): number|fun(...):... #Called when the user interacts with the slider and changes the knob position.
---- The function is passed a single number parameter with the new value.
----@field active? fun(...): boolean #Set the enabled / disabled state. Return value must be a boolean - true to enable the control, false to disable.
---- > **Notice:** Default if not set: nil
-
-
---- Lvgl ButtonSettings
----@class (exact) ButtonSettings
----@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
---- > **Notice:** Default if not set: 0
----@field y? number #Vertical position of the object relative to the top left corner of the parent object.
---- > **Notice:** Default if not set: 0
----@field w? number #Width of the object
---- > **Notice:** Default if not set: Auto size to fit content
----@field h? number #Height of the object
---- > **Notice:** Default if not set: Auto size to fit content
----@field color? number|fun(...):... #Primary color for the object.
---- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
----@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
---- Must return two values - x, y.
---- > **Notice:** Default if not set: nil
----@field size? fun(...): number,number #Size of the object. Must return two values - width, height.
---- > **Notice:** Default if not set: nil
----@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
---- > **Notice:** Default if not set: nil
----@field floating? boolean #If set to true then the associated object will remain fixed in place on the screen if it is within a scrollable container regardless of how the container is scrolled.
---- 
---- Caveats:
---- - has no effect if the object container is not scrollable
---- - may not work as expected in flex containers
---- - nested containers with more than one container having floating set to true may not work as expected
---- **Since:** 2.11.6
---- > **Notice:** Default if not set: false
----@field text? string|fun(...):... #Text to be displayed in the button.
---- > **Notice:** Default if not set: Empty string
----@field press? fun(...): ... #Called when the user taps on the button, after the user releases ENTER key or stops touching the screen.
---- 
---- Note: the 'press' function may optionally return a integer value. If the return value if non-zero then the button will be displayed in the 'checked' state.
---- > **Notice:** Default if not set: nil
----@field longpress? fun(...): ... #Called when the user long taps on the button.
---- 
---- Note: the 'longpress' function may optionally return a integer value. If the return value if non-zero then the button will be displayed in the 'checked' state.
---- > **Notice:** Default if not set: nil
----@field active? fun(...): boolean #Set the enabled / disabled state. Return value must be a boolean - true to enable the control, false to disable.
---- > **Notice:** Default if not set: nil
----@field checked? boolean #Sets the initial 'checked' state for the button. If true the button will display in the checked state. Can be updated with the set() function.
---- > **Notice:** Default if not set: false
----@field color? number|fun(...):... #Sets the background color for the button.
---- > **Notice:** Default if not set: EdgeTx button style color - PRIMARY2 theme color.
----@field textColor? number|fun(...):... #Sets the text color for the button label.
---- > **Notice:** Default if not set: EdgeTx button style color - SECONDARY1 theme color.
----@field cornerRadius? number #Sets the radius for the corners of the button.
---- > **Notice:** Default if not set: EdgeTx button style radius.
----@field font? fun(...): ... #Sets the font size. 
---- E.G.:
---- - MIDSIZE
---- - DBLSIZE
---- > **Notice:** Default if not set: STDSIZE
-
-
---- Lvgl SliderSettings
----@class (exact) SliderSettings
----@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
---- > **Notice:** Default if not set: 0
----@field y? number #Vertical position of the object relative to the top left corner of the parent object.
---- > **Notice:** Default if not set: 0
----@field w? number #Width of the object
---- > **Notice:** Default if not set: Auto size to fit content
----@field color? number|fun(...):... #Primary color for the object.
---- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
----@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
---- Must return two values - x, y.
---- > **Notice:** Default if not set: nil
----@field size? fun(...): number,number #Size of the object. Must return two values - width, height.
---- > **Notice:** Default if not set: nil
----@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
---- > **Notice:** Default if not set: nil
----@field floating? boolean #If set to true then the associated object will remain fixed in place on the screen if it is within a scrollable container regardless of how the container is scrolled.
---- 
---- Caveats:
---- - has no effect if the object container is not scrollable
---- - may not work as expected in flex containers
---- - nested containers with more than one container having floating set to true may not work as expected
---- **Since:** 2.11.6
---- > **Notice:** Default if not set: false
----@field min? number #Minimum value for the slider range (left end).
---- > **Notice:** Default if not set: 0
----@field max? number #Maximum value for the slider range (right end).
---- > **Notice:** Default if not set: 100
----@field get? fun(...): ... #Called to get the currrent value for the slider knob.
---- Should rethrn a value between min and max (inclusive).
---- > **Notice:** Default if not set: nil
----@field set? fun(...): number|fun(...):... #Called when the user interacts with the slider and changes the knob position.
---- The function is passed a single number parameter with the new value.
----@field active? fun(...): boolean #Set the enabled / disabled state. Return value must be a boolean - true to enable the control, false to disable.
---- > **Notice:** Default if not set: nil
-
-
---- Lvgl HlineSettings
----@class (exact) HlineSettings
----@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
---- > **Notice:** Default if not set: 0
----@field y? number #Vertical position of the object relative to the top left corner of the parent object.
---- > **Notice:** Default if not set: 0
----@field w? number #Width of the object
---- > **Notice:** Default if not set: Auto size to fit content
----@field h? number #Height of the object
---- > **Notice:** Default if not set: Auto size to fit content
----@field color? number|fun(...):... #Primary color for the object.
---- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
----@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
---- Must return two values - x, y.
---- > **Notice:** Default if not set: nil
----@field size? fun(...): number,number #Size of the object. Must return two values - width, height.
---- > **Notice:** Default if not set: nil
----@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
---- > **Notice:** Default if not set: nil
----@field floating? boolean #If set to true then the associated object will remain fixed in place on the screen if it is within a scrollable container regardless of how the container is scrolled.
---- 
---- Caveats:
---- - has no effect if the object container is not scrollable
---- - may not work as expected in flex containers
---- - nested containers with more than one container having floating set to true may not work as expected
---- **Since:** 2.11.6
---- > **Notice:** Default if not set: false
----@field rounded? boolean #If true then the end caps of the line are rounded.
---- > **Notice:** Default if not set: false
----@field opacity? number|fun(...):... #Sets the opacity.
---- Note: range is 0 (transparent) to 255 (opaque)
---- > **Notice:** Default if not set: 255 (opaque)
----@field dashGap? number #Sets the gap size for drawing dashed lines.
---- > **Notice:** Default if not set: 0
----@field dashWidth? number #Sets the dash size for drawing dashed lines.
---- Note: both dashGap and dashWidth must be > 0 in order to draw dashed lines.
---- > **Notice:** Default if not set: 0
-
-
---- Lvgl ToggleSettings
----@class (exact) ToggleSettings
----@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
---- > **Notice:** Default if not set: 0
----@field y? number #Vertical position of the object relative to the top left corner of the parent object.
---- > **Notice:** Default if not set: 0
----@field w? number #Width of the object
---- > **Notice:** Default if not set: Auto size to fit content
----@field h? number #Height of the object
---- > **Notice:** Default if not set: Auto size to fit content
----@field color? number|fun(...):... #Primary color for the object.
---- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
----@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
---- Must return two values - x, y.
---- > **Notice:** Default if not set: nil
----@field size? fun(...): number,number #Size of the object. Must return two values - width, height.
---- > **Notice:** Default if not set: nil
----@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
---- > **Notice:** Default if not set: nil
----@field floating? boolean #If set to true then the associated object will remain fixed in place on the screen if it is within a scrollable container regardless of how the container is scrolled.
---- 
---- Caveats:
---- - has no effect if the object container is not scrollable
---- - may not work as expected in flex containers
---- - nested containers with more than one container having floating set to true may not work as expected
---- **Since:** 2.11.6
---- > **Notice:** Default if not set: false
----@field get? fun(...): boolean|number #Called to get the curent state of the toggle switch.
---- Must return a boolean or a number value. 0 or false if the toggle switch is off, 1 or true if it should be on.
---- > **Notice:** Default if not set: nil
----@field set? fun(...): number|fun(...):... #Called when the user interacts with the toggle switch.
---- The function is passed a single number parameter - 0 if the toggle switch is off, 1 if it is on.
---- > **Notice:** Default if not set: nil
----@field active? fun(...): boolean #Set the enabled / disabled state. Return value must be a boolean - true to enable the control, false to disable.
---- > **Notice:** Default if not set: nil
-
-
---- Lvgl RectangleSettings
----@class (exact) RectangleSettings
----@field x? number #Horizontal position of the object relative to the top left corner of the parent object.
---- > **Notice:** Default if not set: 0
----@field y? number #Vertical position of the object relative to the top left corner of the parent object.
---- > **Notice:** Default if not set: 0
----@field w? number #Width of the object
---- > **Notice:** Default if not set: Auto size to fit content
----@field h? number #Height of the object
---- > **Notice:** Default if not set: Auto size to fit content
----@field color? number|fun(...):... #Primary color for the object.
---- > **Notice:** Default if not set: COLOR_THEME_SECONDARY1
----@field pos? fun(...): number,number #Position of the object relative to the top left corner of the parent object.
---- Must return two values - x, y.
---- > **Notice:** Default if not set: nil
----@field size? fun(...): number,number #Size of the object. Must return two values - width, height.
---- > **Notice:** Default if not set: nil
----@field visible? fun(...): boolean #Controls visibility of the object. Must return a boolean - true if the object is shown, false to hide it.
---- > **Notice:** Default if not set: nil
----@field floating? boolean #If set to true then the associated object will remain fixed in place on the screen if it is within a scrollable container regardless of how the container is scrolled.
---- 
---- Caveats:
---- - has no effect if the object container is not scrollable
---- - may not work as expected in flex containers
---- - nested containers with more than one container having floating set to true may not work as expected
---- **Since:** 2.11.6
---- > **Notice:** Default if not set: false
----@field thickness? number #Sets the width of the line used to draw the border.
---- > **Notice:** Default if not set: 1
----@field filled? boolean|fun(...):... #If true the rectangle is filled with the 'color' value.
---- 
---- Filled can be a function in 2.11.4 or later.
---- > **Notice:** Default if not set: false
----@field rounded? number #If greater than 0 makes the corners rounded with a radius set this value.
---- When set to a value greater than 0, must also be >= thickness.
---- > **Notice:** Default if not set: 0
----@field opacity? number|fun(...):... #Sets the opacity.
---- Note: range is 0 (transparent) to 255 (opaque)
---- > **Notice:** Default if not set: 255 (opaque)
-
---- Display a button showing a text alignment name. When tapped a popup menu is opened to choose a text alignment from. Uses EdgeTX styling.
----
---- **Since:** 2.11.0
---- > **Notice:** The popup menu is closed when the user selects an item, and the 'set' function is called.
---- > 
---- > If the user taps outside the menu or the RTN key is pressed, the popup menu is closed and the 'set' function is not called.
----@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
----@param settings AlignSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: AlignSettings) #Contains all of the settings required to create the LVGL object.
-function lvgl.align(parent, settings) end
---- Display a button showing a text alignment name. When tapped a popup menu is opened to choose a text alignment from. Uses EdgeTX styling.
----
---- **Since:** 2.11.0
---- > **Notice:** The popup menu is closed when the user selects an item, and the 'set' function is called.
---- > 
---- > If the user taps outside the menu or the RTN key is pressed, the popup menu is closed and the 'set' function is not called.
----@param settings AlignSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: AlignSettings) #Contains all of the settings required to create the LVGL object.
-function lv_obj:align(settings) end
---- Display a button showing an option value. When tapped a popup menu is opened with multiple options to choose from. Uses EdgeTX styling.
----
---- **Since:** 2.11.0
---- > **Notice:** The popup menu is closed when the user selects an item, and the 'set' function is called.
---- > 
---- > If the user taps outside the menu or the RTN key is pressed, the popup menu is closed and the 'set' function is not called.
----@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
----@param settings ChoiceSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: ChoiceSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lvgl.choice(parent, settings) end
---- Display a button showing an option value. When tapped a popup menu is opened with multiple options to choose from. Uses EdgeTX styling.
----
---- **Since:** 2.11.0
---- > **Notice:** The popup menu is closed when the user selects an item, and the 'set' function is called.
---- > 
---- > If the user taps outside the menu or the RTN key is pressed, the popup menu is closed and the 'set' function is not called.
----@param settings ChoiceSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: ChoiceSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lv_obj:choice(settings) end
---- Add a text edit box using the EdgeTX style.
----
---- **Since:** 2.11.0
----@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
----@param settings TextEditSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: TextEditSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lvgl.textEdit(parent, settings) end
---- Add a text edit box using the EdgeTX style.
----
---- **Since:** 2.11.0
----@param settings TextEditSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: TextEditSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lv_obj:textEdit(settings) end
---- Delete LVGL objects.
----
---- **Since:** 2.11.0
---- > **Notice:** If 'parent' is not set then the entire script UI is deleted. Use this when the UI changes dramatically (e.g. widget size changes).
---- > 
---- > When the 'parent' parameter is defined, only the child LVGL objects within the parent are deleted. Use this to remove and replace a specific set of objects.
----@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
-function lvgl.clear(parent) end
---- Delete LVGL objects.
----
---- **Since:** 2.11.0
---- > **Notice:** If 'parent' is not set then the entire script UI is deleted. Use this when the UI changes dramatically (e.g. widget size changes).
---- > 
---- > When the 'parent' parameter is defined, only the child LVGL objects within the parent are deleted. Use this to remove and replace a specific set of objects.
-function lv_obj:clear() end
---- Display an arc.
----
---- **Since:** 2.11.0
---- > **Notice:** Arcs object have two elements a foreground arc and a background arc. By default the background arc is not shown. To show the background arc set both the bgColor and bgOpacity properties.
---- > 
---- > If opacity or bgOpacity is less than 255 (fully opaque) and rounded is set to true, the ends of the arc will not draw correctly. This is an Lvgl limitation.
----@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
----@param settings ArcSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: ArcSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lvgl.arc(parent, settings) end
---- Display an arc.
----
---- **Since:** 2.11.0
---- > **Notice:** Arcs object have two elements a foreground arc and a background arc. By default the background arc is not shown. To show the background arc set both the bgColor and bgOpacity properties.
---- > 
---- > If opacity or bgOpacity is less than 255 (fully opaque) and rounded is set to true, the ends of the arc will not draw correctly. This is an Lvgl limitation.
----@param settings ArcSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: ArcSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lv_obj:arc(settings) end
---- Display a QR code.
----
---- **Since:** 2.11.0
----@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
----@param settings QrcodeSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: QrcodeSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lvgl.qrcode(parent, settings) end
---- Display a QR code.
----
---- **Since:** 2.11.0
----@param settings QrcodeSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: QrcodeSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lv_obj:qrcode(settings) end
---- Display a button showing a color swatch. When tapped the color picker dialog is opened allowing the user to select a new color. Uses EdgeTX styling.
----
---- **Since:** 2.11.0
---- > **Notice:** The popup menu is closed when the user selects an item, and the 'set' function is called.
---- > 
---- > If the user taps outside the menu or the RTN key is pressed, the popup menu is closed and the 'set' function is not called.
----@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
----@param settings ColorSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: ColorSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lvgl.color(parent, settings) end
---- Display a button showing a color swatch. When tapped the color picker dialog is opened allowing the user to select a new color. Uses EdgeTX styling.
----
---- **Since:** 2.11.0
---- > **Notice:** The popup menu is closed when the user selects an item, and the 'set' function is called.
---- > 
---- > If the user taps outside the menu or the RTN key is pressed, the popup menu is closed and the 'set' function is not called.
----@param settings ColorSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: ColorSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lv_obj:color(settings) end
---- Display a button showing a filename. When tapped a popup file picker is opened. Uses EdgeTX styling.
----
---- **Since:** 2.11.0
---- > **Notice:** The popup menu is closed when the user selects an item, and the 'set' function is called.
---- > 
---- > If the user taps outside the menu or the RTN key is pressed, the popup menu is closed and the 'set' function is not called.
----@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
----@param settings FileSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: FileSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lvgl.file(parent, settings) end
---- Display a button showing a filename. When tapped a popup file picker is opened. Uses EdgeTX styling.
----
---- **Since:** 2.11.0
---- > **Notice:** The popup menu is closed when the user selects an item, and the 'set' function is called.
---- > 
---- > If the user taps outside the menu or the RTN key is pressed, the popup menu is closed and the 'set' function is not called.
----@param settings FileSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: FileSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lv_obj:file(settings) end
---- Display one or more connected lines.
----
---- **Since:** 2.11.0
----@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
----@param settings LineSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: LineSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lvgl.line(parent, settings) end
---- Display one or more connected lines.
----
---- **Since:** 2.11.0
----@param settings LineSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: LineSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lv_obj:line(settings) end
---- Create a page layout for a One-Time script using EdgeTX styling. The page layout has a menu bar at the top with title and sub-title lines as well as a 'back' button in the top left corner.
----
---- **Since:** 2.11.0
---- > **Notice:** The 'page' object should be created as the top level LVGL object in the script window, and all other LVGL objects added as children of the 'page' object.
---- > 
---- > The page will automatically add scroll bars if any child objects are placed outside of the page boundaries.
----@param settings PageSettings #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lvgl.page(settings) end
---- Create a page layout for a One-Time script using EdgeTX styling. The page layout has a menu bar at the top with title and sub-title lines as well as a 'back' button in the top left corner.
----
---- **Since:** 2.11.0
---- > **Notice:** The 'page' object should be created as the top level LVGL object in the script window, and all other LVGL objects added as children of the 'page' object.
---- > 
---- > The page will automatically add scroll bars if any child objects are placed outside of the page boundaries.
----@param settings PageSettings #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lv_obj:page(settings) end
---- Test if widget is running in App Mode.
----
---- **Since:** 2.11.0
----@return boolean _true #if the widget is running in app mode, false otherwise.
-function lvgl.isAppMode() end
---- Test if widget is running in App Mode.
----
---- **Since:** 2.11.0
----@return boolean _true #if the widget is running in app mode, false otherwise.
-function lv_obj:isAppMode() end
---- Display a message dialog box.
----
---- **Since:** 2.11.0
----@param settings MessageSettings #Contains all of the settings required to create the LVGL object.
-function lvgl.message(settings) end
---- Display a message dialog box.
----
---- **Since:** 2.11.0
----@param settings MessageSettings #Contains all of the settings required to create the LVGL object.
-function lv_obj:message(settings) end
---- Display a dialog box.
----
---- **Since:** 2.11.0
----@param settings DialogSettings #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lvgl.dialog(settings) end
---- Display a dialog box.
----
---- **Since:** 2.11.0
----@param settings DialogSettings #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lv_obj:dialog(settings) end
---- Hide an LVGL object.
----
---- **Since:** 2.11.0
---- > **Notice:** The 'visible' setting function can also be used to dynamically show and hide objects.
----@param parent Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
-function lvgl.hide(parent) end
---- Hide an LVGL object.
----
---- **Since:** 2.11.0
---- > **Notice:** The 'visible' setting function can also be used to dynamically show and hide objects.
-function lv_obj:hide() end
---- Display a button showing a font name. When tapped a popup menu is opened to choose a font from. Uses EdgeTX styling.
----
---- **Since:** 2.11.0
---- > **Notice:** The popup menu is closed when the user selects an item, and the 'set' function is called.
---- > 
---- > If the user taps outside the menu or the RTN key is pressed, the popup menu is closed and the 'set' function is not called.
----@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
----@param settings FontSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: FontSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lvgl.font(parent, settings) end
---- Display a button showing a font name. When tapped a popup menu is opened to choose a font from. Uses EdgeTX styling.
----
---- **Since:** 2.11.0
---- > **Notice:** The popup menu is closed when the user selects an item, and the 'set' function is called.
---- > 
---- > If the user taps outside the menu or the RTN key is pressed, the popup menu is closed and the 'set' function is not called.
----@param settings FontSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: FontSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lv_obj:font(settings) end
---- Update the settings for an LVGL object.
----
---- **Since:** 2.11.0
---- > **Notice:** This can be used to update one or more settings for an existing LVGL object. The 'settings' parameter should contain values relevant to the type of object being created.
---- > 
---- > This can be used to update settings that do not support being controlled by functions (e.g. rectangle thickness).
----@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
----@param settings SetSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: SetSettings) #Contains all of the settings required to create the LVGL object.
-function lvgl.set(parent, settings) end
---- Update the settings for an LVGL object.
----
---- **Since:** 2.11.0
---- > **Notice:** This can be used to update one or more settings for an existing LVGL object. The 'settings' parameter should contain values relevant to the type of object being created.
---- > 
---- > This can be used to update settings that do not support being controlled by functions (e.g. rectangle thickness).
----@param settings SetSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: SetSettings) #Contains all of the settings required to create the LVGL object.
-function lv_obj:set(settings) end
---- Display a button showing a source name. When tapped the switch select popup is opened to allow the user to select a new source. Uses EdgeTX styling.
----
---- **Since:** 2.11.0
---- > **Notice:** The popup menu is closed when the user selects an item, and the 'set' function is called.
---- > 
---- > If the user taps outside the menu or the RTN key is pressed, the popup menu is closed and the 'set' function is not called.
----@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
----@param settings SourceSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: SourceSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lvgl.source(parent, settings) end
---- Display a button showing a source name. When tapped the switch select popup is opened to allow the user to select a new source. Uses EdgeTX styling.
----
---- **Since:** 2.11.0
---- > **Notice:** The popup menu is closed when the user selects an item, and the 'set' function is called.
---- > 
---- > If the user taps outside the menu or the RTN key is pressed, the popup menu is closed and the 'set' function is not called.
----@param settings SourceSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: SourceSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lv_obj:source(settings) end
---- Create a container for managing object layout.
----
---- **Since:** 2.11.0
---- > **Notice:** The setting object is designed to manage a single row in a page of user settings. It automatically includes the necesary padding for correctly displaying controls such as toggle, textEdit, button etc.
----@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
----@param settings SettingSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: SettingSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lvgl.setting(parent, settings) end
---- Create a container for managing object layout.
----
---- **Since:** 2.11.0
---- > **Notice:** The setting object is designed to manage a single row in a page of user settings. It automatically includes the necesary padding for correctly displaying controls such as toggle, textEdit, button etc.
----@param settings SettingSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: SettingSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lv_obj:setting(settings) end
---- Display a filled triangle.
----
---- **Since:** 2.11.0
---- > **Notice:** Unlike the line drawing objects, there is no built in triangle drawing in LVGL. The method used to draw triangles is quite simple and does not do any anti-aliasing.
----@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
----@param settings TriangleSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: TriangleSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lvgl.triangle(parent, settings) end
---- Display a filled triangle.
----
---- **Since:** 2.11.0
---- > **Notice:** Unlike the line drawing objects, there is no built in triangle drawing in LVGL. The method used to draw triangles is quite simple and does not do any anti-aliasing.
----@param settings TriangleSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: TriangleSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lv_obj:triangle(settings) end
---- For a widget, returns the local instance table created (and returned from) the script 'create()' function.
----
---- **Since:** 2.11.0
----@return any create__
-function lvgl.getContext() end
---- For a widget, returns the local instance table created (and returned from) the script 'create()' function.
----
---- **Since:** 2.11.0
----@return any create__
-function lv_obj:getContext() end
---- Add a number edit box using the EdgeTX style.
----
---- **Since:** 2.11.0
----@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
----@param settings NumberEditSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: NumberEditSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lvgl.numberEdit(parent, settings) end
---- Add a number edit box using the EdgeTX style.
----
---- **Since:** 2.11.0
----@param settings NumberEditSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: NumberEditSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lv_obj:numberEdit(settings) end
---- Display a vertical line.
----
---- **Since:** 2.11.0
----@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
----@param settings VlineSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: VlineSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lvgl.vline(parent, settings) end
---- Display a vertical line.
----
---- **Since:** 2.11.0
----@param settings VlineSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: VlineSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lv_obj:vline(settings) end
 --- Get the current scroll position (X, Y) of a container object.
 ---
 --- **Since:** 2.11.2
@@ -1888,31 +1529,60 @@ function lvgl.getScrollPos(parent) end
 ---@return number x
 ---@return number y
 function lv_obj:getScrollPos() end
---- If widget is running in full screen mode, then return to normal mode.
+--- Delete LVGL objects.
 ---
 --- **Since:** 2.11.0
-function lvgl.exitFullScreen() end
---- If widget is running in full screen mode, then return to normal mode.
----
---- **Since:** 2.11.0
-function lv_obj:exitFullScreen() end
---- Add a momentary text button using the EdgeTX style.
----
---- **Since:** 2.11.0
---- > **Notice:** Unlike the standard button the press function is called immediately when the user taps on the screen or presses the ENTER key when the momentary button is selected. The button shows in the 'checked' state until the user releases the ENTER key or stops touching the screen.
+--- > **Notice:** If 'parent' is not set then the entire script UI is deleted. Use this when the UI changes dramatically (e.g. widget size changes).
+--- > 
+--- > When the 'parent' parameter is defined, only the child LVGL objects within the parent are deleted. Use this to remove and replace a specific set of objects.
 ---@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
----@param settings MomentaryButtonSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: MomentaryButtonSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lvgl.momentaryButton(parent, settings) end
---- Add a momentary text button using the EdgeTX style.
+function lvgl.clear(parent) end
+--- Delete LVGL objects.
 ---
 --- **Since:** 2.11.0
---- > **Notice:** Unlike the standard button the press function is called immediately when the user taps on the screen or presses the ENTER key when the momentary button is selected. The button shows in the 'checked' state until the user releases the ENTER key or stops touching the screen.
----@param settings MomentaryButtonSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: MomentaryButtonSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+--- > **Notice:** If 'parent' is not set then the entire script UI is deleted. Use this when the UI changes dramatically (e.g. widget size changes).
+--- > 
+--- > When the 'parent' parameter is defined, only the child LVGL objects within the parent are deleted. Use this to remove and replace a specific set of objects.
+function lv_obj:clear() end
+--- Opens a popup menu with multiple options to choose from. Uses EdgeTX styling.
+---
+--- **Since:** 2.11.1
+--- > **Notice:** The popup menu is closed when the user selects an item, and the 'set' function is called.
+--- > 
+--- > If the user taps outside the menu or the RTN key is pressed, the popup menu is closed and the 'set' function is not called.
+---@param settings MenuSettings #Contains all of the settings required to create the LVGL object.
+---@return any na
+function lvgl.menu(settings) end
+--- Opens a popup menu with multiple options to choose from. Uses EdgeTX styling.
+---
+--- **Since:** 2.11.1
+--- > **Notice:** The popup menu is closed when the user selects an item, and the 'set' function is called.
+--- > 
+--- > If the user taps outside the menu or the RTN key is pressed, the popup menu is closed and the 'set' function is not called.
+---@param settings MenuSettings #Contains all of the settings required to create the LVGL object.
+---@return any na
+function lv_obj:menu(settings) end
+--- Display a button showing a timer name. When tapped a popup menu is opened to choose a timer from. Uses EdgeTX styling.
+---
+--- **Since:** 2.11.0
+--- > **Notice:** The popup menu is closed when the user selects an item, and the 'set' function is called.
+--- > 
+--- > If the user taps outside the menu or the RTN key is pressed, the popup menu is closed and the 'set' function is not called.
+---@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
+---@param settings TimerSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: TimerSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
 ---@return Lv_obj LVGL_Object #LVGL object
-function lv_obj:momentaryButton(settings) end
+function lvgl.timer(parent, settings) end
+--- Display a button showing a timer name. When tapped a popup menu is opened to choose a timer from. Uses EdgeTX styling.
+---
+--- **Since:** 2.11.0
+--- > **Notice:** The popup menu is closed when the user selects an item, and the 'set' function is called.
+--- > 
+--- > If the user taps outside the menu or the RTN key is pressed, the popup menu is closed and the 'set' function is not called.
+---@param settings TimerSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: TimerSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lv_obj:timer(settings) end
 --- Build a complex UI in a single operation.
 ---
 --- **Since:** 2.11.0
@@ -2010,24 +1680,80 @@ function lvgl.build(parent, settings) end
 ---@param settings BuildSettings[] #Contains all of the settings required to create the LVGL object.
 ---@overload fun(settings: BuildSettings[]) #Contains all of the settings required to create the LVGL object.
 function lv_obj:build(settings) end
---- Opens a popup menu with multiple options to choose from. Uses EdgeTX styling.
+--- Hide an LVGL object.
 ---
---- **Since:** 2.11.1
+--- **Since:** 2.11.0
+--- > **Notice:** The 'visible' setting function can also be used to dynamically show and hide objects.
+---@param parent Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
+function lvgl.hide(parent) end
+--- Hide an LVGL object.
+---
+--- **Since:** 2.11.0
+--- > **Notice:** The 'visible' setting function can also be used to dynamically show and hide objects.
+function lv_obj:hide() end
+--- If widget is running in full screen mode, then return to normal mode.
+---
+--- **Since:** 2.11.0
+function lvgl.exitFullScreen() end
+--- If widget is running in full screen mode, then return to normal mode.
+---
+--- **Since:** 2.11.0
+function lv_obj:exitFullScreen() end
+--- Update the settings for an LVGL object.
+---
+--- **Since:** 2.11.0
+--- > **Notice:** This can be used to update one or more settings for an existing LVGL object. The 'settings' parameter should contain values relevant to the type of object being created.
+--- > 
+--- > This can be used to update settings that do not support being controlled by functions (e.g. rectangle thickness).
+---@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
+---@param settings SetSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: SetSettings) #Contains all of the settings required to create the LVGL object.
+function lvgl.set(parent, settings) end
+--- Update the settings for an LVGL object.
+---
+--- **Since:** 2.11.0
+--- > **Notice:** This can be used to update one or more settings for an existing LVGL object. The 'settings' parameter should contain values relevant to the type of object being created.
+--- > 
+--- > This can be used to update settings that do not support being controlled by functions (e.g. rectangle thickness).
+---@param settings SetSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: SetSettings) #Contains all of the settings required to create the LVGL object.
+function lv_obj:set(settings) end
+--- Display a horizontal line.
+---
+--- **Since:** 2.11.0
+---@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
+---@param settings HlineSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: HlineSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lvgl.hline(parent, settings) end
+--- Display a horizontal line.
+---
+--- **Since:** 2.11.0
+---@param settings HlineSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: HlineSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lv_obj:hline(settings) end
+--- Display a button showing a filename. When tapped a popup file picker is opened. Uses EdgeTX styling.
+---
+--- **Since:** 2.11.0
 --- > **Notice:** The popup menu is closed when the user selects an item, and the 'set' function is called.
 --- > 
 --- > If the user taps outside the menu or the RTN key is pressed, the popup menu is closed and the 'set' function is not called.
----@param settings MenuSettings #Contains all of the settings required to create the LVGL object.
----@return any na
-function lvgl.menu(settings) end
---- Opens a popup menu with multiple options to choose from. Uses EdgeTX styling.
+---@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
+---@param settings FileSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: FileSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lvgl.file(parent, settings) end
+--- Display a button showing a filename. When tapped a popup file picker is opened. Uses EdgeTX styling.
 ---
---- **Since:** 2.11.1
+--- **Since:** 2.11.0
 --- > **Notice:** The popup menu is closed when the user selects an item, and the 'set' function is called.
 --- > 
 --- > If the user taps outside the menu or the RTN key is pressed, the popup menu is closed and the 'set' function is not called.
----@param settings MenuSettings #Contains all of the settings required to create the LVGL object.
----@return any na
-function lv_obj:menu(settings) end
+---@param settings FileSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: FileSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lv_obj:file(settings) end
 --- Display a 'Yes' / 'No' confirmation dialog box.
 ---
 --- **Since:** 2.11.0
@@ -2038,20 +1764,144 @@ function lvgl.confirm(settings) end
 --- **Since:** 2.11.0
 ---@param settings ConfirmSettings #Contains all of the settings required to create the LVGL object.
 function lv_obj:confirm(settings) end
---- Test if widget is running in full screen mode.
+--- Test if widget is running in App Mode.
 ---
 --- **Since:** 2.11.0
----@return boolean _true #if the widget is running in full screen mode, false otherwise.
---- 
---- always returns true for stand alone tool scripts.
-function lvgl.isFullScreen() end
---- Test if widget is running in full screen mode.
+---@return boolean _true #if the widget is running in app mode, false otherwise.
+function lvgl.isAppMode() end
+--- Test if widget is running in App Mode.
 ---
 --- **Since:** 2.11.0
----@return boolean _true #if the widget is running in full screen mode, false otherwise.
---- 
---- always returns true for stand alone tool scripts.
-function lv_obj:isFullScreen() end
+---@return boolean _true #if the widget is running in app mode, false otherwise.
+function lv_obj:isAppMode() end
+--- Display a button showing a switch name. When tapped the switch select popup is opened to allow the user to select a new switch. Uses EdgeTX styling.
+---
+--- **Since:** 2.11.0
+--- > **Notice:** The popup menu is closed when the user selects an item, and the 'set' function is called.
+--- > 
+--- > If the user taps outside the menu or the RTN key is pressed, the popup menu is closed and the 'set' function is not called.
+---@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
+---@param settings SwitchSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: SwitchSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lvgl.switch(parent, settings) end
+--- Display a button showing a switch name. When tapped the switch select popup is opened to allow the user to select a new switch. Uses EdgeTX styling.
+---
+--- **Since:** 2.11.0
+--- > **Notice:** The popup menu is closed when the user selects an item, and the 'set' function is called.
+--- > 
+--- > If the user taps outside the menu or the RTN key is pressed, the popup menu is closed and the 'set' function is not called.
+---@param settings SwitchSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: SwitchSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lv_obj:switch(settings) end
+--- Display a button showing an option value. When tapped a popup menu is opened with multiple options to choose from. Uses EdgeTX styling.
+---
+--- **Since:** 2.11.0
+--- > **Notice:** The popup menu is closed when the user selects an item, and the 'set' function is called.
+--- > 
+--- > If the user taps outside the menu or the RTN key is pressed, the popup menu is closed and the 'set' function is not called.
+---@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
+---@param settings ChoiceSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: ChoiceSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lvgl.choice(parent, settings) end
+--- Display a button showing an option value. When tapped a popup menu is opened with multiple options to choose from. Uses EdgeTX styling.
+---
+--- **Since:** 2.11.0
+--- > **Notice:** The popup menu is closed when the user selects an item, and the 'set' function is called.
+--- > 
+--- > If the user taps outside the menu or the RTN key is pressed, the popup menu is closed and the 'set' function is not called.
+---@param settings ChoiceSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: ChoiceSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lv_obj:choice(settings) end
+--- Display a solid or filled circle.
+---
+--- **Since:** 2.11.0
+---@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
+---@param settings CircleSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: CircleSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lvgl.circle(parent, settings) end
+--- Display a solid or filled circle.
+---
+--- **Since:** 2.11.0
+---@param settings CircleSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: CircleSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lv_obj:circle(settings) end
+--- Display a message dialog box.
+---
+--- **Since:** 2.11.0
+---@param settings MessageSettings #Contains all of the settings required to create the LVGL object.
+function lvgl.message(settings) end
+--- Display a message dialog box.
+---
+--- **Since:** 2.11.0
+---@param settings MessageSettings #Contains all of the settings required to create the LVGL object.
+function lv_obj:message(settings) end
+--- Display a text label.
+---
+--- **Since:** 2.11.0
+---@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
+---@param settings LabelSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: LabelSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lvgl.label(parent, settings) end
+--- Display a text label.
+---
+--- **Since:** 2.11.0
+---@param settings LabelSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: LabelSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lv_obj:label(settings) end
+--- Display an image. The image will be centered in the frame (x, y, w, h). Images can be scaled to either fit entirely within the frame or completely fill the frame.
+---
+--- **Since:** 2.11.0
+--- > **Notice:** Width (w) and height (h) are required.
+---@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
+---@param settings ImageSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: ImageSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lvgl.image(parent, settings) end
+--- Display an image. The image will be centered in the frame (x, y, w, h). Images can be scaled to either fit entirely within the frame or completely fill the frame.
+---
+--- **Since:** 2.11.0
+--- > **Notice:** Width (w) and height (h) are required.
+---@param settings ImageSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: ImageSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lv_obj:image(settings) end
+--- For a widget, returns the local instance table created (and returned from) the script 'create()' function.
+---
+--- **Since:** 2.11.0
+---@return any create__
+function lvgl.getContext() end
+--- For a widget, returns the local instance table created (and returned from) the script 'create()' function.
+---
+--- **Since:** 2.11.0
+---@return any create__
+function lv_obj:getContext() end
+--- Display a button showing a text alignment name. When tapped a popup menu is opened to choose a text alignment from. Uses EdgeTX styling.
+---
+--- **Since:** 2.11.0
+--- > **Notice:** The popup menu is closed when the user selects an item, and the 'set' function is called.
+--- > 
+--- > If the user taps outside the menu or the RTN key is pressed, the popup menu is closed and the 'set' function is not called.
+---@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
+---@param settings AlignSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: AlignSettings) #Contains all of the settings required to create the LVGL object.
+function lvgl.align(parent, settings) end
+--- Display a button showing a text alignment name. When tapped a popup menu is opened to choose a text alignment from. Uses EdgeTX styling.
+---
+--- **Since:** 2.11.0
+--- > **Notice:** The popup menu is closed when the user selects an item, and the 'set' function is called.
+--- > 
+--- > If the user taps outside the menu or the RTN key is pressed, the popup menu is closed and the 'set' function is not called.
+---@param settings AlignSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: AlignSettings) #Contains all of the settings required to create the LVGL object.
+function lv_obj:align(settings) end
 --- Create a container for managing object layout.
 ---
 --- **Since:** 2.11.0
@@ -2077,181 +1927,38 @@ function lvgl.box(parent, settings) end
 ---@overload fun(settings: BoxSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
 ---@return Lv_obj LVGL_Object #LVGL object
 function lv_obj:box(settings) end
---- Display a solid or filled circle.
+--- Display a filled triangle.
+---
+--- **Since:** 2.11.0
+--- > **Notice:** Unlike the line drawing objects, there is no built in triangle drawing in LVGL. The method used to draw triangles is quite simple and does not do any anti-aliasing.
+---@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
+---@param settings TriangleSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: TriangleSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lvgl.triangle(parent, settings) end
+--- Display a filled triangle.
+---
+--- **Since:** 2.11.0
+--- > **Notice:** Unlike the line drawing objects, there is no built in triangle drawing in LVGL. The method used to draw triangles is quite simple and does not do any anti-aliasing.
+---@param settings TriangleSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: TriangleSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lv_obj:triangle(settings) end
+--- Add a text edit box using the EdgeTX style.
 ---
 --- **Since:** 2.11.0
 ---@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
----@param settings CircleSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: CircleSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@param settings TextEditSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: TextEditSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
 ---@return Lv_obj LVGL_Object #LVGL object
-function lvgl.circle(parent, settings) end
---- Display a solid or filled circle.
+function lvgl.textEdit(parent, settings) end
+--- Add a text edit box using the EdgeTX style.
 ---
 --- **Since:** 2.11.0
----@param settings CircleSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: CircleSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@param settings TextEditSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: TextEditSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
 ---@return Lv_obj LVGL_Object #LVGL object
-function lv_obj:circle(settings) end
---- Display a button showing a switch name. When tapped the switch select popup is opened to allow the user to select a new switch. Uses EdgeTX styling.
----
---- **Since:** 2.11.0
---- > **Notice:** The popup menu is closed when the user selects an item, and the 'set' function is called.
---- > 
---- > If the user taps outside the menu or the RTN key is pressed, the popup menu is closed and the 'set' function is not called.
----@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
----@param settings SwitchSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: SwitchSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lvgl.switch(parent, settings) end
---- Display a button showing a switch name. When tapped the switch select popup is opened to allow the user to select a new switch. Uses EdgeTX styling.
----
---- **Since:** 2.11.0
---- > **Notice:** The popup menu is closed when the user selects an item, and the 'set' function is called.
---- > 
---- > If the user taps outside the menu or the RTN key is pressed, the popup menu is closed and the 'set' function is not called.
----@param settings SwitchSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: SwitchSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lv_obj:switch(settings) end
---- Display an image. The image will be centered in the frame (x, y, w, h). Images can be scaled to either fit entirely within the frame or completely fill the frame.
----
---- **Since:** 2.11.0
---- > **Notice:** Width (w) and height (h) are required.
----@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
----@param settings ImageSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: ImageSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lvgl.image(parent, settings) end
---- Display an image. The image will be centered in the frame (x, y, w, h). Images can be scaled to either fit entirely within the frame or completely fill the frame.
----
---- **Since:** 2.11.0
---- > **Notice:** Width (w) and height (h) are required.
----@param settings ImageSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: ImageSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lv_obj:image(settings) end
---- Display a text label.
----
---- **Since:** 2.11.0
----@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
----@param settings LabelSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: LabelSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lvgl.label(parent, settings) end
---- Display a text label.
----
---- **Since:** 2.11.0
----@param settings LabelSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: LabelSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lv_obj:label(settings) end
---- Display a button showing a timer name. When tapped a popup menu is opened to choose a timer from. Uses EdgeTX styling.
----
---- **Since:** 2.11.0
---- > **Notice:** The popup menu is closed when the user selects an item, and the 'set' function is called.
---- > 
---- > If the user taps outside the menu or the RTN key is pressed, the popup menu is closed and the 'set' function is not called.
----@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
----@param settings TimerSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: TimerSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lvgl.timer(parent, settings) end
---- Display a button showing a timer name. When tapped a popup menu is opened to choose a timer from. Uses EdgeTX styling.
----
---- **Since:** 2.11.0
---- > **Notice:** The popup menu is closed when the user selects an item, and the 'set' function is called.
---- > 
---- > If the user taps outside the menu or the RTN key is pressed, the popup menu is closed and the 'set' function is not called.
----@param settings TimerSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: TimerSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lv_obj:timer(settings) end
---- Add a slider using the EdgeTX style with vertical orientation .
----
---- **Since:** 2.11.0
----@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
----@param settings VerticalSliderSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: VerticalSliderSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lvgl.verticalSlider(parent, settings) end
---- Add a slider using the EdgeTX style with vertical orientation .
----
---- **Since:** 2.11.0
----@param settings VerticalSliderSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: VerticalSliderSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lv_obj:verticalSlider(settings) end
---- Add a text button using the EdgeTX style.
----
---- **Since:** 2.11.0
----@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
----@param settings ButtonSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: ButtonSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lvgl.button(parent, settings) end
---- Add a text button using the EdgeTX style.
----
---- **Since:** 2.11.0
----@param settings ButtonSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: ButtonSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lv_obj:button(settings) end
---- Add a slider using the EdgeTX style.
----
---- **Since:** 2.11.0
----@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
----@param settings SliderSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: SliderSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lvgl.slider(parent, settings) end
---- Add a slider using the EdgeTX style.
----
---- **Since:** 2.11.0
----@param settings SliderSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: SliderSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lv_obj:slider(settings) end
---- Display a horizontal line.
----
---- **Since:** 2.11.0
----@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
----@param settings HlineSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: HlineSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lvgl.hline(parent, settings) end
---- Display a horizontal line.
----
---- **Since:** 2.11.0
----@param settings HlineSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: HlineSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lv_obj:hline(settings) end
---- Add a toggle switch using the EdgeTX style.
----
---- **Since:** 2.11.0
----@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
----@param settings ToggleSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: ToggleSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lvgl.toggle(parent, settings) end
---- Add a toggle switch using the EdgeTX style.
----
---- **Since:** 2.11.0
----@param settings ToggleSettings #Contains all of the settings required to create the LVGL object.
----@overload fun(settings: ToggleSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
----@return Lv_obj LVGL_Object #LVGL object
-function lv_obj:toggle(settings) end
---- Show an LVGL object.
----
---- **Since:** 2.11.0
---- > **Notice:** The 'visible' setting function can also be used to dynamically show and hide objects.
----@param parent Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
-function lvgl.show(parent) end
---- Show an LVGL object.
----
---- **Since:** 2.11.0
---- > **Notice:** The 'visible' setting function can also be used to dynamically show and hide objects.
-function lv_obj:show() end
+function lv_obj:textEdit(settings) end
 --- Display a text label.
 ---
 --- **Since:** 2.11.0
@@ -2269,3 +1976,296 @@ function lvgl.rectangle(parent, settings) end
 ---@overload fun(settings: RectangleSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
 ---@return Lv_obj LVGL_Object #LVGL object
 function lv_obj:rectangle(settings) end
+--- Display a QR code.
+---
+--- **Since:** 2.11.0
+---@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
+---@param settings QrcodeSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: QrcodeSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lvgl.qrcode(parent, settings) end
+--- Display a QR code.
+---
+--- **Since:** 2.11.0
+---@param settings QrcodeSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: QrcodeSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lv_obj:qrcode(settings) end
+--- Add a text button using the EdgeTX style.
+---
+--- **Since:** 2.11.0
+---@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
+---@param settings ButtonSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: ButtonSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lvgl.button(parent, settings) end
+--- Add a text button using the EdgeTX style.
+---
+--- **Since:** 2.11.0
+---@param settings ButtonSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: ButtonSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lv_obj:button(settings) end
+--- Create a page layout for a One-Time script using EdgeTX styling. The page layout has a menu bar at the top with title and sub-title lines as well as a 'back' button in the top left corner.
+---
+--- **Since:** 2.11.0
+--- > **Notice:** The 'page' object should be created as the top level LVGL object in the script window, and all other LVGL objects added as children of the 'page' object.
+--- > 
+--- > The page will automatically add scroll bars if any child objects are placed outside of the page boundaries.
+---@param settings PageSettings #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lvgl.page(settings) end
+--- Create a page layout for a One-Time script using EdgeTX styling. The page layout has a menu bar at the top with title and sub-title lines as well as a 'back' button in the top left corner.
+---
+--- **Since:** 2.11.0
+--- > **Notice:** The 'page' object should be created as the top level LVGL object in the script window, and all other LVGL objects added as children of the 'page' object.
+--- > 
+--- > The page will automatically add scroll bars if any child objects are placed outside of the page boundaries.
+---@param settings PageSettings #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lv_obj:page(settings) end
+--- Add a momentary text button using the EdgeTX style.
+---
+--- **Since:** 2.11.0
+--- > **Notice:** Unlike the standard button the press function is called immediately when the user taps on the screen or presses the ENTER key when the momentary button is selected. The button shows in the 'checked' state until the user releases the ENTER key or stops touching the screen.
+---@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
+---@param settings MomentaryButtonSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: MomentaryButtonSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lvgl.momentaryButton(parent, settings) end
+--- Add a momentary text button using the EdgeTX style.
+---
+--- **Since:** 2.11.0
+--- > **Notice:** Unlike the standard button the press function is called immediately when the user taps on the screen or presses the ENTER key when the momentary button is selected. The button shows in the 'checked' state until the user releases the ENTER key or stops touching the screen.
+---@param settings MomentaryButtonSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: MomentaryButtonSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lv_obj:momentaryButton(settings) end
+--- Display an arc.
+---
+--- **Since:** 2.11.0
+--- > **Notice:** Arcs object have two elements a foreground arc and a background arc. By default the background arc is not shown. To show the background arc set both the bgColor and bgOpacity properties.
+--- > 
+--- > If opacity or bgOpacity is less than 255 (fully opaque) and rounded is set to true, the ends of the arc will not draw correctly. This is an Lvgl limitation.
+---@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
+---@param settings ArcSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: ArcSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lvgl.arc(parent, settings) end
+--- Display an arc.
+---
+--- **Since:** 2.11.0
+--- > **Notice:** Arcs object have two elements a foreground arc and a background arc. By default the background arc is not shown. To show the background arc set both the bgColor and bgOpacity properties.
+--- > 
+--- > If opacity or bgOpacity is less than 255 (fully opaque) and rounded is set to true, the ends of the arc will not draw correctly. This is an Lvgl limitation.
+---@param settings ArcSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: ArcSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lv_obj:arc(settings) end
+--- Display a button showing a color swatch. When tapped the color picker dialog is opened allowing the user to select a new color. Uses EdgeTX styling.
+---
+--- **Since:** 2.11.0
+--- > **Notice:** The popup menu is closed when the user selects an item, and the 'set' function is called.
+--- > 
+--- > If the user taps outside the menu or the RTN key is pressed, the popup menu is closed and the 'set' function is not called.
+---@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
+---@param settings ColorSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: ColorSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lvgl.color(parent, settings) end
+--- Display a button showing a color swatch. When tapped the color picker dialog is opened allowing the user to select a new color. Uses EdgeTX styling.
+---
+--- **Since:** 2.11.0
+--- > **Notice:** The popup menu is closed when the user selects an item, and the 'set' function is called.
+--- > 
+--- > If the user taps outside the menu or the RTN key is pressed, the popup menu is closed and the 'set' function is not called.
+---@param settings ColorSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: ColorSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lv_obj:color(settings) end
+--- Display one or more connected lines.
+---
+--- **Since:** 2.11.0
+---@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
+---@param settings LineSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: LineSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lvgl.line(parent, settings) end
+--- Display one or more connected lines.
+---
+--- **Since:** 2.11.0
+---@param settings LineSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: LineSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lv_obj:line(settings) end
+--- Display a button showing a source name. When tapped the switch select popup is opened to allow the user to select a new source. Uses EdgeTX styling.
+---
+--- **Since:** 2.11.0
+--- > **Notice:** The popup menu is closed when the user selects an item, and the 'set' function is called.
+--- > 
+--- > If the user taps outside the menu or the RTN key is pressed, the popup menu is closed and the 'set' function is not called.
+---@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
+---@param settings SourceSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: SourceSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lvgl.source(parent, settings) end
+--- Display a button showing a source name. When tapped the switch select popup is opened to allow the user to select a new source. Uses EdgeTX styling.
+---
+--- **Since:** 2.11.0
+--- > **Notice:** The popup menu is closed when the user selects an item, and the 'set' function is called.
+--- > 
+--- > If the user taps outside the menu or the RTN key is pressed, the popup menu is closed and the 'set' function is not called.
+---@param settings SourceSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: SourceSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lv_obj:source(settings) end
+--- Create a container for managing object layout.
+---
+--- **Since:** 2.11.0
+--- > **Notice:** The setting object is designed to manage a single row in a page of user settings. It automatically includes the necesary padding for correctly displaying controls such as toggle, textEdit, button etc.
+---@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
+---@param settings SettingSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: SettingSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lvgl.setting(parent, settings) end
+--- Create a container for managing object layout.
+---
+--- **Since:** 2.11.0
+--- > **Notice:** The setting object is designed to manage a single row in a page of user settings. It automatically includes the necesary padding for correctly displaying controls such as toggle, textEdit, button etc.
+---@param settings SettingSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: SettingSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lv_obj:setting(settings) end
+--- Add a slider using the EdgeTX style.
+---
+--- **Since:** 2.11.0
+---@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
+---@param settings SliderSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: SliderSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lvgl.slider(parent, settings) end
+--- Add a slider using the EdgeTX style.
+---
+--- **Since:** 2.11.0
+---@param settings SliderSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: SliderSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lv_obj:slider(settings) end
+--- Show an LVGL object.
+---
+--- **Since:** 2.11.0
+--- > **Notice:** The 'visible' setting function can also be used to dynamically show and hide objects.
+---@param parent Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
+function lvgl.show(parent) end
+--- Show an LVGL object.
+---
+--- **Since:** 2.11.0
+--- > **Notice:** The 'visible' setting function can also be used to dynamically show and hide objects.
+function lv_obj:show() end
+--- Test if widget is running in full screen mode.
+---
+--- **Since:** 2.11.0
+---@return boolean _true #if the widget is running in full screen mode, false otherwise.
+--- 
+--- always returns true for stand alone tool scripts.
+function lvgl.isFullScreen() end
+--- Test if widget is running in full screen mode.
+---
+--- **Since:** 2.11.0
+---@return boolean _true #if the widget is running in full screen mode, false otherwise.
+--- 
+--- always returns true for stand alone tool scripts.
+function lv_obj:isFullScreen() end
+--- Display a vertical line.
+---
+--- **Since:** 2.11.0
+---@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
+---@param settings VlineSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: VlineSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lvgl.vline(parent, settings) end
+--- Display a vertical line.
+---
+--- **Since:** 2.11.0
+---@param settings VlineSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: VlineSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lv_obj:vline(settings) end
+--- Add a slider using the EdgeTX style with vertical orientation .
+---
+--- **Since:** 2.11.0
+---@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
+---@param settings VerticalSliderSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: VerticalSliderSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lvgl.verticalSlider(parent, settings) end
+--- Add a slider using the EdgeTX style with vertical orientation .
+---
+--- **Since:** 2.11.0
+---@param settings VerticalSliderSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: VerticalSliderSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lv_obj:verticalSlider(settings) end
+--- Display a dialog box.
+---
+--- **Since:** 2.11.0
+---@param settings DialogSettings #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lvgl.dialog(settings) end
+--- Display a dialog box.
+---
+--- **Since:** 2.11.0
+---@param settings DialogSettings #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lv_obj:dialog(settings) end
+--- Display a button showing a font name. When tapped a popup menu is opened to choose a font from. Uses EdgeTX styling.
+---
+--- **Since:** 2.11.0
+--- > **Notice:** The popup menu is closed when the user selects an item, and the 'set' function is called.
+--- > 
+--- > If the user taps outside the menu or the RTN key is pressed, the popup menu is closed and the 'set' function is not called.
+---@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
+---@param settings FontSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: FontSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lvgl.font(parent, settings) end
+--- Display a button showing a font name. When tapped a popup menu is opened to choose a font from. Uses EdgeTX styling.
+---
+--- **Since:** 2.11.0
+--- > **Notice:** The popup menu is closed when the user selects an item, and the 'set' function is called.
+--- > 
+--- > If the user taps outside the menu or the RTN key is pressed, the popup menu is closed and the 'set' function is not called.
+---@param settings FontSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: FontSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lv_obj:font(settings) end
+--- Add a toggle switch using the EdgeTX style.
+---
+--- **Since:** 2.11.0
+---@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
+---@param settings ToggleSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: ToggleSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lvgl.toggle(parent, settings) end
+--- Add a toggle switch using the EdgeTX style.
+---
+--- **Since:** 2.11.0
+---@param settings ToggleSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: ToggleSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lv_obj:toggle(settings) end
+--- Add a number edit box using the EdgeTX style.
+---
+--- **Since:** 2.11.0
+---@param parent? Lv_obj #Parent LGVL object. If set then whatever LVGL objects are created by the function are set as children of 'parent'. If not set then objects are created in the top level script window.
+---@param settings NumberEditSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: NumberEditSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lvgl.numberEdit(parent, settings) end
+--- Add a number edit box using the EdgeTX style.
+---
+--- **Since:** 2.11.0
+---@param settings NumberEditSettings #Contains all of the settings required to create the LVGL object.
+---@overload fun(settings: NumberEditSettings): Lv_obj #Contains all of the settings required to create the LVGL object.
+---@return Lv_obj LVGL_Object #LVGL object
+function lv_obj:numberEdit(settings) end
