@@ -4,58 +4,6 @@
 --- EdgeTX Lua API stubs for lua-language-server (LuaLS)
 --- Global functions available in all EdgeTX Lua scripts
 
---- Return an iterator listing all the files and directories name in a directory
---- ### Example
---- 
---- ```lua
----   for fname in dir(".") do
----     print(fname)
----   end
----
---- **Since:** 2.5.0
----@param directory string #Working directory
-function dir(directory) end
----@class (exact) General_fstat_Return
----@field year number #year
----@field mon number #month
----@field day number #day of month
----@field hour number #hours
----@field hour12 number #hours in US format
----@field min number #minutes
----@field sec number #seconds
----@field suffix string #(text) am or pm
-
---- Checks the existence of file or directory.
----  If not exist, return nil.
----  If exist, return the object information.
---- ### Example
---- 
---- ```lua
----   info = fstat("radio")
----   if info ~= nil then
----     if (info.attrib == AM_DIR) then
----       print("is a directory")
----     end
---- 
----     size = info.size
----     time = info.time
----   end
----
---- **Since:** 2.5.0
----@param path string #path to the object
----@return General_fstat_Return table #object info, table elements:
---- 'size' (number) file size
---- 'attrib' (number) file attribute flags
---- 'time' (table) table with last time modified date and times, table elements:
---- `year` (number) year
---- `mon` (number) month
---- `day` (number) day of month
---- `hour` (number) hours
---- `hour12` (number) hours in US format
---- `min` (number) minutes
---- `sec` (number) seconds
---- `suffix` (text) am or pm
-function fstat(path) end
 --- Return OpenTX version
 --- ### Example
 --- 
@@ -628,3 +576,55 @@ function getSourceName(sourceIndex) end
 --- 
 --- This is an iterator function over value sources. `for sourceIndex, sourceName in sources() do ...` will iterate over all available value sources.
 function sources(first, last) end
+--- Return an iterator listing all the files and directories name in a directory
+--- ### Example
+--- 
+--- ```lua
+---   for fname in dir(".") do
+---     print(fname)
+---   end
+---
+--- **Since:** 2.5.0
+---@param directory string #Working directory
+function dir(directory) end
+---@class (exact) General_fstat_Return
+---@field year number #year
+---@field mon number #month
+---@field day number #day of month
+---@field hour number #hours
+---@field hour12 number #hours in US format
+---@field min number #minutes
+---@field sec number #seconds
+---@field suffix string #(text) am or pm
+
+--- Checks the existence of file or directory.
+---  If not exist, return nil.
+---  If exist, return the object information.
+--- ### Example
+--- 
+--- ```lua
+---   info = fstat("radio")
+---   if info ~= nil then
+---     if (info.attrib == AM_DIR) then
+---       print("is a directory")
+---     end
+--- 
+---     size = info.size
+---     time = info.time
+---   end
+---
+--- **Since:** 2.5.0
+---@param path string #path to the object
+---@return General_fstat_Return table #object info, table elements:
+--- 'size' (number) file size
+--- 'attrib' (number) file attribute flags
+--- 'time' (table) table with last time modified date and times, table elements:
+--- `year` (number) year
+--- `mon` (number) month
+--- `day` (number) day of month
+--- `hour` (number) hours
+--- `hour12` (number) hours in US format
+--- `min` (number) minutes
+--- `sec` (number) seconds
+--- `suffix` (text) am or pm
+function fstat(path) end

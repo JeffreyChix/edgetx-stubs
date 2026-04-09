@@ -1,6 +1,6 @@
 {
   "version": "2.10",
-  "generated": "2026-04-07T01:15:12.033Z",
+  "generated": "2026-04-09T11:35:57.024Z",
   "functions": [
     {
       "entityType": "function",
@@ -1783,123 +1783,6 @@
       "deprecated": false,
       "sourceFile": "api_colorlcd.cpp",
       "availableOn": "COLOR_LCD"
-    },
-    {
-      "entityType": "function",
-      "module": "general",
-      "name": "dir",
-      "signature": "dir(directory)",
-      "description": "Return an iterator listing all the files and directories name in a directory\n### Example\n\n```lua\n  for fname in dir(\".\") do\n    print(fname)\n  end\n```",
-      "parameters": [
-        {
-          "name": "directory",
-          "type": "string",
-          "description": "Working directory",
-          "optional": false,
-          "flagHints": []
-        }
-      ],
-      "overloadParameters": [],
-      "returns": [],
-      "notices": [],
-      "status": "current Introduced in 2.5.0",
-      "sinceVersion": "2.5.0",
-      "deprecated": false,
-      "sourceFile": "api_filesystem.cpp"
-    },
-    {
-      "entityType": "function",
-      "module": "general",
-      "name": "fstat",
-      "signature": "fstat(path)",
-      "description": "Checks the existence of file or directory.\n If not exist, return nil.\n If exist, return the object information.\n### Example\n\n```lua\n  info = fstat(\"radio\")\n  if info ~= nil then\n    if (info.attrib == AM_DIR) then\n      print(\"is a directory\")\n    end\n\n    size = info.size\n    time = info.time\n  end\n```",
-      "parameters": [
-        {
-          "name": "path",
-          "type": "string",
-          "description": "path to the object",
-          "optional": false,
-          "flagHints": []
-        }
-      ],
-      "overloadParameters": [],
-      "returns": [
-        {
-          "name": "table",
-          "type": "table",
-          "description": "object info, table elements:\n'size' (number) file size\n'attrib' (number) file attribute flags\n'time' (table) table with last time modified date and times, table elements:\n`year` (number) year\n`mon` (number) month\n`day` (number) day of month\n`hour` (number) hours\n`hour12` (number) hours in US format\n`min` (number) minutes\n`sec` (number) seconds\n`suffix` (text) am or pm",
-          "fields": [
-            {
-              "name": "year",
-              "type": "number",
-              "description": "year"
-            },
-            {
-              "name": "mon",
-              "type": "number",
-              "description": "month"
-            },
-            {
-              "name": "day",
-              "type": "number",
-              "description": "day of month"
-            },
-            {
-              "name": "hour",
-              "type": "number",
-              "description": "hours"
-            },
-            {
-              "name": "hour12",
-              "type": "number",
-              "description": "hours in US format"
-            },
-            {
-              "name": "min",
-              "type": "number",
-              "description": "minutes"
-            },
-            {
-              "name": "sec",
-              "type": "number",
-              "description": "seconds"
-            },
-            {
-              "name": "suffix",
-              "type": "string",
-              "description": "(text) am or pm"
-            }
-          ]
-        }
-      ],
-      "notices": [],
-      "status": "current Introduced in 2.5.0",
-      "sinceVersion": "2.5.0",
-      "deprecated": false,
-      "sourceFile": "api_filesystem.cpp"
-    },
-    {
-      "entityType": "function",
-      "module": "general",
-      "name": "del",
-      "signature": "del(file or directory)",
-      "description": "Returns FRESULT (e.g. 0=OK, 4=File not found, 5=Path not found, 6=Path invalid)\n### Example\n\n```lua\n  if del(\"/SCRIPTS/TOOLS/deleteme.txt\") == 0 then\n     -- successfully deleted file\n  else\n     -- failed to delete file\n  end\n```",
-      "parameters": [
-        {
-          "name": "file or directory",
-          "type": "unknown",
-          "description": "",
-          "optional": false,
-          "flagHints": []
-        }
-      ],
-      "overloadParameters": [],
-      "returns": [],
-      "notices": [],
-      "status": "current Introduced in 2.9.0",
-      "sinceVersion": "2.9.0",
-      "deprecated": false,
-      "sourceFile": "api_filesystem.cpp"
     },
     {
       "entityType": "function",
@@ -3700,6 +3583,123 @@
       "deprecated": false,
       "sourceFile": "api_stdlcd.cpp",
       "availableOn": "NON_COLOR_LCD"
+    },
+    {
+      "entityType": "function",
+      "module": "general",
+      "name": "dir",
+      "signature": "dir(directory)",
+      "description": "Return an iterator listing all the files and directories name in a directory\n### Example\n\n```lua\n  for fname in dir(\".\") do\n    print(fname)\n  end\n```",
+      "parameters": [
+        {
+          "name": "directory",
+          "type": "string",
+          "description": "Working directory",
+          "optional": false,
+          "flagHints": []
+        }
+      ],
+      "overloadParameters": [],
+      "returns": [],
+      "notices": [],
+      "status": "current Introduced in 2.5.0",
+      "sinceVersion": "2.5.0",
+      "deprecated": false,
+      "sourceFile": "api_filesystem.cpp"
+    },
+    {
+      "entityType": "function",
+      "module": "general",
+      "name": "fstat",
+      "signature": "fstat(path)",
+      "description": "Checks the existence of file or directory.\n If not exist, return nil.\n If exist, return the object information.\n### Example\n\n```lua\n  info = fstat(\"radio\")\n  if info ~= nil then\n    if (info.attrib == AM_DIR) then\n      print(\"is a directory\")\n    end\n\n    size = info.size\n    time = info.time\n  end\n```",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "string",
+          "description": "path to the object",
+          "optional": false,
+          "flagHints": []
+        }
+      ],
+      "overloadParameters": [],
+      "returns": [
+        {
+          "name": "table",
+          "type": "table",
+          "description": "object info, table elements:\n'size' (number) file size\n'attrib' (number) file attribute flags\n'time' (table) table with last time modified date and times, table elements:\n`year` (number) year\n`mon` (number) month\n`day` (number) day of month\n`hour` (number) hours\n`hour12` (number) hours in US format\n`min` (number) minutes\n`sec` (number) seconds\n`suffix` (text) am or pm",
+          "fields": [
+            {
+              "name": "year",
+              "type": "number",
+              "description": "year"
+            },
+            {
+              "name": "mon",
+              "type": "number",
+              "description": "month"
+            },
+            {
+              "name": "day",
+              "type": "number",
+              "description": "day of month"
+            },
+            {
+              "name": "hour",
+              "type": "number",
+              "description": "hours"
+            },
+            {
+              "name": "hour12",
+              "type": "number",
+              "description": "hours in US format"
+            },
+            {
+              "name": "min",
+              "type": "number",
+              "description": "minutes"
+            },
+            {
+              "name": "sec",
+              "type": "number",
+              "description": "seconds"
+            },
+            {
+              "name": "suffix",
+              "type": "string",
+              "description": "(text) am or pm"
+            }
+          ]
+        }
+      ],
+      "notices": [],
+      "status": "current Introduced in 2.5.0",
+      "sinceVersion": "2.5.0",
+      "deprecated": false,
+      "sourceFile": "api_filesystem.cpp"
+    },
+    {
+      "entityType": "function",
+      "module": "general",
+      "name": "del",
+      "signature": "del(file or directory)",
+      "description": "Returns FRESULT (e.g. 0=OK, 4=File not found, 5=Path not found, 6=Path invalid)\n### Example\n\n```lua\n  if del(\"/SCRIPTS/TOOLS/deleteme.txt\") == 0 then\n     -- successfully deleted file\n  else\n     -- failed to delete file\n  end\n```",
+      "parameters": [
+        {
+          "name": "file or directory",
+          "type": "unknown",
+          "description": "",
+          "optional": false,
+          "flagHints": []
+        }
+      ],
+      "overloadParameters": [],
+      "returns": [],
+      "notices": [],
+      "status": "current Introduced in 2.9.0",
+      "sinceVersion": "2.9.0",
+      "deprecated": false,
+      "sourceFile": "api_filesystem.cpp"
     },
     {
       "entityType": "function",
